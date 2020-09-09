@@ -35,6 +35,8 @@ connection.query("SELECT * FROM artists", (err, result, fields) => {
   if (err) throw err;
 });
 
+// POST ENDPOINTS
+
 app.post("/song", (req, res) => {
     const { body } = req;
     if (!body) {
@@ -83,6 +85,8 @@ app.post("/playlist", (req, res) => {
   })
 });
 
+// GET ENDPOINTS
+
 app.get("/playlist", (req, res) => {
   const sql = `SELECT * FROM playlists`;
   connection.query(sql, (err, data) => {
@@ -114,6 +118,8 @@ app.get("/artist", (req, res) => {
       res.send(data);
   })
 });
+
+// DELETE ENDPOINTS
 
 app.get("/playlist/:id", (req, res) => {
   const sql = `SELECT * FROM playlists WHERE id = ${req.params.id}`;
@@ -148,7 +154,123 @@ app.get("/artist/:id", (req, res) => {
   })
 });
 
+// GET TOP 20
 
+app.get("/top_playlist", (req, res) => {
+  const sql = `SELECT * FROM playlists LIMIT 20`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/top_song", (req, res) => {
+  const sql = `SELECT * FROM songs LIMIT 20`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/top_artist", (req, res) => {
+  const sql = `SELECT * FROM artists LIMIT 20`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/top_album", (req, res) => {
+  const sql = `SELECT * FROM albums LIMIT 20`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+// UPDATE ENDPOINTS
+
+app.put("/artist/:id", (req, res) => {
+  const { body } = req;
+    if (!body) {
+        res.status(400).send("content missing");
+    }
+  const sql = `UPDATE artists SET ? WHERE id = ${req.params.id}`;
+  connection.query(sql, body, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('updated');
+  })
+});
+
+app.put("/album/:id", (req, res) => {
+  const { body } = req;
+    if (!body) {
+        res.status(400).send("content missing");
+    }
+  const sql = `UPDATE albums SET ? WHERE id = ${req.params.id}`;
+  connection.query(sql, body, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('updated');
+  })
+});
+
+app.put("/song/:id", (req, res) => {
+  const { body } = req;
+    if (!body) {
+        res.status(400).send("content missing");
+    }
+  const sql = `UPDATE songs SET ? WHERE id = ${req.params.id}`;
+  connection.query(sql, body, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('updated');
+  })
+});
+
+app.put("/playlist/:id", (req, res) => {
+  const { body } = req;
+    if (!body) {
+        res.status(400).send("content missing");
+    }
+  const sql = `UPDATE playlists SET ? WHERE id = ${req.params.id}`;
+  connection.query(sql, body, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('updated');
+  })
+});
+
+// DELETE ENDPOINTS
+
+app.delete("/artist/:id", (req, res) => {
+  const sql = `DELETE FROM artists WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('DELETED');
+  })
+});
+
+app.delete("/playlist/:id", (req, res) => {
+  const sql = `DELETE FROM playlists WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('DELETED');
+  })
+});
+
+app.delete("/song/:id", (req, res) => {
+  const sql = `DELETE FROM songs WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('DELETED');
+  })
+});
+
+app.delete("/album/:id", (req, res) => {
+  const sql = `DELETE FROM albums WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('DELETED');
+  })
+});
 
 const PORT = 8080;
 app.listen(PORT, () => {
