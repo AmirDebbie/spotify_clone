@@ -1,6 +1,15 @@
-.grid-container {
+.home-title {
+  text-align: center;
+  background-color: #1db954;
   color: white;
-  height: 100vh;
+  margin: 0;
+  padding: 10px
+}
+
+.grid-container {
+  margin: 5px;
+  color: white;
+  height: 89vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
@@ -16,7 +25,7 @@
 .grid-item::-webkit-scrollbar {
   position: fixed;
 	width: 6px;
-	background-color: #333;
+	background-color: #444;
 }
 
 .grid-item::-webkit-scrollbar-thumb {
@@ -27,5 +36,11 @@
 
 .artistImg {
   height: 27px;
-  width: 27px
+  width: 27px;
+  position: absolute;
+  right: 20px;
+}
+.song-list-item:hover {
+  color: #1db954;
+  cursor: pointer;
 }

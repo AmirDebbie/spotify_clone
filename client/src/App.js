@@ -1,81 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import { List, ListItem, ListItemText, Typography } from '@material-ui/core'
+import { List } from '@material-ui/core'
+import ArtistListItem from './components/ArtistListItem';
+import SongListItem from './components/SongListItem';
 
 function App() {
   const [artists, setArtists] = useState([]);
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
+    // Get all artists
     (async () => {
       const { data } = await axios.get("top_artist");
       setArtists(data);
-    })()
+    })();
+
+    // Get all songs
+    (async () => {
+      const { data } = await axios.get("top_song");
+      setSongs(data);
+    })();
+
   }, [])
 
   return (
-    <div className='grid-container'>
-      <div className='grid-item'>
-        <h1>Songs</h1>
-        <List>
-          {artists.map(artist => (
-            <ListItem style={{textAlign: "center"}}>
-              <ListItemText 
-                primary={artist.name}
-                secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
-                sec
-              />
-              <img className='artistImg' src={artist.cover_img} />
-            </ListItem>
-          ))}
-        </List>
+    <>
+      <h1 className="home-title">SPOTIFY CLONE</h1>
+      <div className='grid-container'>
+        <div className='grid-item'>
+          <h2>Top Songs</h2>
+          <List>
+            {songs.map(song => (
+              <SongListItem key={song.id} song={song} />
+            ))}
+          </List>
+        </div>
+        <div className='grid-item'>
+          <h2>Top Albums</h2>
+        </div>
+        <div className='grid-item'>
+          <h2>Top Artists</h2>
+          <List>
+            {artists.map(artist => (
+              <ArtistListItem key={artist.id} artist={artist} />
+            ))}
+          </List>
+        </div>
+        <div className='grid-item'>
+          <h2>Top Playlists</h2>
+        </div>
       </div>
-      <div className='grid-item'>
-        <h1>Albums</h1>
-        <List>
-          {artists.map(artist => (
-            <ListItem style={{textAlign: "center"}}>
-              <ListItemText 
-                primary={artist.name}
-                secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
-                sec
-              />
-              <img className='artistImg' src={artist.cover_img} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-      <div className='grid-item'>
-        <h1>Artists</h1>
-        <List>
-          {artists.map(artist => (
-            <ListItem style={{textAlign: "center"}}>
-              <ListItemText 
-                primary={artist.name}
-                secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
-                sec
-              />
-              <img alt='Artist Cover' className='artistImg' src={artist.cover_img} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-      <div className='grid-item'>
-        <h1>Playlists</h1>
-        <List>
-          {artists.map(artist => (
-            <ListItem style={{textAlign: "center"}}>
-              <ListItemText 
-                primary={artist.name}
-                secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
-                sec
-              />
-              <img className='artistImg' src={artist.cover_img} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    </div>
+    </>
   );
 }
 
