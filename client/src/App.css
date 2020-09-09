@@ -40,9 +40,31 @@
   position: absolute;
   right: 20px;
 }
-.song-list-item:hover {
-  color: #1db954;
+
+.playModal {
+  position: absolute;
+  right: 20px;
+}
+
+.playButton {
+  color: white;
+  background-color: #444;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: bold;
+  transition: 100ms;
+}
+
+.playButton:hover {
+  background-color: #555;
+  color: #1db954;
+  transform: scale(1.05);
+}
+
+.playButton:focus {
+  outline: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -54,3 +76,6 @@
     height: 50vh;
   }
 }
+
+
+
