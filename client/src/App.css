@@ -44,3 +44,13 @@
   color: #1db954;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-item {
+    height: 50vh;
+  }
+}

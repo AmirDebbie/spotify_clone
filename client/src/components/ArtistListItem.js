@@ -10,7 +10,9 @@ function ArtistListItem({ artist }) {
                   secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
                   sec
                 />
-                <img alt='artist cover' className='artistImg' src={artist.cover_img} />
+                {artist.cover_img && 
+                    <img alt='artist cover' className='artistImg' src={artist.cover_img} />
+                }
               </ListItem>
         </div>
     )

@@ -98,7 +98,7 @@ app.get("/playlist", (req, res) => {
 // Gets also album name and artist name
 app.get("/song", (req, res) => {
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
-  Join artists ON artists.id = songs.artist_id
+  JOIN artists ON artists.id = songs.artist_id
   JOIN albums ON albums.id = songs.album_id`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -122,7 +122,7 @@ app.get("/artist", (req, res) => {
   })
 });
 
-// DELETE ENDPOINTS
+// Get by id 
 
 app.get("/playlist/:id", (req, res) => {
   const sql = `SELECT * FROM playlists WHERE id = ${req.params.id}`;
@@ -169,7 +169,7 @@ app.get("/top_playlist", (req, res) => {
 
 app.get("/top_song", (req, res) => {
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
-  Join artists ON artists.id = songs.artist_id
+  JOIN artists ON artists.id = songs.artist_id
   JOIN albums ON albums.id = songs.album_id LIMIT 20`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
