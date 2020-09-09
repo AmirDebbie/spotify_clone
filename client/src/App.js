@@ -55,7 +55,7 @@ function App() {
                 secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
                 sec
               />
-              <img className='artistImg' src={artist.cover_img} />
+              <img alt='Artist Cover' className='artistImg' src={artist.cover_img} />
             </ListItem>
           ))}
         </List>
