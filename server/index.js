@@ -41,7 +41,7 @@ app.post("/song", (req, res) => {
         res.status(400).send("content missing");
     }
     const sql = `INSERT INTO songs SET ?`;
-    connection.query(sql, body, function (err, data) {
+    connection.query(sql, body, (err, data) => {
         if (err) res.send(err.message);
         res.send('song success');
     })
@@ -53,7 +53,7 @@ app.post("/album", (req, res) => {
         res.status(400).send("content missing");
     }
     const sql = `INSERT INTO albums SET ?`;
-    connection.query(sql, body, function (err, data) {
+    connection.query(sql, body, (err, data) => {
         if (err) res.send(err.message);
         res.send('album success');
     })
@@ -65,11 +65,89 @@ app.post("/artist", (req, res) => {
         res.status(400).send("content missing");
     }
     const sql = `INSERT INTO artists SET ?`;
-    connection.query(sql, body, function (err, data) {
+    connection.query(sql, body, (err, data) => {
         if (err) res.send(err.message);
         res.send('artist success');
     })
 });
+
+app.post("/playlist", (req, res) => {
+  const { body } = req;
+  if (!body) {
+      res.status(400).send("content missing");
+  }
+  const sql = `INSERT INTO playlists SET ?`;
+  connection.query(sql, body, (err, data) => {
+      if (err) res.send(err.message);
+      res.send('playlist success');
+  })
+});
+
+app.get("/playlist", (req, res) => {
+  const sql = `SELECT * FROM playlists`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/song", (req, res) => {
+  const sql = `SELECT * FROM songs`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/album", (req, res) => {
+  const sql = `SELECT * FROM albums`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/artist", (req, res) => {
+  const sql = `SELECT * FROM artists`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/playlist/:id", (req, res) => {
+  const sql = `SELECT * FROM playlists WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/song/:id", (req, res) => {
+  const sql = `SELECT * FROM songs WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+
+app.get("/album/:id", (req, res) => {
+  const sql = `SELECT * FROM albums WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+app.get("/artist/:id", (req, res) => {
+  const sql = `SELECT * FROM artists WHERE id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
 
 
 const PORT = 8080;
