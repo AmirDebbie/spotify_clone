@@ -9,5 +9,17 @@
 .grid-item {
   background-color: #333;
   text-align: center;
-  /* overflow: scroll; */
+  overflow: scroll; 
+}
+.grid-item::-webkit-scrollbar { 
+  width: 0 !important
+}
+
+.artistImg {
+  height: 27px;
+  width: 27px
+}
+
+.MuiListItemText-secondary {
+  color: green;
 }
