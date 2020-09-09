@@ -1,0 +1,13 @@
+.grid-container {
+  color: white;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.grid-item {
+  background-color: #333;
+  text-align: center;
+  /* overflow: scroll; */
+}
