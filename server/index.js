@@ -33,50 +33,44 @@ connection.connect((err) => {
 });
 connection.query("SELECT * FROM artists", (err, result, fields) => {
   if (err) throw err;
-  console.log(result);
 });
 
 app.post("/song", (req, res) => {
-    if (!req.body) {
+    const { body } = req;
+    if (!body) {
         res.status(400).send("content missing");
-    } 
-    const { youtube_link, album_id, artist_id, title, length, track_number, lyrics, upload_at, created_at } = req.body;
+    }
+    const sql = `INSERT INTO songs SET ?`;
+    connection.query(sql, body, function (err, data) {
+        if (err) res.send(err.message);
+        res.send('song success');
+    })
+});
 
-    var sql = `INSERT INTO songs 
-                (
-                    youtube_link, album_id, artist_id, title, length, track_number, lyrics, upload_at, created_at
-                )
-                VALUES
-                (
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?
-                )`;
-    connection.query(sql, [youtube_link, album_id, artist_id, title, length, track_number, lyrics, upload_at, created_at], function (err, data) {
-        if (err) throw err;
-        console.log('success')
-        res.send('good');
-    });
+app.post("/album", (req, res) => {
+    const { body } = req;
+    if (!body) {
+        res.status(400).send("content missing");
+    }
+    const sql = `INSERT INTO albums SET ?`;
+    connection.query(sql, body, function (err, data) {
+        if (err) res.send(err.message);
+        res.send('album success');
+    })
 });
 
 app.post("/artist", (req, res) => {
-    if (!req.body) {
+    const { body } = req;
+    if (!body) {
         res.status(400).send("content missing");
-    } 
-    const { name, cover_img, upload_at } = req.body;
-
-    var sql = `INSERT INTO artists 
-                (
-                    name, cover_img, upload_at
-                )
-                VALUES
-                (
-                    ?, ?, ?
-                )`;
-    connection.query(sql, [name, cover_img, upload_at], function (err, data) {
-        if (err) throw err;
-        console.log('success')
-        res.send('good');
-    });
+    }
+    const sql = `INSERT INTO artists SET ?`;
+    connection.query(sql, body, function (err, data) {
+        if (err) res.send(err.message);
+        res.send('artist success');
+    })
 });
+
 
 const PORT = 8080;
 app.listen(PORT, () => {
