@@ -1,13 +1,10 @@
-import React, { useMemo, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core'
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import Modal from '@material-ui/core/Modal';
-
-
+import React, { useMemo, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { IconButton } from "@material-ui/core";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import Modal from "@material-ui/core/Modal";
 
 function getModalStyle() {
-
   return {
     top: `50%`,
     left: `50%`,
@@ -17,24 +14,24 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
   },
 }));
 
-export default function MyModal({ youtube_link }) {
+export default function MyModal({ youtube_link, title }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
 
   const video_id = useMemo(() => {
-    let video_id = youtube_link.split('v=')[1];
-    const ampersandPosition = video_id.indexOf('&');
-    if(ampersandPosition !== -1) {
-        video_id = video_id.substring(0, ampersandPosition);
+    let video_id = youtube_link.split("v=")[1];
+    const ampersandPosition = video_id.indexOf("&");
+    if (ampersandPosition !== -1) {
+      video_id = video_id.substring(0, ampersandPosition);
     }
-    return video_id
-}, [youtube_link])
+    return video_id;
+  }, [youtube_link]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,20 +43,25 @@ export default function MyModal({ youtube_link }) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${video_id}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe
+        title={title}
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${video_id}`}
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   );
 
   return (
-    <span className='playModal'>
-        <IconButton onClick={handleOpen}>
-            <PlayCircleFilledIcon style={{color: 'white', fontSize: 30}} />
-        </IconButton>
+    <span className="playModal">
+      <IconButton onClick={handleOpen}>
+        <PlayCircleFilledIcon style={{ color: "white", fontSize: 30 }} />
+      </IconButton>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>
     </span>

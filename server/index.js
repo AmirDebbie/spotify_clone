@@ -86,7 +86,6 @@ app.post("/playlist", (req, res) => {
 });
 
 // GET ENDPOINTS
-
 app.get("/playlist", (req, res) => {
   const sql = `SELECT * FROM playlists`;
   connection.query(sql, (err, data) => {

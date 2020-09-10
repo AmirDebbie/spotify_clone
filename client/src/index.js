@@ -1,14 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import * as serviceWorker from "./serviceWorker";
+import Albums from "./components/Albums";
+import Songs from "./components/Songs";
+import Artists from "./components/Artists";
+import Playlists from "./components/Playlists";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/albums">
+          <Albums />
+        </Route>
+        <Route path="/songs">
+          <Songs />
+        </Route>
+        <Route path="/artists">
+          <Artists />
+        </Route>
+        <Route path="/playlists">
+          <Playlists />
+        </Route>
+        <Route path="/">
+          <App />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,11 +1,3 @@
-.home-title {
-  text-align: center;
-  background-color: #1db954;
-  color: white;
-  margin: 0;
-  padding: 10px
-}
-
 .grid-container {
   margin: 5px;
   color: white;
@@ -66,7 +58,20 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
+.subjectPage {
+  color: white;
+  text-align: center;
+  width: 40%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+  .subjectPage {
+    width: 65%
+  }
+}
+
+@media only screen and (max-width: 700px) {
   .grid-container {
     grid-template-columns: 1fr;
   }
@@ -74,7 +79,13 @@
   .grid-item {
     height: 50vh;
   }
+
+  .subjectPage {
+    width: 100%
+  }
 }
+
+
 
 
 
