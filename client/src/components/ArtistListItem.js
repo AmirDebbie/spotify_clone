@@ -8,7 +8,6 @@ function ArtistListItem({ artist }) {
                 <ListItemText 
                   primary={artist.name}
                   secondary={<Typography style={{ color: '#1db954', fontSize: 12 }}>{new Date(artist.upload_at.slice(0, 10)).toDateString()}</Typography>}
-                  sec
                 />
                 {artist.cover_img && 
                     <img alt='artist cover' className='artistImg' src={artist.cover_img} />

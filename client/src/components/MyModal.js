@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core'
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import Modal from '@material-ui/core/Modal';
 
 
@@ -28,7 +30,7 @@ export default function MyModal({ youtube_link }) {
   const video_id = useMemo(() => {
     let video_id = youtube_link.split('v=')[1];
     const ampersandPosition = video_id.indexOf('&');
-    if(ampersandPosition != -1) {
+    if(ampersandPosition !== -1) {
         video_id = video_id.substring(0, ampersandPosition);
     }
     return video_id
@@ -50,9 +52,10 @@ export default function MyModal({ youtube_link }) {
 
   return (
     <span className='playModal'>
-      <button className= "playButton" type="button" onClick={handleOpen}>
-        PLAY
-      </button>
+        <IconButton onClick={handleOpen}>
+            <PlayCircleFilledIcon style={{color: 'white', fontSize: 30}} />
+        </IconButton>
+
       <Modal
         open={open}
         onClose={handleClose}

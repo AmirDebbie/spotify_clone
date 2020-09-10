@@ -99,7 +99,8 @@ app.get("/playlist", (req, res) => {
 app.get("/song", (req, res) => {
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
   JOIN artists ON artists.id = songs.artist_id
-  JOIN albums ON albums.id = songs.album_id`;
+  JOIN albums ON albums.id = songs.album_id
+  ORDER BY songs.created_at DESC`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -170,7 +171,9 @@ app.get("/top_playlist", (req, res) => {
 app.get("/top_song", (req, res) => {
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
   JOIN artists ON artists.id = songs.artist_id
-  JOIN albums ON albums.id = songs.album_id LIMIT 20`;
+  JOIN albums ON albums.id = songs.album_id 
+  ORDER BY songs.created_at DESC
+  LIMIT 20`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -186,7 +189,10 @@ app.get("/top_artist", (req, res) => {
 });
 
 app.get("/top_album", (req, res) => {
-  const sql = `SELECT * FROM albums LIMIT 20`;
+  const sql = `SELECT albums.*, artists.name AS artist FROM albums
+  JOIN artists ON albums.artist_id = artists.id
+  ORDER BY albums.created_at DESC
+  LIMIT 20`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
