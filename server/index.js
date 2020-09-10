@@ -108,7 +108,9 @@ app.get("/song", (req, res) => {
 });
 
 app.get("/album", (req, res) => {
-  const sql = `SELECT * FROM albums`;
+  const sql = `SELECT albums.*, artists.name AS artist FROM albums
+  JOIN artists ON albums.artist_id = artists.id
+  ORDER BY albums.created_at DESC`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
