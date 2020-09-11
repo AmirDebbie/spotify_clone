@@ -40,6 +40,17 @@ function App() {
     })();
   }, []);
 
+  const handleInputChange = async (e) => {
+    const search = e.target.value;
+    const songsData = await axios.get(`song?search=${search}`);
+    setSongs(songsData.data);
+    const albumsData = await axios.get(`album?search=${search}`);
+    setAlbums(albumsData.data);
+    const artistsData = await axios.get(`artist?search=${search}`);
+    setArtists(artistsData.data);
+    const playlistsData = await axios.get(`playlist?search=${search}`);
+    setPlaylists(playlistsData.data);
+  }
   return (
     <>
       <NavAppBar />
@@ -77,6 +88,7 @@ function App() {
           </List>
         </div>
       </div>
+      <input onChange={handleInputChange} type='text' />
     </>
   );
 }

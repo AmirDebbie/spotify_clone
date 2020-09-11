@@ -87,7 +87,12 @@ app.post("/playlist", (req, res) => {
 
 // GET ENDPOINTS
 app.get("/playlist", (req, res) => {
-  const sql = `SELECT * FROM playlists`;
+  let sql;
+  if (req.query.search) {
+    sql = `SELECT * FROM playlists WHERE playlists.name LIKE '%${req.query.search}%'`;
+  } else {
+    sql = `SELECT * FROM playlists`;
+  }
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -96,10 +101,19 @@ app.get("/playlist", (req, res) => {
 
 // Gets also album name and artist name
 app.get("/song", (req, res) => {
-  const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
-  JOIN artists ON artists.id = songs.artist_id
-  JOIN albums ON albums.id = songs.album_id
-  ORDER BY songs.created_at DESC`;
+  let sql;
+  if (req.query.search) {
+    sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+    JOIN artists ON artists.id = songs.artist_id
+    JOIN albums ON albums.id = songs.album_id
+    WHERE songs.title LIKE '%${req.query.search}%'
+    ORDER BY songs.created_at DESC`
+  } else {
+    sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+    JOIN artists ON artists.id = songs.artist_id
+    JOIN albums ON albums.id = songs.album_id
+    ORDER BY songs.created_at DESC`;
+  }
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -107,9 +121,17 @@ app.get("/song", (req, res) => {
 });
 
 app.get("/album", (req, res) => {
-  const sql = `SELECT albums.*, artists.name AS artist FROM albums
-  JOIN artists ON albums.artist_id = artists.id
-  ORDER BY albums.created_at DESC`;
+  let sql; 
+  if (req.query.search) {
+    sql = `SELECT albums.*, artists.name AS artist FROM albums
+    JOIN artists ON albums.artist_id = artists.id
+    WHERE albums.name LIKE '%${req.query.search}%'
+    ORDER BY albums.created_at DESC`;
+  } else {
+    sql = `SELECT albums.*, artists.name AS artist FROM albums
+    JOIN artists ON albums.artist_id = artists.id
+    ORDER BY albums.created_at DESC`;
+  }
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -117,7 +139,12 @@ app.get("/album", (req, res) => {
 });
 
 app.get("/artist", (req, res) => {
-  const sql = `SELECT * FROM artists`;
+  let sql;
+  if (req.query.search) {
+    sql = `SELECT * FROM artists WHERE artists.name LIKE '%${req.query.search}%'`;
+  } else {
+    sql = `SELECT * FROM artists`;
+  }
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);

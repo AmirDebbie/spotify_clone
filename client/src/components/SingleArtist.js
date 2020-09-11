@@ -36,7 +36,7 @@ function SingleArtist() {
           <div style={styles.container}>
             <h1>{artist.name}</h1>
             <p>{`Uploaded At ${new Date(artist.upload_at.slice(0, 10)).toDateString()}`}</p>
-            <img style={{height: 200}} src={artist.cover_img} />
+            <img alt='artist' style={{height: 200}} src={artist.cover_img} />
             <div style={styles.gridContainer}>
                 <div className="subjectArtistPage">
                     <h2>Albums</h2>
