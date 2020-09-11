@@ -65,6 +65,18 @@
   margin: auto;
 }
 
+.subjectArtistPage {
+  color: white;
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.linkListItem:hover {
+  background-color: #444
+}
+
 @media only screen and (max-width: 1200px) {
   .subjectPage {
     width: 65%

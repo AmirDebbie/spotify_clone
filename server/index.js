@@ -144,7 +144,9 @@ app.get("/song/:id", (req, res) => {
 
 
 app.get("/album/:id", (req, res) => {
-  const sql = `SELECT * FROM albums WHERE id = ${req.params.id}`;
+  const sql = `SELECT albums.*, artists.name AS artist 
+  FROM albums JOIN artists ON albums.artist_id = artists.id
+  WHERE albums.id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send(data);
@@ -281,6 +283,41 @@ app.delete("/album/:id", (req, res) => {
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
       res.send('DELETED');
+  })
+});
+
+// Get all songs from a single album 
+app.get("/albumsongs/:id", (req, res) => {
+  const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+  JOIN artists ON artists.id = songs.artist_id
+  JOIN albums ON albums.id = songs.album_id 
+  WHERE songs.album_id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+// Get all songs from a single Artist
+app.get("/artistsongs/:id", (req, res) => {
+  const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+  JOIN artists ON artists.id = songs.artist_id
+  JOIN albums ON albums.id = songs.album_id 
+  WHERE songs.artist_id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
+// Get all alnums from a single Artist
+app.get("/artistalbums/:id", (req, res) => {
+  const sql = `SELECT albums.*, artists.name As artist FROM albums
+  JOIN artists ON artists.id = albums.artist_id
+  WHERE albums.artist_id = ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
   })
 });
 

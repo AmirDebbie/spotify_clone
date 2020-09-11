@@ -8,11 +8,19 @@ import Albums from "./components/Albums";
 import Songs from "./components/Songs";
 import Artists from "./components/Artists";
 import Playlists from "./components/Playlists";
+import SingleAlbum from "./components/SingleAlbum";
+import SingleArtist from "./components/SingleArtist";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
+        <Route path="/artist/:id">
+          <SingleArtist />
+        </Route>
+        <Route path="/album/:id">
+          <SingleAlbum />
+        </Route>
         <Route path="/albums">
           <Albums />
         </Route>
