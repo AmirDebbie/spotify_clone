@@ -88,7 +88,9 @@ function App() {
           </List>
         </div>
       </div>
-      <input onChange={handleInputChange} type='text' />
+      <div style={{textAlign: 'center'}}>
+        <input placeholder='Search' className='searchInput' onChange={handleInputChange} type='text' />
+      </div>
     </>
   );
 }

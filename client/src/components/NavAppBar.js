@@ -32,9 +32,11 @@ function NavAppBar() {
           >
             <Menu />
           </IconButton>
-          <Typography style={{ fontWeight: "bold" }} variant="h4">
-            Spotify-Clone
-          </Typography>
+          <Link style={{color: 'white', textDecoration: "none" }} to="/">
+            <Typography style={{ fontWeight: "bold" }} variant="h4">
+              Spotify-Clone
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
 
