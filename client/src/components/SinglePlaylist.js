@@ -5,33 +5,33 @@ import { List } from "@material-ui/core";
 import NavAppBar from "./NavAppBar";
 import SongListItem from "./SongListItem";
 
-function SingleAlbum() {
-  const [albumSongs, setAlbumSongs] = useState([]);
-  const [album, setAlbum] = useState();
+function SinglePlaylist() {
+  const [playlistSongs, setPlaylistSongs] = useState([]);
+  const [playlist, setPlaylist] = useState();
   const { id } = useParams();
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`/albumsongs/${id}`);
-      setAlbumSongs(data);
+      const { data } = await axios.get(`/playlistsongs/${id}`);
+      setPlaylistSongs(data);
     })();
 
     (async () => {
-      const { data } = await axios.get(`/album/${id}`);
-      setAlbum(data[0]);
+      const { data } = await axios.get(`/playlist/${id}`);
+      setPlaylist(data[0]);
     })();
   }, [id]);
 
   return (
     <div>
-      {album && (
+      {playlist && (
         <>
           <NavAppBar />
           <div className="subjectPage">
-            <h1>{album.name}</h1>
-            <p>{`${album.artist} | ${new Date(album.created_at.slice(0, 10)).toDateString()}`}</p>
-            <img style={{height: 200, width: 200}} src={album.cover_img} />
+            <h1>{playlist.name}</h1>
+            <p>{`Uploaded At ${new Date(playlist.upload_at.slice(0, 10)).toDateString()}`}</p>
+            <img style={{height: 200}} src={playlist.cover_img} />
             <List>
-              {albumSongs.map((song) => (
+              {playlistSongs.map((song) => (
                 <SongListItem key={song.id} song={song} />
               ))}
             </List>
@@ -42,4 +42,4 @@ function SingleAlbum() {
   );
 }
 
-export default SingleAlbum;
+export default SinglePlaylist;

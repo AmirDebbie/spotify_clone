@@ -321,6 +321,19 @@ app.get("/artistalbums/:id", (req, res) => {
   })
 });
 
+// Get all songs from a single Playlist 
+app.get("/playlistsongs/:id", (req, res) => {
+  const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+  JOIN artists ON artists.id = songs.artist_id
+  JOIN albums ON albums.id = songs.album_id 
+  JOIN songsinplaylists ON songsinplaylists.song_id = songs.id
+  WHERE songsinplaylists.playlist_id =  ${req.params.id}`;
+  connection.query(sql, (err, data) => {
+      if (err) res.send(err.message);
+      res.send(data);
+  })
+});
+
 const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
