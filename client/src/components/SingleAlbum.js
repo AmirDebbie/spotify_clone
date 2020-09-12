@@ -28,8 +28,16 @@ function SingleAlbum() {
           <NavAppBar />
           <div className="subjectPage">
             <h1>{album.name}</h1>
-            <p>{`${album.artist} | ${new Date(album.created_at.slice(0, 10)).toDateString()}`}</p>
-            <img alt='album' style={{height: 200, width: 200}} src={album.cover_img} />
+            <p>{`${album.artist} | ${new Date(
+              album.created_at.slice(0, 10)
+            ).toDateString()}`}</p>
+            {album.cover_img && (
+              <img
+                alt="album"
+                style={{ height: 200, width: 200 }}
+                src={album.cover_img}
+              />
+            )}
             <List>
               {albumSongs.map((song) => (
                 <SongListItem key={song.id} song={song} />

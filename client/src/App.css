@@ -27,25 +27,23 @@
 }
 
 .searchInput {
-  margin: 20px;
-  background-color: #444;
+  margin: 15px;
+  width: 230px;
+  background-color: white;
   padding: 8px;
   border: #666 solid 2px;
   border-radius: 20px;
   color: #1db954;
   text-align: center;
   font-family: Trebuchet MS, sans-serif;
-  transition: 200ms;
 }
 
 .searchInput::placeholder {
-  color: #1db954;
+  color: #333;
 }
 
 .searchInput:hover {
   outline: none;
-  border-color: #1db954;
-  transform: scale(1.02);
 }
 
 .searchInput:focus,

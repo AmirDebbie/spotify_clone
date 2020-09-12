@@ -28,8 +28,16 @@ function SinglePlaylist() {
           <NavAppBar />
           <div className="subjectPage">
             <h1>{playlist.name}</h1>
-            <p>{`Uploaded At ${new Date(playlist.upload_at.slice(0, 10)).toDateString()}`}</p>
-            <img alt='playlist' style={{height: 200}} src={playlist.cover_img} />
+            <p>{`Uploaded At ${new Date(
+              playlist.upload_at.slice(0, 10)
+            ).toDateString()}`}</p>
+            {playlist.cover_img && (
+              <img
+                alt="playlist"
+                style={{ height: 200 }}
+                src={playlist.cover_img}
+              />
+            )}
             <List>
               {playlistSongs.map((song) => (
                 <SongListItem key={song.id} song={song} />

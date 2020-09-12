@@ -7,12 +7,15 @@ import SongListItem from "./components/SongListItem";
 import NavAppBar from "./components/NavAppBar";
 import AlbumListItem from "./components/AlbumListItem";
 import PlaylistListItem from "./components/PlaylistListItem";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function App() {
   const [artists, setArtists] = useState([]);
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [playlists, setPlaylists] = useState([]);
+  const [loading, setLoading] = useState(false);
+  let timer;
 
   useEffect(() => {
     // Get all artists
@@ -40,8 +43,19 @@ function App() {
     })();
   }, []);
 
-  const handleInputChange = async (e) => {
+  const handleInputTimer = (e) => {
+    if(timer) {
+      console.log(e.target.value)
+      clearTimeout(timer);
+    }
+    if (!loading) {
+      setLoading(true);
+    }
     const search = e.target.value;
+    timer = setTimeout(() => { handleInputChange(search) }, 2000)
+  }
+
+  const handleInputChange = async (search) => {
     const songsData = await axios.get(`song?search=${search}`);
     setSongs(songsData.data);
     const albumsData = await axios.get(`album?search=${search}`);
@@ -50,10 +64,15 @@ function App() {
     setArtists(artistsData.data);
     const playlistsData = await axios.get(`playlist?search=${search}`);
     setPlaylists(playlistsData.data);
+    setLoading(false);
   }
   return (
     <>
       <NavAppBar />
+      <div style={{textAlign: 'center'}}>
+        <input placeholder='Search' className='searchInput' onChange={handleInputTimer} type='text' />
+        {loading && <CircularProgress style={{ color: 'white', marginTop: 10, position: 'absolute'}} />}
+      </div>
       <div className="grid-container">
         <div className="grid-item">
           <h2>Top Songs</h2>
@@ -87,9 +106,6 @@ function App() {
             ))}
           </List>
         </div>
-      </div>
-      <div style={{textAlign: 'center'}}>
-        <input placeholder='Search' className='searchInput' onChange={handleInputChange} type='text' />
       </div>
     </>
   );

@@ -32,7 +32,7 @@ function NavAppBar() {
           >
             <Menu />
           </IconButton>
-          <Link style={{color: 'white', textDecoration: "none" }} to="/">
+          <Link style={{ color: "white", textDecoration: "none" }} to="/">
             <Typography style={{ fontWeight: "bold" }} variant="h4">
               Spotify-Clone
             </Typography>

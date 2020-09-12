@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 
 function ArtistListItem({ artist }) {
   return (
-    <div className='linkListItem'>
-      <Link style={{ textDecoration: "none", color: 'white' }} to={`/artist/${artist.id}`}>
+    <div className="linkListItem">
+      <Link
+        style={{ textDecoration: "none", color: "white" }}
+        to={`/artist/${artist.id}`}
+      >
         <ListItem style={{ textAlign: "center" }}>
           <ListItemText
             primary={artist.name}
