@@ -54,13 +54,13 @@ function ArtistListItemAdmin({ artist, getArtists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (new Date(uploadAt) == 'Invalid Date') {
+    if (String(new Date(uploadAt)) === 'Invalid Date') {
       alert('Invalid Date Entered')
     } else {
       const updatedArtist = {
         name,
         cover_img: coverImg,
-        upload_at: uploadAt,
+        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/artist/${artist.id}`, updatedArtist);
       getArtists();

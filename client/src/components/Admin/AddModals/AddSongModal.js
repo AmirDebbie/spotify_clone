@@ -45,20 +45,22 @@ function AddSongModal({ getSongs, artists, albums }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (new Date(createdAt) == 'Invalid Date') {
+    if (String(new Date(createdAt)) === 'Invalid Date') {
       alert('Invalid Date Entered')
     } else if (isNaN(trackNumber)) {
       alert('Invalid Track Number Entered')
+    } else if (!(/^([0-5][0-9]):([0-5][0-9])$/.test(length))) {
+      alert('Invalid Length Entered (Length should look like: "xx:xx")')
     } else {
       const newSong = {
         youtube_link: youtubeLink,
         album_id: albumId,
         artist_id: artistId,
         title,
-        length,
+        length: '00:'.concat(length),
         track_number: trackNumber,
         lyrics,
-        created_at: createdAt,
+        created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date().toISOString().slice(0, 10),
       };
       await axios.post(`/song`, newSong);

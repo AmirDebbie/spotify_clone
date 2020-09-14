@@ -41,14 +41,14 @@ function AddAlbumModal({ getAlbums, artists }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (new Date(createdAt) == 'Invalid Date') {
+    if (String(new Date(createdAt)) === 'Invalid Date') {
       alert('Invalid Date Entered')
     } else {
       const newAlbum = {
         artist_id: artistId,
         name,
         cover_img: coverImg,
-        created_at: createdAt,
+        created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date().toISOString().slice(0, 10),
       };
       await axios.post(`/album`, newAlbum);

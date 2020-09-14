@@ -55,14 +55,14 @@ function AlbumListItemAdmin({ album, getAlbums }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (new Date(createdAt) == 'Invalid Date' || new Date(uploadAt) == 'Invalid Date') {
+    if (String(new Date(createdAt)) === 'Invalid Date' || String(new Date(uploadAt)) === 'Invalid Date') {
       alert('Invalid Date Entered')
     } else {
       const updatedAlbum = {
         name,
         cover_img: coverImg,
-        created_at: createdAt,
-        upload_at: uploadAt,
+        created_at: new Date(createdAt).toISOString().slice(0, 10),
+        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/album/${album.id}`, updatedAlbum);
       getAlbums();

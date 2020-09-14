@@ -38,7 +38,7 @@ function SongListItemAdmin({ song, getSongs }) {
   const [open, setOpen] = useState(false);
   const [youtubeLink, setYoutubeLink] = useState(song.youtube_link);
   const [title, setTitle] = useState(song.title);
-  const [length, setLength] = useState(song.length);
+  const [length, setLength] = useState(song.length.slice(3, 8));
   const [trackNumber, setTrackNumber] = useState(song.track_number);
   const [lyrics, setLyrics] = useState(song.lyrics);
   const [createdAt, setCreatedAt] = useState(song.created_at.slice(0, 10));
@@ -61,19 +61,21 @@ function SongListItemAdmin({ song, getSongs }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (new Date(createdAt) == 'Invalid Date' || new Date(uploadAt) == 'Invalid Date') {
+    if (String(new Date(createdAt)) === 'Invalid Date' || String(new Date(uploadAt)) === 'Invalid Date') {
       alert('Invalid Date Entered')
     } else if (isNaN(trackNumber)) {
       alert('Invalid Track Number Entered')
+    } else if (!(/^([0-5][0-9]):([0-5][0-9])$/.test(length))) {
+      alert('Invalid Length Entered (Length should look like: "xx:xx")')
     } else {
       const updatedSong = {
         youtube_link: youtubeLink,
         title,
-        length,
+        length: '00:'.concat(length),
         track_number: trackNumber,
         lyrics,
-        created_at: createdAt,
-        upload_at: uploadAt,
+        created_at: new Date(createdAt).toISOString().slice(0, 10),
+        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/song/${song.id}`, updatedSong);
       getSongs();
