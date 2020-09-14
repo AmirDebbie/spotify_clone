@@ -50,9 +50,9 @@ export default function YoutubeModal({ youtube_link, title }) {
         width="560"
         height="315"
         src={`https://www.youtube.com/embed/${video_id}`}
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </div>
   );
