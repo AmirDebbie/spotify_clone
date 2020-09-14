@@ -11,6 +11,7 @@ import Playlists from "./components/Playlists";
 import SingleAlbum from "./components/SingleAlbum";
 import SingleArtist from "./components/SingleArtist";
 import SinglePlaylist from "./components/SinglePlaylist";
+import Admin from "./components/Admin";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,9 @@ ReactDOM.render(
         </Route>
         <Route path="/playlist/:id">
           <SinglePlaylist />
+        </Route>
+        <Route path="/admin">
+          <Admin />
         </Route>
         <Route path="/albums">
           <Albums />

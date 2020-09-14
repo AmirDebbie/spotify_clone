@@ -12,6 +12,7 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import PlaylistPlayOutlinedIcon from "@material-ui/icons/PlaylistPlayOutlined";
 import MusicNoteOutlinedIcon from "@material-ui/icons/MusicNoteOutlined";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from "react-router-dom";
 
 function NavAppBar() {
@@ -78,6 +79,14 @@ function NavAppBar() {
             <div className="drawerItem">
               All Playlists
               <PlaylistPlayOutlinedIcon
+                style={{ position: "absolute", right: 10 }}
+              />
+            </div>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to="/admin">
+            <div className="drawerItem">
+              Admin
+              <SupervisorAccountIcon
                 style={{ position: "absolute", right: 10 }}
               />
             </div>

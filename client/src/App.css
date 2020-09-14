@@ -102,6 +102,42 @@ button:focus {
   background-color: #444
 }
 
+.updateButton {
+  background-color: #1db95477;
+  width: 60px;
+  height: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border: #1db954 solid 2px;
+  border-radius: 6px;
+  margin: 10px;
+  transition: 200ms;
+}
+
+.updateButton:hover {
+  cursor: pointer;
+  background-color: #30c564;
+}
+
+.deleteButton {
+  background-color: rgba(206, 34, 34, 0.445);
+  width: 60px;
+  height: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border: rgb(201, 39, 39) solid 2px;
+  border-radius: 6px;
+  margin: 10px;
+  transition: 200ms;
+}
+
+.deleteButton:hover {
+  cursor: pointer;
+  background-color: rgb(201, 39, 39);
+}
+
 @media only screen and (max-width: 1200px) {
   .subjectPage {
     width: 65%
