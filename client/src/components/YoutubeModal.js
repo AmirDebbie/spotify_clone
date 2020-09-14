@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyModal({ youtube_link, title }) {
+export default function YoutubeModal({ youtube_link, title }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -26,9 +26,11 @@ export default function MyModal({ youtube_link, title }) {
 
   const video_id = useMemo(() => {
     let video_id = youtube_link.split("v=")[1];
-    const ampersandPosition = video_id.indexOf("&");
-    if (ampersandPosition !== -1) {
-      video_id = video_id.substring(0, ampersandPosition);
+    if(video_id) {
+      const ampersandPosition = video_id.indexOf("&");
+      if (ampersandPosition !== -1) {
+        video_id = video_id.substring(0, ampersandPosition);
+      }
     }
     return video_id;
   }, [youtube_link]);

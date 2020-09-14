@@ -6,6 +6,10 @@ import NavAppBar from "./NavAppBar";
 import AlbumListItemAdmin from "./AlbumListItemAdmin";
 import PlaylistListItemAdmin from "./PlaylistListItemAdmin";
 import ArtistListItemAdmin from "./ArtistListItemAdmin";
+import AddAlbumModal from "./AddAlbumModal";
+import AddArtistModal from "./AddArtistModal";
+import AddSongModal from "./AddSongModal";
+import AddPlaylistModal from "./AddPlayListModal";
 
 function Admin() {
   const [artists, setArtists] = useState([]);
@@ -65,6 +69,7 @@ function Admin() {
       <div className="grid-container">
         <div className="grid-item">
           <h2>Top Songs</h2>
+          <AddSongModal getSongs={getSongs} />
           <List>
             {songs.map((song) => (
               <SongListItemAdmin key={song.id} getSongs={getSongs} song={song} />
@@ -73,6 +78,7 @@ function Admin() {
         </div>
         <div className="grid-item">
           <h2>Top Albums</h2>
+          <AddAlbumModal getAlbums={getAlbums}/>
           <List>
             {albums.map((album) => (
               <AlbumListItemAdmin key={album.id} getAlbums={getAlbums} album={album} />
@@ -81,6 +87,7 @@ function Admin() {
         </div>
         <div className="grid-item">
           <h2>Top Artists</h2>
+          <AddArtistModal getArtists={getArtists} />
           <List>
             {artists.map((artist) => (
               <ArtistListItemAdmin key={artist.id} getArtists={getArtists} artist={artist} />
@@ -89,6 +96,7 @@ function Admin() {
         </div>
         <div className="grid-item">
           <h2>Top Playlists</h2>
+          <AddPlaylistModal getPlaylists={getPlaylists} />
           <List>
             {playlists.map((playlist) => (
               <PlaylistListItemAdmin key={playlist.id} getPlaylists={getPlaylists} playlist={playlist} />

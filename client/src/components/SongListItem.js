@@ -6,7 +6,7 @@ import {
   Tooltip,
   Zoom,
 } from "@material-ui/core";
-import MyModal from "./MyModal";
+import YoutubeModal from "./YoutubeModal";
 
 function SongListItem({ song }) {
   return (
@@ -26,7 +26,7 @@ function SongListItem({ song }) {
               } | ${song.album} | ${song.length.slice(3, 8)}`}</Typography>
             }
           />
-          <MyModal title={song.name} youtube_link={song.youtube_link} />
+          <YoutubeModal title={song.name} youtube_link={song.youtube_link} />
         </ListItem>
       </Tooltip>
     </div>

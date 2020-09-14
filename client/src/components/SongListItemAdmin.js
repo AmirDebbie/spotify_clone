@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ListItem, ListItemText, Typography, Modal, TextField, Button, Zoom, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import MyModal from "./MyModal";
+import YoutubeModal from "./YoutubeModal";
 
 function getModalStyle() {
   return {
@@ -149,7 +149,7 @@ function SongListItemAdmin({ song, getSongs }) {
               } | ${song.album} | ${song.length.slice(3, 8)}`}</Typography>
             }
           />
-          <MyModal title={song.name} youtube_link={song.youtube_link} />
+          <YoutubeModal title={song.name} youtube_link={song.youtube_link} />
           <button className='deleteButton' onClick={handleDelete} style={{ position: "absolute" }}>
           Delete
         </button>
