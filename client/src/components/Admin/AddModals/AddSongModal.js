@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddSongModal({ getSongs }) {
+function AddSongModal({ getSongs, artists, albums }) {
   const classes = useStyles();
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
@@ -66,30 +66,44 @@ function AddSongModal({ getSongs }) {
       <h2 style={{ textAlign: "center" }}>Add New Song</h2>
       <form onSubmit={handleSubmit}>
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Youtube Link"
           onChange={(e) => {
             setYoutubeLink(e.target.value);
           }}
         />
-        <br />
-        <TextField
-          style={{ width: 400 }}
-          label="Album ID"
+        <select
+          required
+          onChange={(e) => {
+            setArtistId(e.target.value);
+            setAlbumId(undefined);
+          }}
+        >
+          <option value="" disabled selected>
+            Select An Artist
+          </option>
+          {artists.map((artist) => (
+            <option key={artist.id} value={artist.id}>{artist.name}</option>
+          ))}
+        </select>
+        <select
+          required
           onChange={(e) => {
             setAlbumId(e.target.value);
           }}
-        />
-        <br />
+        >
+          <option value="" selected>
+            Select An Album
+          </option>
+          {albums.map((album) => {
+            if (album.artist_id === Number(artistId)) {
+              return <option key={album.id} value={album.id}>{album.name}</option>;
+            }
+          })}
+        </select>
         <TextField
-          style={{ width: 400 }}
-          label="Artist ID"
-          onChange={(e) => {
-            setArtistId(e.target.value);
-          }}
-        />
-        <br />
-        <TextField
+          required={true}
           style={{ width: 400 }}
           label="Title"
           onChange={(e) => {
@@ -98,6 +112,7 @@ function AddSongModal({ getSongs }) {
         />
         <br />
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Length"
           onChange={(e) => {
@@ -106,6 +121,7 @@ function AddSongModal({ getSongs }) {
         />
         <br />
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Track Number"
           onChange={(e) => {
@@ -114,6 +130,7 @@ function AddSongModal({ getSongs }) {
         />
         <br />
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Lyrics"
           onChange={(e) => {
@@ -122,6 +139,7 @@ function AddSongModal({ getSongs }) {
         />
         <br />
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Created At"
           onChange={(e) => {

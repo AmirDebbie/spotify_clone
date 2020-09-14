@@ -69,7 +69,7 @@ function Admin() {
       <div className="grid-container">
         <div className="grid-item">
           <h2>All Songs</h2>
-          <AddSongModal getSongs={getSongs} />
+          <AddSongModal albums={albums} artists={artists} getSongs={getSongs} />
           <List>
             {songs.map((song) => (
               <SongListItemAdmin
@@ -82,7 +82,7 @@ function Admin() {
         </div>
         <div className="grid-item">
           <h2>All Albums</h2>
-          <AddAlbumModal getAlbums={getAlbums} />
+          <AddAlbumModal getAlbums={getAlbums} artists={artists} />
           <List>
             {albums.map((album) => (
               <AlbumListItemAdmin

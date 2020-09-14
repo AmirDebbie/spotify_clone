@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddAlbumModal({ getAlbums }) {
+function AddAlbumModal({ getAlbums, artists }) {
   const classes = useStyles();
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
@@ -57,15 +57,21 @@ function AddAlbumModal({ getAlbums }) {
     <div style={modalStyle} className={classes.paper}>
       <h2 style={{ textAlign: "center" }}>Add New Album</h2>
       <form onSubmit={handleSubmit}>
-        <TextField
-          style={{ width: 400 }}
-          label="Artist ID"
+        <select
+          required
           onChange={(e) => {
             setArtistId(e.target.value);
           }}
-        />
-        <br />
+        >
+          <option value="" disabled selected>
+            Select An Artist
+          </option>
+          {artists.map((artist) => (
+            <option key={artist.id} value={artist.id}>{artist.name}</option>
+          ))}
+        </select>
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Album Name"
           onChange={(e) => {
@@ -82,6 +88,7 @@ function AddAlbumModal({ getAlbums }) {
         />
         <br />
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Created At"
           onChange={(e) => {
