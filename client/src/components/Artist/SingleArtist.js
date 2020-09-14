@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { List } from "@material-ui/core";
-import NavAppBar from "./NavAppBar";
-import SongListItem from "./SongListItem";
-import AlbumListItem from "./AlbumListItem";
+import NavAppBar from "../NavAppBar";
+import SongListItem from "../Song/SongListItem";
+import AlbumListItem from "../Album/AlbumListItem";
 
 function SingleArtist() {
   const [artistSongs, setArtistSongs] = useState([]);

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { List } from "@material-ui/core";
 import SongListItemAdmin from "./SongListItemAdmin";
-import NavAppBar from "./NavAppBar";
+import NavAppBar from "../NavAppBar";
 import AlbumListItemAdmin from "./AlbumListItemAdmin";
 import PlaylistListItemAdmin from "./PlaylistListItemAdmin";
 import ArtistListItemAdmin from "./ArtistListItemAdmin";
-import AddAlbumModal from "./AddAlbumModal";
-import AddArtistModal from "./AddArtistModal";
-import AddSongModal from "./AddSongModal";
-import AddPlaylistModal from "./AddPlayListModal";
+import AddAlbumModal from "./AddModals/AddAlbumModal";
+import AddArtistModal from "./AddModals/AddArtistModal";
+import AddSongModal from "./AddModals/AddSongModal";
+import AddPlaylistModal from "./AddModals/AddPlayListModal";
 
 function Admin() {
   const [artists, setArtists] = useState([]);
@@ -68,7 +68,7 @@ function Admin() {
       <NavAppBar />
       <div className="grid-container">
         <div className="grid-item">
-          <h2>Top Songs</h2>
+          <h2>All Songs</h2>
           <AddSongModal getSongs={getSongs} />
           <List>
             {songs.map((song) => (
@@ -81,7 +81,7 @@ function Admin() {
           </List>
         </div>
         <div className="grid-item">
-          <h2>Top Albums</h2>
+          <h2>All Albums</h2>
           <AddAlbumModal getAlbums={getAlbums} />
           <List>
             {albums.map((album) => (
@@ -94,7 +94,7 @@ function Admin() {
           </List>
         </div>
         <div className="grid-item">
-          <h2>Top Artists</h2>
+          <h2>All Artists</h2>
           <AddArtistModal getArtists={getArtists} />
           <List>
             {artists.map((artist) => (
@@ -107,7 +107,7 @@ function Admin() {
           </List>
         </div>
         <div className="grid-item">
-          <h2>Top Playlists</h2>
+          <h2>All Playlists</h2>
           <AddPlaylistModal getPlaylists={getPlaylists} />
           <List>
             {playlists.map((playlist) => (

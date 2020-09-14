@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { List } from "@material-ui/core";
-import NavAppBar from "./NavAppBar";
-import SongListItem from "./SongListItem";
+import NavAppBar from "../NavAppBar";
+import SongListItem from "../Song/SongListItem";
 
 function SingleAlbum() {
   const [albumSongs, setAlbumSongs] = useState([]);

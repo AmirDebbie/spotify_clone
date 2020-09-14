@@ -6,7 +6,7 @@ import {
   Tooltip,
   Zoom,
 } from "@material-ui/core";
-import YoutubeModal from "./YoutubeModal";
+import YoutubeModal from "../YoutubeModal";
 
 function SongListItem({ song }) {
   return (

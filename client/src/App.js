@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import { List } from "@material-ui/core";
-import ArtistListItem from "./components/ArtistListItem";
-import SongListItem from "./components/SongListItem";
+import ArtistListItem from "./components/Artist/ArtistListItem";
+import SongListItem from "./components/Song/SongListItem";
 import NavAppBar from "./components/NavAppBar";
-import AlbumListItem from "./components/AlbumListItem";
-import PlaylistListItem from "./components/PlaylistListItem";
+import AlbumListItem from "./components/Album/AlbumListItem";
+import PlaylistListItem from "./components/Playlist/PlaylistListItem";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 function App() {

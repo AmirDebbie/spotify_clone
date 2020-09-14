@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavAppBar from "./NavAppBar";
+import NavAppBar from "../NavAppBar";
 import axios from "axios";
 import { List } from "@material-ui/core";
 import AlbumListItem from "./AlbumListItem";

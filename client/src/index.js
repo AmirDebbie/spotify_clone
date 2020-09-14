@@ -4,14 +4,14 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import Albums from "./components/Albums";
-import Songs from "./components/Songs";
-import Artists from "./components/Artists";
-import Playlists from "./components/Playlists";
-import SingleAlbum from "./components/SingleAlbum";
-import SingleArtist from "./components/SingleArtist";
-import SinglePlaylist from "./components/SinglePlaylist";
-import Admin from "./components/Admin";
+import Albums from "./components/Album/Albums";
+import Songs from "./components/Song/Songs";
+import Artists from "./components/Artist/Artists";
+import Playlists from "./components/Playlist/Playlists";
+import SingleAlbum from "./components/Album/SingleAlbum";
+import SingleArtist from "./components/Artist/SingleArtist";
+import SinglePlaylist from "./components/Playlist/SinglePlaylist";
+import Admin from "./components/Admin/Admin";
 
 ReactDOM.render(
   <React.StrictMode>
