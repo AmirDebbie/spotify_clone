@@ -61,17 +61,20 @@ function SongListItemAdmin({ song, getSongs }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === 'Invalid Date' || String(new Date(uploadAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (
+      String(new Date(createdAt)) === "Invalid Date" ||
+      String(new Date(uploadAt)) === "Invalid Date"
+    ) {
+      alert("Invalid Date Entered");
     } else if (isNaN(trackNumber)) {
-      alert('Invalid Track Number Entered')
-    } else if (!(/^([0-5][0-9]):([0-5][0-9])$/.test(length))) {
-      alert('Invalid Length Entered (Length should look like: "xx:xx")')
+      alert("Invalid Track Number Entered");
+    } else if (!/^([0-5][0-9]):([0-5][0-9])$/.test(length)) {
+      alert('Invalid Length Entered (Length should look like: "xx:xx")');
     } else {
       const updatedSong = {
         youtube_link: youtubeLink,
         title,
-        length: '00:'.concat(length),
+        length: "00:".concat(length),
         track_number: trackNumber,
         lyrics,
         created_at: new Date(createdAt).toISOString().slice(0, 10),
@@ -89,6 +92,7 @@ function SongListItemAdmin({ song, getSongs }) {
       <form onSubmit={handleUpdateSubmit}>
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Youtube Link"
           value={youtubeLink}
           onChange={(e) => {
@@ -98,6 +102,7 @@ function SongListItemAdmin({ song, getSongs }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Title"
           value={title}
           onChange={(e) => {
@@ -107,6 +112,7 @@ function SongListItemAdmin({ song, getSongs }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Length"
           value={length}
           onChange={(e) => {
@@ -116,6 +122,7 @@ function SongListItemAdmin({ song, getSongs }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Track Number"
           value={trackNumber}
           onChange={(e) => {
@@ -134,6 +141,7 @@ function SongListItemAdmin({ song, getSongs }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Created At"
           value={createdAt}
           onChange={(e) => {
@@ -143,6 +151,7 @@ function SongListItemAdmin({ song, getSongs }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Uploaded At"
           value={uploadAt}
           onChange={(e) => {

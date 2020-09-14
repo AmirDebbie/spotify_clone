@@ -55,8 +55,11 @@ function AlbumListItemAdmin({ album, getAlbums }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === 'Invalid Date' || String(new Date(uploadAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (
+      String(new Date(createdAt)) === "Invalid Date" ||
+      String(new Date(uploadAt)) === "Invalid Date"
+    ) {
+      alert("Invalid Date Entered");
     } else {
       const updatedAlbum = {
         name,
@@ -76,6 +79,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
       <form onSubmit={handleUpdateSubmit}>
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Album Name"
           value={name}
           onChange={(e) => {
@@ -94,6 +98,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Created At"
           value={createdAt}
           onChange={(e) => {
@@ -103,6 +108,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         <br />
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Uploaded At"
           value={uploadAt}
           onChange={(e) => {

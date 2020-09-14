@@ -45,19 +45,19 @@ function AddSongModal({ getSongs, artists, albums }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (String(new Date(createdAt)) === "Invalid Date") {
+      alert("Invalid Date Entered");
     } else if (isNaN(trackNumber)) {
-      alert('Invalid Track Number Entered')
-    } else if (!(/^([0-5][0-9]):([0-5][0-9])$/.test(length))) {
-      alert('Invalid Length Entered (Length should look like: "xx:xx")')
+      alert("Invalid Track Number Entered");
+    } else if (!/^([0-5][0-9]):([0-5][0-9])$/.test(length)) {
+      alert('Invalid Length Entered (Length should look like: "xx:xx")');
     } else {
       const newSong = {
         youtube_link: youtubeLink,
         album_id: albumId,
         artist_id: artistId,
         title,
-        length: '00:'.concat(length),
+        length: "00:".concat(length),
         track_number: trackNumber,
         lyrics,
         created_at: new Date(createdAt).toISOString().slice(0, 10),
@@ -67,7 +67,7 @@ function AddSongModal({ getSongs, artists, albums }) {
       getSongs();
       handleClose();
     }
-  }
+  };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -92,7 +92,9 @@ function AddSongModal({ getSongs, artists, albums }) {
             Select An Artist
           </option>
           {artists.map((artist) => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
+            <option key={artist.id} value={artist.id}>
+              {artist.name}
+            </option>
           ))}
         </select>
         <select
@@ -106,7 +108,11 @@ function AddSongModal({ getSongs, artists, albums }) {
           </option>
           {albums.map((album) => {
             if (album.artist_id === Number(artistId)) {
-              return <option key={album.id} value={album.id}>{album.name}</option>;
+              return (
+                <option key={album.id} value={album.id}>
+                  {album.name}
+                </option>
+              );
             }
           })}
         </select>
@@ -138,7 +144,6 @@ function AddSongModal({ getSongs, artists, albums }) {
         />
         <br />
         <TextField
-          required={true}
           style={{ width: 400 }}
           label="Lyrics"
           onChange={(e) => {

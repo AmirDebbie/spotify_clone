@@ -41,8 +41,8 @@ function AddAlbumModal({ getAlbums, artists }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (String(new Date(createdAt)) === "Invalid Date") {
+      alert("Invalid Date Entered");
     } else {
       const newAlbum = {
         artist_id: artistId,
@@ -71,7 +71,9 @@ function AddAlbumModal({ getAlbums, artists }) {
             Select An Artist
           </option>
           {artists.map((artist) => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
+            <option key={artist.id} value={artist.id}>
+              {artist.name}
+            </option>
           ))}
         </select>
         <TextField

@@ -55,6 +55,7 @@ function AddArtistModal({ getArtists }) {
       <form onSubmit={handleSubmit}>
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Artist Name"
           onChange={(e) => {
             setName(e.target.value);

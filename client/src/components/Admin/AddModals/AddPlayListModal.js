@@ -55,6 +55,7 @@ function AddPlaylistModal({ getPlaylists }) {
       <form onSubmit={handleSubmit}>
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Playlist Name"
           onChange={(e) => {
             setName(e.target.value);

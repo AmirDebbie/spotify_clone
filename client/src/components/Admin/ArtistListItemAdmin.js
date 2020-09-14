@@ -54,8 +54,8 @@ function ArtistListItemAdmin({ artist, getArtists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(uploadAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (String(new Date(uploadAt)) === "Invalid Date") {
+      alert("Invalid Date Entered");
     } else {
       const updatedArtist = {
         name,
@@ -73,6 +73,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
       <h2 style={{ textAlign: "center" }}>Update Artist</h2>
       <form onSubmit={handleUpdateSubmit}>
         <TextField
+          required={true}
           style={{ width: 400 }}
           label="Artist Name"
           value={name}
@@ -93,6 +94,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         <TextField
           style={{ width: 400 }}
           label="Uploaded At"
+          required={true}
           value={uploadAt}
           onChange={(e) => {
             setUploadAt(e.target.value);

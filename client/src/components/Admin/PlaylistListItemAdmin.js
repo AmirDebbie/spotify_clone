@@ -54,8 +54,8 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(uploadAt)) === 'Invalid Date') {
-      alert('Invalid Date Entered')
+    if (String(new Date(uploadAt)) === "Invalid Date") {
+      alert("Invalid Date Entered");
     } else {
       const updatedPlaylist = {
         name,
@@ -74,6 +74,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
       <form onSubmit={handleUpdateSubmit}>
         <TextField
           style={{ width: 400 }}
+          required={true}
           label="Playlist Name"
           value={name}
           onChange={(e) => {
