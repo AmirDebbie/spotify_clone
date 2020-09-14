@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ListItem, ListItemText, Typography, Modal, TextField, Button } from "@material-ui/core";
+import {
+  ListItem,
+  ListItemText,
+  Typography,
+  Modal,
+  TextField,
+  Button,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 function getModalStyle() {
@@ -28,8 +35,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(album.name);
   const [coverImg, setCoverImg] = useState(album.cover_img);
-  const [createdAt, setCreatedAt] = useState(album.created_at.slice(0,10));
-  const [uploadAt, setUploadAt] = useState(album.upload_at.slice(0,10));
+  const [createdAt, setCreatedAt] = useState(album.created_at.slice(0, 10));
+  const [uploadAt, setUploadAt] = useState(album.upload_at.slice(0, 10));
 
   // Opens the modal
   const handleOpen = () => {
@@ -47,13 +54,13 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   };
 
   const handleUpdateSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
     const updatedAlbum = {
-        name,
-        cover_img: coverImg,
-        created_at: createdAt,
-        upload_at: uploadAt
-    }
+      name,
+      cover_img: coverImg,
+      created_at: createdAt,
+      upload_at: uploadAt,
+    };
     await axios.put(`/album/${album.id}`, updatedAlbum);
     getAlbums();
     handleClose();
@@ -67,32 +74,40 @@ function AlbumListItemAdmin({ album, getAlbums }) {
           style={{ width: 400 }}
           label="Album Name"
           value={name}
-          onChange={e => { setName(e.target.value) }}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
         <br />
         <TextField
           style={{ width: 400 }}
           label="Cover Img"
           value={coverImg}
-          onChange={e => { setCoverImg(e.target.value) }}
+          onChange={(e) => {
+            setCoverImg(e.target.value);
+          }}
         />
         <br />
         <TextField
           style={{ width: 400 }}
           label="Created At"
           value={createdAt}
-          onChange={e => { setCreatedAt(e.target.value) }}
+          onChange={(e) => {
+            setCreatedAt(e.target.value);
+          }}
         />
         <br />
         <TextField
           style={{ width: 400 }}
           label="Uploaded At"
           value={uploadAt}
-          onChange={e => { setUploadAt(e.target.value) }}
+          onChange={(e) => {
+            setUploadAt(e.target.value);
+          }}
         />
-        <br /> 
+        <br />
         <Button
-          style={{ backgroundColor: '#1db954', margin: 10 }}
+          style={{ backgroundColor: "#1db954", margin: 10 }}
           variant="contained"
           color="primary"
           type="submit"
@@ -117,10 +132,20 @@ function AlbumListItemAdmin({ album, getAlbums }) {
             ).toDateString()}`}</Typography>
           }
         />
-        <button className='deleteButton' onClick={handleDelete} style={{ position: "absolute" }}>
+        <button
+          className="deleteButton"
+          onClick={handleDelete}
+          style={{ position: "absolute" }}
+        >
           Delete
         </button>
-        <button className='updateButton' onClick={handleOpen} style={{ position: "absolute", left: 100 }}>Update</button>
+        <button
+          className="updateButton"
+          onClick={handleOpen}
+          style={{ position: "absolute", left: 100 }}
+        >
+          Update
+        </button>
         {album.cover_img && (
           <img alt="album cover" className="artistImg" src={album.cover_img} />
         )}

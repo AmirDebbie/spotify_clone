@@ -12,7 +12,7 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import PlaylistPlayOutlinedIcon from "@material-ui/icons/PlaylistPlayOutlined";
 import MusicNoteOutlinedIcon from "@material-ui/icons/MusicNoteOutlined";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import { Link } from "react-router-dom";
 
 function NavAppBar() {

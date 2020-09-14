@@ -26,7 +26,7 @@ export default function YoutubeModal({ youtube_link, title }) {
 
   const video_id = useMemo(() => {
     let video_id = youtube_link.split("v=")[1];
-    if(video_id) {
+    if (video_id) {
       const ampersandPosition = video_id.indexOf("&");
       if (ampersandPosition !== -1) {
         video_id = video_id.substring(0, ampersandPosition);

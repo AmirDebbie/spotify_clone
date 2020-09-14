@@ -46,22 +46,22 @@ function Admin() {
   const getAlbums = async () => {
     const { data } = await axios.get("album");
     setAlbums(data);
-  }
+  };
 
   const getArtists = async () => {
     const { data } = await axios.get("artist");
     setArtists(data);
-  }
+  };
 
   const getSongs = async () => {
     const { data } = await axios.get("song");
     setSongs(data);
-  }
+  };
 
   const getPlaylists = async () => {
     const { data } = await axios.get("playlist");
     setPlaylists(data);
-  }
+  };
 
   return (
     <>
@@ -72,16 +72,24 @@ function Admin() {
           <AddSongModal getSongs={getSongs} />
           <List>
             {songs.map((song) => (
-              <SongListItemAdmin key={song.id} getSongs={getSongs} song={song} />
+              <SongListItemAdmin
+                key={song.id}
+                getSongs={getSongs}
+                song={song}
+              />
             ))}
           </List>
         </div>
         <div className="grid-item">
           <h2>Top Albums</h2>
-          <AddAlbumModal getAlbums={getAlbums}/>
+          <AddAlbumModal getAlbums={getAlbums} />
           <List>
             {albums.map((album) => (
-              <AlbumListItemAdmin key={album.id} getAlbums={getAlbums} album={album} />
+              <AlbumListItemAdmin
+                key={album.id}
+                getAlbums={getAlbums}
+                album={album}
+              />
             ))}
           </List>
         </div>
@@ -90,7 +98,11 @@ function Admin() {
           <AddArtistModal getArtists={getArtists} />
           <List>
             {artists.map((artist) => (
-              <ArtistListItemAdmin key={artist.id} getArtists={getArtists} artist={artist} />
+              <ArtistListItemAdmin
+                key={artist.id}
+                getArtists={getArtists}
+                artist={artist}
+              />
             ))}
           </List>
         </div>
@@ -99,7 +111,11 @@ function Admin() {
           <AddPlaylistModal getPlaylists={getPlaylists} />
           <List>
             {playlists.map((playlist) => (
-              <PlaylistListItemAdmin key={playlist.id} getPlaylists={getPlaylists} playlist={playlist} />
+              <PlaylistListItemAdmin
+                key={playlist.id}
+                getPlaylists={getPlaylists}
+                playlist={playlist}
+              />
             ))}
           </List>
         </div>

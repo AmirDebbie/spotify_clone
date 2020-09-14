@@ -46,15 +46,15 @@ function AddSongModal({ getSongs }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newSong = {
-        youtube_link: youtubeLink,
-        album_id: albumId,
-        artist_id: artistId,
+      youtube_link: youtubeLink,
+      album_id: albumId,
+      artist_id: artistId,
       title,
       length,
       track_number: trackNumber,
       lyrics,
       created_at: createdAt,
-      upload_at: new Date().toISOString().slice(0,10)
+      upload_at: new Date().toISOString().slice(0, 10),
     };
     await axios.post(`/song`, newSong);
     getSongs();
@@ -65,7 +65,7 @@ function AddSongModal({ getSongs }) {
     <div style={modalStyle} className={classes.paper}>
       <h2 style={{ textAlign: "center" }}>Add New Song</h2>
       <form onSubmit={handleSubmit}>
-      <TextField
+        <TextField
           style={{ width: 400 }}
           label="Youtube Link"
           onChange={(e) => {
@@ -88,7 +88,8 @@ function AddSongModal({ getSongs }) {
             setArtistId(e.target.value);
           }}
         />
-        <br /><TextField
+        <br />
+        <TextField
           style={{ width: 400 }}
           label="Title"
           onChange={(e) => {

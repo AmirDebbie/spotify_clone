@@ -42,11 +42,11 @@ function AddAlbumModal({ getAlbums }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newAlbum = {
-        artist_id: artistId,
+      artist_id: artistId,
       name,
       cover_img: coverImg,
       created_at: createdAt,
-      upload_at: new Date().toISOString().slice(0,10)
+      upload_at: new Date().toISOString().slice(0, 10),
     };
     await axios.post(`/album`, newAlbum);
     getAlbums();

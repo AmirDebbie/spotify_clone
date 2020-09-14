@@ -42,7 +42,7 @@ function AddArtistModal({ getArtists }) {
     const newArtist = {
       name,
       cover_img: coverImg,
-      upload_at: new Date().toISOString().slice(0,10)
+      upload_at: new Date().toISOString().slice(0, 10),
     };
     await axios.post(`/artist`, newArtist);
     getArtists();
