@@ -61,18 +61,24 @@ function SongListItemAdmin({ song, getSongs }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    const updatedSong = {
-      youtube_link: youtubeLink,
-      title,
-      length,
-      track_number: trackNumber,
-      lyrics,
-      created_at: createdAt,
-      upload_at: uploadAt,
-    };
-    await axios.put(`/song/${song.id}`, updatedSong);
-    getSongs();
-    handleClose();
+    if (new Date(createdAt) == 'Invalid Date' || new Date(uploadAt) == 'Invalid Date') {
+      alert('Invalid Date Entered')
+    } else if (isNaN(trackNumber)) {
+      alert('Invalid Track Number Entered')
+    } else {
+      const updatedSong = {
+        youtube_link: youtubeLink,
+        title,
+        length,
+        track_number: trackNumber,
+        lyrics,
+        created_at: createdAt,
+        upload_at: uploadAt,
+      };
+      await axios.put(`/song/${song.id}`, updatedSong);
+      getSongs();
+      handleClose();
+    }
   };
 
   const modalBody = (

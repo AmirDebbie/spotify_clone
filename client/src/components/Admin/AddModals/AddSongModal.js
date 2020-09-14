@@ -45,21 +45,27 @@ function AddSongModal({ getSongs, artists, albums }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newSong = {
-      youtube_link: youtubeLink,
-      album_id: albumId,
-      artist_id: artistId,
-      title,
-      length,
-      track_number: trackNumber,
-      lyrics,
-      created_at: createdAt,
-      upload_at: new Date().toISOString().slice(0, 10),
-    };
-    await axios.post(`/song`, newSong);
-    getSongs();
-    handleClose();
-  };
+    if (new Date(createdAt) == 'Invalid Date') {
+      alert('Invalid Date Entered')
+    } else if (isNaN(trackNumber)) {
+      alert('Invalid Track Number Entered')
+    } else {
+      const newSong = {
+        youtube_link: youtubeLink,
+        album_id: albumId,
+        artist_id: artistId,
+        title,
+        length,
+        track_number: trackNumber,
+        lyrics,
+        created_at: createdAt,
+        upload_at: new Date().toISOString().slice(0, 10),
+      };
+      await axios.post(`/song`, newSong);
+      getSongs();
+      handleClose();
+    }
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>

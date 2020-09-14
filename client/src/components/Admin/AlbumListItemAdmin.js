@@ -55,15 +55,19 @@ function AlbumListItemAdmin({ album, getAlbums }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    const updatedAlbum = {
-      name,
-      cover_img: coverImg,
-      created_at: createdAt,
-      upload_at: uploadAt,
-    };
-    await axios.put(`/album/${album.id}`, updatedAlbum);
-    getAlbums();
-    handleClose();
+    if (new Date(createdAt) == 'Invalid Date' || new Date(uploadAt) == 'Invalid Date') {
+      alert('Invalid Date Entered')
+    } else {
+      const updatedAlbum = {
+        name,
+        cover_img: coverImg,
+        created_at: createdAt,
+        upload_at: uploadAt,
+      };
+      await axios.put(`/album/${album.id}`, updatedAlbum);
+      getAlbums();
+      handleClose();
+    }
   };
 
   const modalBody = (

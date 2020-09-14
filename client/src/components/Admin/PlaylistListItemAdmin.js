@@ -54,14 +54,18 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    const updatedPlaylist = {
-      name,
-      cover_img: coverImg,
-      upload_at: uploadAt,
-    };
-    await axios.put(`/playlist/${playlist.id}`, updatedPlaylist);
-    getPlaylists();
-    handleClose();
+    if (new Date(uploadAt) == 'Invalid Date') {
+      alert('Invalid Date Entered')
+    } else {
+      const updatedPlaylist = {
+        name,
+        cover_img: coverImg,
+        upload_at: uploadAt,
+      };
+      await axios.put(`/playlist/${playlist.id}`, updatedPlaylist);
+      getPlaylists();
+      handleClose();
+    }
   };
 
   const modalBody = (

@@ -54,14 +54,18 @@ function ArtistListItemAdmin({ artist, getArtists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    const updatedArtist = {
-      name,
-      cover_img: coverImg,
-      upload_at: uploadAt,
-    };
-    await axios.put(`/artist/${artist.id}`, updatedArtist);
-    getArtists();
-    handleClose();
+    if (new Date(uploadAt) == 'Invalid Date') {
+      alert('Invalid Date Entered')
+    } else {
+      const updatedArtist = {
+        name,
+        cover_img: coverImg,
+        upload_at: uploadAt,
+      };
+      await axios.put(`/artist/${artist.id}`, updatedArtist);
+      getArtists();
+      handleClose();
+    }
   };
 
   const modalBody = (
