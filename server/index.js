@@ -6,20 +6,20 @@ const app = express();
 
 app.use(express.json());
 
-app.use(
-  morgan(function (tokens, req, res) {
-    const myTiny = [
-      tokens.method(req, res),
-      tokens.url(req, res),
-      tokens.status(req, res),
-      tokens.res(req, res, "content-length"),
-      "-",
-      tokens["response-time"](req, res),
-      "ms",
-    ];
-    return myTiny.join(" ");
-  })
-);
+app.use(morgan(function (tokens, req, res) {
+  const myTiny = [tokens.method(req, res),
+  tokens.url(req, res),
+  tokens.status(req, res),
+  tokens.res(req, res, 'content-length'), '-',
+  tokens['response-time'](req, res), 'ms']
+  if (req.method === 'POST' || req.method === 'PUT') {
+    return myTiny.concat([JSON.stringify(req.body)]).join(' ')
+  } else {
+    return myTiny.join(' ')
+  }
+}));
+
+
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -41,12 +41,13 @@ app.post("/song", (req, res) => {
     const { body } = req;
     if (!body) {
         res.status(400).send("content missing");
+    } else {
+      const sql = `INSERT INTO songs SET ?`;
+      connection.query(sql, body, (err, data) => {
+          if (err) res.send(err.message);
+          res.send('song success');
+      })
     }
-    const sql = `INSERT INTO songs SET ?`;
-    connection.query(sql, body, (err, data) => {
-        if (err) res.send(err.message);
-        res.send('song success');
-    })
 });
 
 app.post("/album", (req, res) => {
@@ -154,6 +155,9 @@ app.get("/artist", (req, res) => {
 // Get by id 
 
 app.get("/playlist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT * FROM playlists WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -162,6 +166,9 @@ app.get("/playlist/:id", (req, res) => {
 });
 
 app.get("/song/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT * FROM songs WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -171,6 +178,9 @@ app.get("/song/:id", (req, res) => {
 
 
 app.get("/album/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT albums.*, artists.name AS artist 
   FROM albums JOIN artists ON albums.artist_id = artists.id
   WHERE albums.id = ${req.params.id}`;
@@ -181,6 +191,9 @@ app.get("/album/:id", (req, res) => {
 });
 
 app.get("/artist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT * FROM artists WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -232,6 +245,9 @@ app.get("/top_album", (req, res) => {
 // UPDATE ENDPOINTS
 
 app.put("/artist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const { body } = req;
     if (!body) {
         res.status(400).send("content missing");
@@ -244,6 +260,9 @@ app.put("/artist/:id", (req, res) => {
 });
 
 app.put("/album/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const { body } = req;
     if (!body) {
         res.status(400).send("content missing");
@@ -256,6 +275,9 @@ app.put("/album/:id", (req, res) => {
 });
 
 app.put("/song/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const { body } = req;
     if (!body) {
         res.status(400).send("content missing");
@@ -268,6 +290,9 @@ app.put("/song/:id", (req, res) => {
 });
 
 app.put("/playlist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const { body } = req;
     if (!body) {
         res.status(400).send("content missing");
@@ -282,6 +307,9 @@ app.put("/playlist/:id", (req, res) => {
 // DELETE ENDPOINTS
 
 app.delete("/artist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `DELETE FROM artists WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -290,6 +318,9 @@ app.delete("/artist/:id", (req, res) => {
 });
 
 app.delete("/playlist/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `DELETE FROM playlists WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -298,6 +329,9 @@ app.delete("/playlist/:id", (req, res) => {
 });
 
 app.delete("/song/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `DELETE FROM songs WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -306,6 +340,9 @@ app.delete("/song/:id", (req, res) => {
 });
 
 app.delete("/album/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `DELETE FROM albums WHERE id = ${req.params.id}`;
   connection.query(sql, (err, data) => {
       if (err) res.send(err.message);
@@ -315,6 +352,9 @@ app.delete("/album/:id", (req, res) => {
 
 // Get all songs from a single album 
 app.get("/albumsongs/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
   JOIN artists ON artists.id = songs.artist_id
   JOIN albums ON albums.id = songs.album_id 
@@ -327,29 +367,39 @@ app.get("/albumsongs/:id", (req, res) => {
 
 // Get all songs from a single Artist
 app.get("/artistsongs/:id", (req, res) => {
-  const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
-  JOIN artists ON artists.id = songs.artist_id
-  JOIN albums ON albums.id = songs.album_id 
-  WHERE songs.artist_id = ${req.params.id}`;
-  connection.query(sql, (err, data) => {
-      if (err) res.send(err.message);
-      res.send(data);
-  })
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
+    const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
+    JOIN artists ON artists.id = songs.artist_id
+    JOIN albums ON albums.id = songs.album_id 
+    WHERE songs.artist_id = ${req.params.id}`;
+      connection.query(sql, (err, data) => {
+          if (err) res.send(err.message);
+          res.send(data);
+      })
 });
 
 // Get all alnums from a single Artist
 app.get("/artistalbums/:id", (req, res) => {
-  const sql = `SELECT albums.*, artists.name As artist FROM albums
-  JOIN artists ON artists.id = albums.artist_id
-  WHERE albums.artist_id = ${req.params.id}`;
-  connection.query(sql, (err, data) => {
-      if (err) res.send(err.message);
-      res.send(data);
-  })
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
+    const sql = `SELECT albums.*, artists.name As artist FROM albums
+    JOIN artists ON artists.id = albums.artist_id
+    WHERE albums.artist_id = ${req.params.id}`;
+    connection.query(sql, (err, data) => {
+        if (err) res.send(err.message);
+        res.send(data);
+    })
+  
 });
 
 // Get all songs from a single Playlist 
 app.get("/playlistsongs/:id", (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    return res.status(400).send('Id must be a number')
+  }
   const sql = `SELECT songs.*, albums.name As album, artists.name As artist FROM songs
   JOIN artists ON artists.id = songs.artist_id
   JOIN albums ON albums.id = songs.album_id 

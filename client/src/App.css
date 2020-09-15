@@ -148,6 +148,66 @@ select {
   display: block;
 }
 
+.newSongGrid {
+  background-color: #333;
+  width: 250px;
+  border: #1db954 solid 2px;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  color: white;
+  text-align: center;
+  height: 300px;
+}
+
+.newSongGrid:hover {
+  background-color: #555;
+  
+}
+
+
+
+.newAlbumGrid {
+  background-color: #333;
+  width: 250px;
+  border: #1db954 solid 2px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  color: white;
+  text-align: center;
+  height: 300px;
+}
+
+.newAlbumGrid:hover {
+  background-color: #555;
+
+}
+
+.hCVuYx {
+  background-color: #1db95477 !important;
+}
+
+.chowzb {
+  background-color: #1db95477 !important;
+}
+
+.brcpxa {
+  display: none;
+}
+
+.ikyGAt {
+  display: none;
+}
+
+.listTitle {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.bigImg {
+  height: 150px;
+}
+
 @media only screen and (max-width: 1200px) {
   .subjectPage {
     width: 65%

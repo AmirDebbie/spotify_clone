@@ -4,32 +4,47 @@ import axios from "axios";
 import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
-import AlbumListItem from "../Album/AlbumListItem";
+import NewAlbumListItem from "../NewRequirements/NewAlbumListItem";
+import Carousel from 'react-elastic-carousel';
+import NotFound from "../NewRequirements/NotFound";
 
 function SingleArtist() {
   const [artistSongs, setArtistSongs] = useState([]);
   const [artist, setArtist] = useState();
+  const [goodRequest, setGoodRequest] = useState(true);
   const [artistAlbums, setArtistAlbums] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`/artistsongs/${id}`);
-      setArtistSongs(data);
-    })();
-
-    (async () => {
-      const { data } = await axios.get(`/artistalbums/${id}`);
-      setArtistAlbums(data);
-    })();
-
-    (async () => {
-      const { data } = await axios.get(`/artist/${id}`);
-      setArtist(data[0]);
+      try {
+        let { data } = await axios.get(`/artistsongs/${id}`);
+        setArtistSongs(data);
+        data = await axios.get(`/artistalbums/${id}`);
+        setArtistAlbums(data.data);
+        data = await axios.get(`/artist/${id}`);
+        console.log(data.data)
+        if(!data.data[0]) {
+          setGoodRequest(false)
+        }
+        setArtist(data.data[0]);
+      } catch (e) {
+        console.log(e.message)
+        setGoodRequest(false)
+      }
     })();
   }, [id]);
 
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 450, itemsToShow: 2 },
+    { width: 700, itemsToShow: 3 },
+    { width: 1000, itemsToShow: 4 },
+    { width: 1200, itemsToShow: 5 },
+  ]
+
   return (
     <div>
+    {goodRequest ? <div>
       {artist && (
         <>
           <NavAppBar />
@@ -45,27 +60,28 @@ function SingleArtist() {
                 src={artist.cover_img}
               />
             )}
-            <div style={styles.gridContainer}>
-              <div className="subjectArtistPage">
-                <h2>Albums</h2>
+              <div className="subjectPage">
+                <h2>Top Songs</h2>
                 <List>
-                  {artistAlbums.map((album) => (
-                    <AlbumListItem key={album.id} album={album} />
+                  {artistSongs.slice(0,5).map((song) => (
+                    <SongListItem query={{path: 'artist', id: artist.id}} key={song.id} song={song} />
                   ))}
                 </List>
-              </div>
-              <div className="subjectArtistPage">
-                <h2>Songs</h2>
-                <List>
-                  {artistSongs.map((song) => (
-                    <SongListItem key={song.id} song={song} />
-                  ))}
-                </List>
-              </div>
             </div>
+              <div className="subjectArtistPage">
+                <br />
+                <br />
+                <h2>Albums</h2>
+                <Carousel Carousel color="white" breakPoints={breakPoints}>
+                  {artistAlbums.map((album) => (
+                    <NewAlbumListItem key={album.id} album={album} />
+                  ))}
+                </Carousel>
+              </div>
           </div>
         </>
       )}
+    </div> : <NotFound /> }
     </div>
   );
 }

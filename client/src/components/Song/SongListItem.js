@@ -6,10 +6,12 @@ import {
   Tooltip,
   Zoom,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import YoutubeModal from "../YoutubeModal";
 
-function SongListItem({ song }) {
+function SongListItem({ song, query }) {
   return (
+    <Link to={`/song/${song.id}?${query.path}=${query.id}`} style={{ textDecoration: "none", color: "white" }}>
     <div className="song-list-item">
       <Tooltip
         TransitionComponent={Zoom}
@@ -30,6 +32,7 @@ function SongListItem({ song }) {
         </ListItem>
       </Tooltip>
     </div>
+    </Link>
   );
 }
 

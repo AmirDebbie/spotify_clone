@@ -12,6 +12,8 @@ import SingleAlbum from "./components/Album/SingleAlbum";
 import SingleArtist from "./components/Artist/SingleArtist";
 import SinglePlaylist from "./components/Playlist/SinglePlaylist";
 import Admin from "./components/Admin/Admin";
+import NotFound from "./components/NewRequirements/NotFound";
+import SingleSong from "./components/NewRequirements/SingleSong";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,29 +22,35 @@ ReactDOM.render(
         <Route path="/artist/:id">
           <SingleArtist />
         </Route>
+        <Route path="/song/:id">
+          <SingleSong />
+        </Route>
         <Route path="/album/:id">
           <SingleAlbum />
         </Route>
         <Route path="/playlist/:id">
           <SinglePlaylist />
         </Route>
-        <Route path="/admin">
+        <Route exact path="/admin">
           <Admin />
         </Route>
-        <Route path="/albums">
+        <Route exact path="/albums">
           <Albums />
         </Route>
-        <Route path="/songs">
+        <Route exact path="/songs">
           <Songs />
         </Route>
-        <Route path="/artists">
+        <Route exact path="/artists">
           <Artists />
         </Route>
-        <Route path="/playlists">
+        <Route exact path="/playlists">
           <Playlists />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <App />
+        </Route>
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
     </Router>

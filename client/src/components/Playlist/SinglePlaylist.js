@@ -4,25 +4,33 @@ import axios from "axios";
 import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
+import NotFound from "../NewRequirements/NotFound";
 
 function SinglePlaylist() {
   const [playlistSongs, setPlaylistSongs] = useState([]);
+  const [goodRequest, setGoodRequest] = useState(true);
   const [playlist, setPlaylist] = useState();
   const { id } = useParams();
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`/playlistsongs/${id}`);
-      setPlaylistSongs(data);
-    })();
-
-    (async () => {
-      const { data } = await axios.get(`/playlist/${id}`);
-      setPlaylist(data[0]);
+      try {
+        let { data } = await axios.get(`/playlistsongs/${id}`);
+        setPlaylistSongs(data);
+        data = await axios.get(`/playlist/${id}`);
+        if(!data.data[0]) {
+          setGoodRequest(false)
+        }
+        setPlaylist(data.data[0]);
+      } catch (e) {
+        console.log(e.message)
+        setGoodRequest(false)
+      }
     })();
   }, [id]);
 
   return (
     <div>
+    {goodRequest ? <div>
       {playlist && (
         <>
           <NavAppBar />
@@ -40,12 +48,13 @@ function SinglePlaylist() {
             )}
             <List>
               {playlistSongs.map((song) => (
-                <SongListItem key={song.id} song={song} />
+                <SongListItem query={{path: 'playlist', id: playlist.id}} key={song.id} song={song} />
               ))}
             </List>
           </div>
         </>
       )}
+    </div> : <NotFound />}
     </div>
   );
 }

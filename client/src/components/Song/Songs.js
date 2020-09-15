@@ -20,7 +20,7 @@ function Songs() {
         <h1>All Songs</h1>
         <List>
           {songs.map((song) => (
-            <SongListItem key={song.id} song={song} />
+            <SongListItem query={{path: 'top_song', id:'true'}} key={song.id} song={song} />
           ))}
         </List>
       </div>
