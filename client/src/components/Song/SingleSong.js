@@ -65,6 +65,7 @@ function SingleSong() {
         setGoodRequest(false);
       }
     })();
+    // eslint-disable-next-line
   }, [id]);
 
   return goodRequest ? (

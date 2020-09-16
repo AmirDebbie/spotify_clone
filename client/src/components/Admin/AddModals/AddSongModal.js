@@ -106,15 +106,12 @@ function AddSongModal({ getSongs, artists, albums }) {
           <option value="" selected>
             Select An Album
           </option>
-          {albums.map((album) => {
-            if (album.artist_id === Number(artistId)) {
-              return (
+          {albums.filter((album) => album.artist_id === Number(artistId)).map((album) => (
                 <option key={album.id} value={album.id}>
                   {album.name}
                 </option>
-              );
-            }
-          })}
+              )
+          )}
         </select>
         <TextField
           required={true}
