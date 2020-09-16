@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavAppBar from "../NavAppBar";
 import axios from "axios";
-import { List } from "@material-ui/core";
-import NewArtistListItem from "../NewRequirements/NewArtistListItem";
+import SquareArtistListItem from "./SquareArtistListItem";
 
 function Artists() {
   const [artists, setArtists] = useState([]);
@@ -16,22 +15,24 @@ function Artists() {
   return (
     <>
       <NavAppBar />
-        <h1>All Artists</h1>
-        <div style={styles.gridContainer}>
-          {artists.map((artist) => (
-            <NewArtistListItem key={artist.id} artist={artist} />
-          ))}
-        </div>
+      <h1 style={{ color: "white", textAlign: "center" }}>All Artists</h1>
+      <div style={styles.gridContainer}>
+        {artists.map((artist) => (
+          <SquareArtistListItem key={artist.id} artist={artist} />
+        ))}
+      </div>
     </>
   );
 }
 
 const styles = {
   gridContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
-    gridGap: 20
-  }
-}
+    width: "80%",
+    marginLeft: "4%",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+    gridGap: 30,
+  },
+};
 
 export default Artists;

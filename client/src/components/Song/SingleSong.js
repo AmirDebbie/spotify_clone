@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
-import NotFound from "./NotFound";
+import NotFound from "../NotFound/NotFound";
 import { List } from "@material-ui/core";
-import SongListItem from "../Song/SongListItem";
-import NavAppBar from '../NavAppBar'
+import SongListItem from "./SongListItem";
+import NavAppBar from "../NavAppBar";
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
 function SingleSong() {
-  let query = useQuery();
+  const query = useQuery();
   const { id } = useParams();
   const [song, setSong] = useState({});
   const [list, setList] = useState([]);
@@ -35,70 +37,72 @@ function SingleSong() {
     (async () => {
       try {
         let { data } = await axios.get(`/song/${id}`);
-        if(!data[0]) {
-            setGoodRequest(false)
+        if (!data[0]) {
+          setGoodRequest(false);
         }
         setSong(data[0]);
         if (query.get("artist")) {
           data = await axios.get(`/artistsongs/${query.get("artist")}`);
           setList(data.data);
-          setPath('artist');
-          setIdForObj(query.get('artist'))
+          setPath("artist");
+          setIdForObj(query.get("artist"));
         } else if (query.get("album")) {
           data = await axios.get(`/albumsongs/${query.get("album")}`);
           setList(data.data);
-          setPath('album');
-          setIdForObj(query.get('album'))
+          setPath("album");
+          setIdForObj(query.get("album"));
         } else if (query.get("playlist")) {
           data = await axios.get(`/playlistsongs/${query.get("playlist")}`);
           setList(data.data);
-          setPath('playlist');
-          setIdForObj(query.get('playlist'))
+          setPath("playlist");
+          setIdForObj(query.get("playlist"));
         } else {
           data = await axios.get(`/top_song`);
           setList(data.data);
         }
       } catch (e) {
         console.log(e.message);
-        setGoodRequest(false)
+        setGoodRequest(false);
       }
     })();
   }, [id]);
 
   return goodRequest ? (
-      <>
+    <>
       <NavAppBar />
       {song.title && (
-    <div style={styles.gridContainer}>
-      <iframe
-        title={song.title}
-        width="100%"
-        height="600"
-        src={`https://www.youtube.com/embed/${video_id}`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-      <List>
-        {list.map((listSong) => (
-          <SongListItem
-            query={{ path: path, id: idForObj }}
-            key={listSong.id}
-            song={listSong}
-          />
-        ))}
-      </List>
-    </div>
-  ) }
+        <div style={styles.gridContainer}>
+          <iframe
+            title={song.title}
+            width="100%"
+            height="600"
+            src={`https://www.youtube.com/embed/${video_id}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+          <List>
+            {list.map((listSong) => (
+              <SongListItem
+                query={{ path: path, id: idForObj }}
+                key={listSong.id}
+                song={listSong}
+              />
+            ))}
+          </List>
+        </div>
+      )}
     </>
-    ) : <NotFound />
+  ) : (
+    <NotFound />
+  );
 }
 
 const styles = {
-    gridContainer: {
-        display: 'grid',
-        gridTemplateColumns: '2fr 1fr',
-    }
-}
+  gridContainer: {
+    display: "grid",
+    gridTemplateColumns: "2fr 1fr",
+  },
+};
 
 export default SingleSong;

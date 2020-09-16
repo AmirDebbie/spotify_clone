@@ -4,7 +4,7 @@ import axios from "axios";
 import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
-import NotFound from "../NewRequirements/NotFound";
+import NotFound from "../NotFound/NotFound";
 
 function SingleAlbum() {
   const [albumSongs, setAlbumSongs] = useState([]);
@@ -50,7 +50,11 @@ function SingleAlbum() {
                 )}
                 <List>
                   {albumSongs.map((song) => (
-                    <SongListItem query={{path: 'album', id: album.id}} key={song.id} song={song} />
+                    <SongListItem
+                      query={{ path: "album", id: album.id }}
+                      key={song.id}
+                      song={song}
+                    />
                   ))}
                 </List>
               </div>

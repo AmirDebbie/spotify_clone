@@ -12,8 +12,8 @@ import SingleAlbum from "./components/Album/SingleAlbum";
 import SingleArtist from "./components/Artist/SingleArtist";
 import SinglePlaylist from "./components/Playlist/SinglePlaylist";
 import Admin from "./components/Admin/Admin";
-import NotFound from "./components/NewRequirements/NotFound";
-import SingleSong from "./components/NewRequirements/SingleSong";
+import NotFound from "./components/NotFound/NotFound";
+import SingleSong from "./components/Song/SingleSong";
 
 ReactDOM.render(
   <React.StrictMode>

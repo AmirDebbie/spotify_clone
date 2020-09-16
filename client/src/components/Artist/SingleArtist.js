@@ -4,9 +4,9 @@ import axios from "axios";
 import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
-import NewAlbumListItem from "../NewRequirements/NewAlbumListItem";
+import SquareAlbumListItem from "../Album/SquareAlbumListItem";
 import Carousel from 'react-elastic-carousel';
-import NotFound from "../NewRequirements/NotFound";
+import NotFound from "../NotFound/NotFound";
 
 function SingleArtist() {
   const [artistSongs, setArtistSongs] = useState([]);
@@ -74,7 +74,7 @@ function SingleArtist() {
                 <h2>Albums</h2>
                 <Carousel Carousel color="white" breakPoints={breakPoints}>
                   {artistAlbums.map((album) => (
-                    <NewAlbumListItem key={album.id} album={album} />
+                    <SquareAlbumListItem key={album.id} album={album} />
                   ))}
                 </Carousel>
               </div>

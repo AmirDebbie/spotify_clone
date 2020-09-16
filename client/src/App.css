@@ -102,6 +102,10 @@ button:focus {
   background-color: #444
 }
 
+.songListItem:hover {
+  background-color: #444;
+}
+
 .updateButton {
   background-color: #1db95477;
   width: 60px;
