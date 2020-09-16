@@ -7,5 +7,5 @@ Data Base Structure:
 ![Image of ERD](./readmeFiles/spotify-db-diagram.png)
 
 Client app GIF: 
-![hide](./readmeFiles/RCO4orsfv7.gif)
+![hide](./readmeFiles/n0YCesP2sv.gif)
 
