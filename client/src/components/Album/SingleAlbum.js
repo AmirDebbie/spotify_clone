@@ -21,7 +21,6 @@ function SingleAlbum() {
           setGoodRequest(false);
         }
         setAlbum(data.data[0]);
-        console.log(data.data[0]);
       } catch (e) {
         console.log(e.message);
         setGoodRequest(false);
