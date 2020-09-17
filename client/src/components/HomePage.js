@@ -85,11 +85,11 @@ function HomePage() {
   };
 
   const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 510, itemsToShow: 2 },
-    { width: 770, itemsToShow: 3 },
-    { width: 1040, itemsToShow: 4 },
-    { width: 1280, itemsToShow: 5 },
+    { width: 1, itemsToShow: 1, itemsToScroll: 1 },
+    { width: 510, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 770, itemsToShow: 3, itemsToScroll: 3 },
+    { width: 1040, itemsToShow: 4, itemsToScroll: 4 },
+    { width: 1280, itemsToShow: 5, itemsToScroll: 5 },
   ];
   return (
     <>
@@ -108,39 +108,47 @@ function HomePage() {
         )}
       </div>
       <h2 className="listTitle">Top Songs</h2>
-      <Carousel color="white" breakPoints={breakPoints}>
-        {songs.map((song) => (
-          <SquareSongListItem
-            query={{ path: "top-song", id: "true" }}
-            key={song.id}
-            song={song}
-          />
-        ))}
-      </Carousel>
+      <div style={{ padding: 20 }}>
+        <Carousel breakPoints={breakPoints}>
+          {songs.map((song) => (
+            <SquareSongListItem
+              query={{ path: "top-song", id: "true" }}
+              key={song.id}
+              song={song}
+            />
+          ))}
+        </Carousel>
+      </div>
       <br />
       <br />
       <h2 className="listTitle">Top Albums</h2>
-      <Carousel color="white" breakPoints={breakPoints}>
-        {albums.map((album) => (
-          <SquareAlbumListItem key={album.id} album={album} />
-        ))}
-      </Carousel>
+      <div style={{ padding: 20 }}>
+        <Carousel color="white" breakPoints={breakPoints}>
+          {albums.map((album) => (
+            <SquareAlbumListItem key={album.id} album={album} />
+          ))}
+        </Carousel>
+      </div>
       <br />
       <br />
       <h2 className="listTitle">Top Artists</h2>
-      <Carousel color="white" breakPoints={breakPoints}>
-        {artists.map((artist) => (
-          <SquareArtistListItem key={artist.id} artist={artist} />
-        ))}
-      </Carousel>
+      <div style={{ padding: 20 }}>
+        <Carousel breakPoints={breakPoints}>
+          {artists.map((artist) => (
+            <SquareArtistListItem key={artist.id} artist={artist} />
+          ))}
+        </Carousel>
+      </div>
       <br />
       <br />
       <h2 className="listTitle">Top Playlists</h2>
-      <Carousel color="white" breakPoints={breakPoints}>
-        {playlists.map((playlist) => (
-          <SquarePlaylistListItem key={playlist.id} playlist={playlist} />
-        ))}
-      </Carousel>
+      <div style={{ padding: 20 }}>
+        <Carousel breakPoints={breakPoints}>
+          {playlists.map((playlist) => (
+            <SquarePlaylistListItem key={playlist.id} playlist={playlist} />
+          ))}
+        </Carousel>
+      </div>
     </>
   );
 }

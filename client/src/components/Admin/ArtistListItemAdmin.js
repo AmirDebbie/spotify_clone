@@ -115,7 +115,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
   );
 
   return (
-    <div className="linkListItem">
+    <>
       <ListItem style={{ textAlign: "center" }}>
         <ListItemText
           primary={artist.name}
@@ -150,7 +150,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
       <Modal open={open} onClose={handleClose}>
         {modalBody}
       </Modal>
-    </div>
+    </>
   );
 }
 

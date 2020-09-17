@@ -64,7 +64,7 @@ button:focus {
 }
 
 .drawer {
-  background-color: #222;
+  background-color: #111;
   height: 100%; 
   width: 200px;
   overflow: hidden;
@@ -75,9 +75,11 @@ button:focus {
   color: white;
   width: 100%;
   height: 1.5em;
+  transition: 200ms;
 }
 
 .drawerItem:hover {
+  transition: 200ms;
   color: #1db954;
   background-color: #333;
   cursor: pointer;
@@ -98,12 +100,13 @@ button:focus {
   margin-right: auto;
 }
 
-.linkListItem:hover {
-  background-color: #444
+.songListItem {
+  transition: 200ms;
+  border-radius: 10px;
 }
-
 .songListItem:hover {
-  background-color: #444;
+  transition: 200ms;
+  background-color: #222;
 }
 
 .updateButton {
@@ -153,46 +156,67 @@ select {
 }
 
 .newSongGrid {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.795);
   width: 250px;
-  border: #1db954 solid 2px;
   display: grid;
   grid-template-rows: 2fr 1fr;
   color: white;
   text-align: center;
-  height: 300px;
+  height: 280px;
+  transition: 200ms;
+  width: 230px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .newSongGrid:hover {
-  background-color: #555;
-  
+  background-color: rgb(63, 63, 63);
+  transition: 200ms;
 }
 
-
-
 .newAlbumGrid {
-  background-color: #333;
-  width: 250px;
-  border: #1db954 solid 2px;
+  background-color: rgba(51, 51, 51, 0.795);
+  width: 230px;
+  padding: 10px;
+  border-radius: 10px;
   display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr;
   color: white;
-  text-align: center;
-  height: 300px;
+  height: 330px;
+  transition: 200ms;
 }
 
 .newAlbumGrid:hover {
-  background-color: #555;
-
+  background-color: rgb(63, 63, 63);
+  transition: 200ms;
 }
 
-.hCVuYx {
-  background-color: #1db95477 !important;
+/* .hCVuYx {
+  background-color: black !important;
+  color: black !important;
+  transition: 4000ms;
+}
+
+.hCVuYx:hover {
+  background-color: #1db954 !important;
+} */
+
+.hCVuYx:disabled {
+  color: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  cursor: auto !important;
 }
 
 .chowzb {
-  background-color: #1db95477 !important;
+  background-color: rgba(255, 255, 255, 0.795) !important;
+  color: black !important;
 }
+
+.chowzb:hover {
+  background-color: white !important;
+}
+
 
 .brcpxa {
   display: none;
@@ -209,7 +233,8 @@ select {
 }
 
 .bigImg {
-  height: 150px;
+  height: 232px;
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 1200px) {

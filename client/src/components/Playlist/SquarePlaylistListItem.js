@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 
 function NewPlaylistListItem({ playlist }) {
   return (
-    <div className="linkListItem">
       <Link
         style={{ textDecoration: "none", color: "white" }}
         to={`/playlist/${playlist.id}`}
       >
         <div className="newAlbumGrid">
-          <h3>{playlist.name}</h3>
           <div>
             {playlist.cover_img && (
               <img
@@ -19,12 +17,14 @@ function NewPlaylistListItem({ playlist }) {
               />
             )}
           </div>
-          <p style={{ fontSize: 15, color: "#1db954" }}>{`${new Date(
+          <div style={{height: 20, marginBottom: 20, marginTop: 5}}>
+          <h3 style={{margin: 0}}>{playlist.name}</h3>
+          </div>
+          <p style={{ fontSize: 15, color: "#999", fontWeight: 'bold' }}>{`${new Date(
             playlist.upload_at.slice(0, 10)
           ).toDateString()}`}</p>
         </div>
       </Link>
-    </div>
   );
 }
 

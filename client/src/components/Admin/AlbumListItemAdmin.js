@@ -130,7 +130,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   );
 
   return (
-    <div className="linkListItem">
+    <>
       <ListItem style={{ textAlign: "center" }}>
         <ListItemText
           primary={album.name}
@@ -163,7 +163,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
       <Modal open={open} onClose={handleClose}>
         {modalBody}
       </Modal>
-    </div>
+    </>
   );
 }
 

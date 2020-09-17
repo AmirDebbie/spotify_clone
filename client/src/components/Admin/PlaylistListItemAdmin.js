@@ -114,7 +114,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   );
 
   return (
-    <div className="linkListItem">
+    <>
       <ListItem style={{ textAlign: "center" }}>
         <ListItemText
           primary={playlist.name}
@@ -149,7 +149,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
       <Modal open={open} onClose={handleClose}>
         {modalBody}
       </Modal>
-    </div>
+    </>
   );
 }
 

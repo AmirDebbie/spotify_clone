@@ -25,7 +25,7 @@ function SquareSongListItem({ query, song }) {
           <PlayCircleFilledIcon style={{ color: "white", fontSize: 150 }} />
         </div>
         <div>
-          <p style={{ fontSize: 15, color: "#1db954" }}>{`${song.artist} | ${
+          <p style={{ fontSize: 15, color: "#999", fontWeight: 'bold' }}>{`${song.artist} | ${
             song.album
           } | ${song.length.slice(3, 8)}`}</p>
         </div>
