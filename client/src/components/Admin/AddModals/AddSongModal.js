@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Modal, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
+
 
 function getModalStyle() {
   return {
@@ -34,6 +36,7 @@ function AddSongModal({ getSongs, artists, albums }) {
   const [trackNumber, setTrackNumber] = useState("");
   const [lyrics, setLyrics] = useState("");
   const [createdAt, setCreatedAt] = useState("");
+  const [cookies] = useCookies();
 
   const handleOpen = () => {
     setOpen(true);
@@ -63,7 +66,11 @@ function AddSongModal({ getSongs, artists, albums }) {
         created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date().toISOString().slice(0, 10),
       };
-      await axios.post(`/song`, newSong);
+      await axios.post(`/song`, newSong, {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       getSongs();
       handleClose();
     }

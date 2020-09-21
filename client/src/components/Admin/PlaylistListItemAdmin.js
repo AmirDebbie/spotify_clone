@@ -9,6 +9,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
 
 function getModalStyle() {
   return {
@@ -36,6 +37,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   const [name, setName] = useState(playlist.name);
   const [coverImg, setCoverImg] = useState(playlist.cover_img);
   const [uploadAt, setUploadAt] = useState(playlist.upload_at.slice(0, 10));
+  const [cookies] = useCookies();
 
   // Opens the modal
   const handleOpen = () => {
@@ -48,7 +50,11 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/playlist/${playlist.id}`);
+    await axios.delete(`/playlist/${playlist.id}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     getPlaylists();
   };
 
@@ -62,7 +68,11 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
         cover_img: coverImg,
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/playlist/${playlist.id}`, updatedPlaylist);
+      await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       getPlaylists();
       handleClose();
     }

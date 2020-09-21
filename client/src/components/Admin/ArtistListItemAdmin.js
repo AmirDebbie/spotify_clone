@@ -9,6 +9,8 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
+
 
 function getModalStyle() {
   return {
@@ -36,6 +38,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
   const [name, setName] = useState(artist.name);
   const [coverImg, setCoverImg] = useState(artist.cover_img);
   const [uploadAt, setUploadAt] = useState(artist.upload_at.slice(0, 10));
+  const [cookies] = useCookies();
 
   // Opens the modal
   const handleOpen = () => {
@@ -48,7 +51,11 @@ function ArtistListItemAdmin({ artist, getArtists }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/artist/${artist.id}`);
+    await axios.delete(`/artist/${artist.id}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     getArtists();
   };
 
@@ -62,7 +69,11 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         cover_img: coverImg,
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/artist/${artist.id}`, updatedArtist);
+      await axios.put(`/artist/${artist.id}`, updatedArtist, {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       getArtists();
       handleClose();
     }

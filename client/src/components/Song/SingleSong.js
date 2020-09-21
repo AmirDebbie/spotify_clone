@@ -5,6 +5,8 @@ import NotFound from "../NotFound/NotFound";
 import { List } from "@material-ui/core";
 import SongListItem from "./SongListItem";
 import NavAppBar from "../NavAppBar";
+import { useCookies } from "react-cookie";
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -18,6 +20,8 @@ function SingleSong() {
   const [idForObj, setIdForObj] = useState();
   const [path, setPath] = useState();
   const [goodRequest, setGoodRequest] = useState(true);
+  const [cookies] = useCookies();
+
 
   const video_id = useMemo(() => {
     let youtube_link = song.youtube_link;
@@ -36,28 +40,48 @@ function SingleSong() {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/song/${id}`);
+        let { data } = await axios.get(`/song/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         if (!data[0]) {
           setGoodRequest(false);
         }
         setSong(data[0]);
         if (query.get("artist")) {
-          data = await axios.get(`/artistsongs/${query.get("artist")}`);
+          data = await axios.get(`/artistsongs/${query.get("artist")}`, {
+            headers: {
+              Authorization: cookies.token,
+            }
+           });
           setList(data.data);
           setPath("artist");
           setIdForObj(query.get("artist"));
         } else if (query.get("album")) {
-          data = await axios.get(`/albumsongs/${query.get("album")}`);
+          data = await axios.get(`/albumsongs/${query.get("album")}`, {
+            headers: {
+              Authorization: cookies.token,
+            }
+           });
           setList(data.data);
           setPath("album");
           setIdForObj(query.get("album"));
         } else if (query.get("playlist")) {
-          data = await axios.get(`/playlistsongs/${query.get("playlist")}`);
+          data = await axios.get(`/playlistsongs/${query.get("playlist")}`, {
+            headers: {
+              Authorization: cookies.token,
+            }
+           });
           setList(data.data);
           setPath("playlist");
           setIdForObj(query.get("playlist"));
         } else {
-          data = await axios.get(`/top_song`);
+          data = await axios.get(`/top_song`, {
+            headers: {
+              Authorization: cookies.token,
+            }
+           });
           setList(data.data);
         }
       } catch (e) {

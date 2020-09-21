@@ -2,13 +2,21 @@ import React, { useEffect, useState } from "react";
 import NavAppBar from "../NavAppBar";
 import axios from "axios";
 import SquareAlbumListItem from "./SquareAlbumListItem";
+import { useCookies } from "react-cookie";
+
 
 function Albums() {
   const [albums, setAlbums] = useState([]);
+  const [cookies] = useCookies();
+
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("album");
+      const { data } = await axios.get("album", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setAlbums(data);
     })();
   }, []);

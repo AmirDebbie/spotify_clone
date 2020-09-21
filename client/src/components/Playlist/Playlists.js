@@ -3,13 +3,20 @@ import NavAppBar from "../NavAppBar";
 import axios from "axios";
 import { List } from "@material-ui/core";
 import PlaylistListItem from "./PlaylistListItem";
+import { useCookies } from "react-cookie";
+
 
 function Playlists() {
   const [playlists, setPlaylists] = useState([]);
+  const [cookies] = useCookies();
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("playlist");
+      const { data } = await axios.get("playlist", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setPlaylists(data);
     })();
   }, []);

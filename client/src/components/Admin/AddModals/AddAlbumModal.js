@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Modal, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
+
 
 function getModalStyle() {
   return {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AddAlbumModal({ getAlbums, artists }) {
+  const [cookies] = useCookies();
   const classes = useStyles();
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
@@ -51,7 +54,11 @@ function AddAlbumModal({ getAlbums, artists }) {
         created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date().toISOString().slice(0, 10),
       };
-      await axios.post(`/album`, newAlbum);
+      await axios.post(`/album`, newAlbum, {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       getAlbums();
       handleClose();
     }

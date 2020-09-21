@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Modal, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
+
 
 function getModalStyle() {
   return {
@@ -28,6 +30,8 @@ function AddPlaylistModal({ getPlaylists }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [coverImg, setCoverImg] = useState("");
+  const [cookies] = useCookies();
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -44,7 +48,11 @@ function AddPlaylistModal({ getPlaylists }) {
       cover_img: coverImg,
       upload_at: new Date().toISOString().slice(0, 10),
     };
-    await axios.post(`/playlist`, newPlaylist);
+    await axios.post(`/playlist`, newPlaylist, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     getPlaylists();
     handleClose();
   };

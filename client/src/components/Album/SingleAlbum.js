@@ -4,6 +4,7 @@ import axios from "axios";
 import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
+import { useCookies } from "react-cookie";
 import NotFound from "../NotFound/NotFound";
 
 function SingleAlbum() {
@@ -11,12 +12,22 @@ function SingleAlbum() {
   const [goodRequest, setGoodRequest] = useState(true);
   const [album, setAlbum] = useState();
   const { id } = useParams();
+  const [cookies] = useCookies();
+
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/albumsongs/${id}`);
+        let { data } = await axios.get(`/albumsongs/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setAlbumSongs(data);
-        data = await axios.get(`/album/${id}`);
+        data = await axios.get(`/album/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         if (!data.data[0]) {
           setGoodRequest(false);
         }

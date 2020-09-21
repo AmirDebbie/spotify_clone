@@ -7,8 +7,10 @@ import SquareAlbumListItem from "./Album/SquareAlbumListItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Carousel from "react-elastic-carousel";
 import SquarePlaylistListItem from "./Playlist/SquarePlaylistListItem";
+import { useCookies } from 'react-cookie';
 
 function HomePage() {
+  const [cookies, setCookie] = useCookies();
   const [artists, setArtists] = useState([]);
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
@@ -19,8 +21,13 @@ function HomePage() {
   useEffect(() => {
     // Get all artists
     (async () => {
+      console.log('hello')
       try {
-        const { data } = await axios.get("top_artist");
+        const { data } = await axios.get("top_artist", {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setArtists(data);
       } catch (e) {
         console.log(e.message);
@@ -30,7 +37,11 @@ function HomePage() {
     // Get all songs
     (async () => {
       try {
-        const { data } = await axios.get("top_song");
+        const { data } = await axios.get("top_song", {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setSongs(data);
       } catch (e) {
         console.log(e.message);
@@ -40,7 +51,11 @@ function HomePage() {
     // Get all albums
     (async () => {
       try {
-        const { data } = await axios.get("top_album");
+        const { data } = await axios.get("top_album", {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setAlbums(data);
       } catch (e) {
         console.log(e.message);
@@ -50,7 +65,11 @@ function HomePage() {
     // Get all playlists
     (async () => {
       try {
-        const { data } = await axios.get("top_playlist");
+        const { data } = await axios.get("top_playlist", {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setPlaylists(data);
       } catch (e) {
         console.log(e.message);
@@ -73,13 +92,29 @@ function HomePage() {
   };
 
   const handleInputChange = async (search) => {
-    const songsData = await axios.get(`song?search=${search}`);
+    const songsData = await axios.get(`song?search=${search}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setSongs(songsData.data);
-    const albumsData = await axios.get(`album?search=${search}`);
+    const albumsData = await axios.get(`album?search=${search}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setAlbums(albumsData.data);
-    const artistsData = await axios.get(`artist?search=${search}`);
+    const artistsData = await axios.get(`artist?search=${search}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setArtists(artistsData.data);
-    const playlistsData = await axios.get(`playlist?search=${search}`);
+    const playlistsData = await axios.get(`playlist?search=${search}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setPlaylists(playlistsData.data);
     setLoading(false);
   };

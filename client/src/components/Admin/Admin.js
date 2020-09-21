@@ -10,56 +10,91 @@ import AddAlbumModal from "./AddModals/AddAlbumModal";
 import AddArtistModal from "./AddModals/AddArtistModal";
 import AddSongModal from "./AddModals/AddSongModal";
 import AddPlaylistModal from "./AddModals/AddPlayListModal";
+import { useCookies } from "react-cookie";
+
 
 function Admin() {
   const [artists, setArtists] = useState([]);
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [playlists, setPlaylists] = useState([]);
+  const [cookies] = useCookies();
 
   useEffect(() => {
     // Get all artists
     (async () => {
-      const { data } = await axios.get("top_artist");
+      const { data } = await axios.get("top_artist", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setArtists(data);
     })();
 
     // Get all songs
     (async () => {
-      const { data } = await axios.get("song");
+      const { data } = await axios.get("song", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setSongs(data);
     })();
 
     // Get all albums
     (async () => {
-      const { data } = await axios.get("album");
+      const { data } = await axios.get("album", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setAlbums(data);
     })();
 
     // Get all playlists
     (async () => {
-      const { data } = await axios.get("playlist");
+      const { data } = await axios.get("playlist", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setPlaylists(data);
     })();
   }, []);
 
   const getAlbums = async () => {
-    const { data } = await axios.get("album");
+    const { data } = await axios.get("album", {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setAlbums(data);
   };
 
   const getArtists = async () => {
-    const { data } = await axios.get("artist");
+    const { data } = await axios.get("artist", {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setArtists(data);
   };
 
   const getSongs = async () => {
-    const { data } = await axios.get("song");
+    const { data } = await axios.get("song", {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setSongs(data);
   };
 
   const getPlaylists = async () => {
-    const { data } = await axios.get("playlist");
+    const { data } = await axios.get("playlist", {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     setPlaylists(data);
   };
 

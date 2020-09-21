@@ -7,6 +7,8 @@ import SongListItem from "../Song/SongListItem";
 import SquareAlbumListItem from "../Album/SquareAlbumListItem";
 import Carousel from 'react-elastic-carousel';
 import NotFound from "../NotFound/NotFound";
+import { useCookies } from "react-cookie";
+
 
 function SingleArtist() {
   const [artistSongs, setArtistSongs] = useState([]);
@@ -14,14 +16,28 @@ function SingleArtist() {
   const [goodRequest, setGoodRequest] = useState(true);
   const [artistAlbums, setArtistAlbums] = useState([]);
   const { id } = useParams();
+  const [cookies] = useCookies();
+
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/artistsongs/${id}`);
+        let { data } = await axios.get(`/artistsongs/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setArtistSongs(data);
-        data = await axios.get(`/artistalbums/${id}`);
+        data = await axios.get(`/artistalbums/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setArtistAlbums(data.data);
-        data = await axios.get(`/artist/${id}`);
+        data = await axios.get(`/artist/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         if(!data.data[0]) {
           setGoodRequest(false)
         }

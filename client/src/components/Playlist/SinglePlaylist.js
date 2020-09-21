@@ -5,18 +5,30 @@ import { List } from "@material-ui/core";
 import NavAppBar from "../NavAppBar";
 import SongListItem from "../Song/SongListItem";
 import NotFound from "../NotFound/NotFound";
+import { useCookies } from "react-cookie";
+
 
 function SinglePlaylist() {
   const [playlistSongs, setPlaylistSongs] = useState([]);
   const [goodRequest, setGoodRequest] = useState(true);
   const [playlist, setPlaylist] = useState();
   const { id } = useParams();
+  const [cookies] = useCookies();
+
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/playlistsongs/${id}`);
+        let { data } = await axios.get(`/playlistsongs/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         setPlaylistSongs(data);
-        data = await axios.get(`/playlist/${id}`);
+        data = await axios.get(`/playlist/${id}`, {
+          headers: {
+            Authorization: cookies.token,
+          }
+         });
         if (!data.data[0]) {
           setGoodRequest(false);
         }

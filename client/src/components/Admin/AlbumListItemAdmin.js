@@ -9,6 +9,8 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCookies } from "react-cookie";
+
 
 function getModalStyle() {
   return {
@@ -37,6 +39,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   const [coverImg, setCoverImg] = useState(album.cover_img);
   const [createdAt, setCreatedAt] = useState(album.created_at.slice(0, 10));
   const [uploadAt, setUploadAt] = useState(album.upload_at.slice(0, 10));
+  const [cookies] = useCookies();
 
   // Opens the modal
   const handleOpen = () => {
@@ -49,7 +52,11 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/album/${album.id}`);
+    await axios.delete(`/album/${album.id}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     getAlbums();
   };
 
@@ -67,7 +74,11 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/album/${album.id}`, updatedAlbum);
+      await axios.put(`/album/${album.id}`, updatedAlbum, {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       getAlbums();
       handleClose();
     }

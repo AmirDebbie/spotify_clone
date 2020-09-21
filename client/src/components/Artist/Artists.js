@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react";
 import NavAppBar from "../NavAppBar";
 import axios from "axios";
 import SquareArtistListItem from "./SquareArtistListItem";
+import { useCookies } from "react-cookie";
+
 
 function Artists() {
   const [artists, setArtists] = useState([]);
+  const [cookies] = useCookies();
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("artist");
+      const { data } = await axios.get("artist", {
+        headers: {
+          Authorization: cookies.token,
+        }
+       });
       setArtists(data);
     })();
   }, []);

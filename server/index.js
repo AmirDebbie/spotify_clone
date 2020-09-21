@@ -1,6 +1,9 @@
 const express = require("express");
 const mysql = require("mysql");
 const morgan = require("morgan");
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+
 
 const app = express();
 
@@ -19,8 +22,6 @@ app.use(morgan(function (tokens, req, res) {
   }
 }));
 
-
-
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -34,6 +35,93 @@ connection.connect((err) => {
 connection.query("SELECT * FROM artists", (err, result, fields) => {
   if (err) throw err;
 });
+
+function pad(num) { return ('00' + num).slice(-2) };
+
+// Change the date to SQL date format
+function formatDate(date) {
+    let dateStr = date.getUTCFullYear() + '-' +
+        pad(date.getUTCMonth() + 1) + '-' +
+        pad(date.getUTCDate() + 1)
+    return dateStr;
+};
+
+
+app.post('/userRegister', (req, res) => {
+  const { name, email, password } = req.body;
+  connection.query(`SELECT * FROM users WHERE email = '${email}'`, async (err, result) => {
+    if (!result[0]) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = {
+          name,
+          email,
+          created_at: formatDate(new Date()),
+          password: hashedPassword,
+        }
+        connection.query(`INSERT INTO users Set ?`, newUser, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(400).json("An error occurred.");
+            } else {
+                res.json("1 user successfully inserted into db");
+            }
+        })
+    } else {
+      res.status(400).send('Email Exits')
+    }
+  })
+})
+
+app.post('/userLogin', (req, res) => {
+  const { email, password } = req.body;
+    connection.query(`SELECT * 
+    FROM users 
+    WHERE email = '${email}'`, async (err, result, fields) => {
+        if (err) {
+            res.status(400).json("An error occurred.");
+        } else if (result[0]) {
+            if (await bcrypt.compare(password, result[0].password)) {
+                console.log(result[0].user_ID);
+                const user = result[0].user_ID
+                const token = jwt.sign({ user }, 'my_secret_key')
+                res.json({
+                    name: result[0].name,
+                    token
+                });
+            } else {
+                res.status(403).json({ message: 'incorrect password' });
+            }
+        }
+    })
+})
+
+app.post('/validateUser', (req, res) => {
+  jwt.verify(req.body.token, 'my_secret_key', (error, data) => {
+    if (error) {
+        res.sendStatus(403);
+    } else {
+        res.send(true)
+    }
+})
+})
+
+app.use(ensureToken);
+
+function ensureToken(req, res, next) {
+  const bearerHeader = req.headers['authorization'];
+  if (typeof bearerHeader !== 'undefined') {
+    jwt.verify(bearerHeader, 'my_secret_key', (error, data) => {
+      if (error) {
+        res.status(403).send('incoreccet token');
+      } else {
+        res.token = bearerHeader;
+        next();
+      }
+    })
+  } else {
+    res.sendStatus(403);
+  }
+}
 
 // POST ENDPOINTS
 

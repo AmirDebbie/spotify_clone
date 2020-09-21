@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import YoutubeModal from "../YoutubeModal";
+import { useCookies } from "react-cookie";
 
 function getModalStyle() {
   return {
@@ -43,6 +44,7 @@ function SongListItemAdmin({ song, getSongs }) {
   const [lyrics, setLyrics] = useState(song.lyrics);
   const [createdAt, setCreatedAt] = useState(song.created_at.slice(0, 10));
   const [uploadAt, setUploadAt] = useState(song.upload_at.slice(0, 10));
+  const [cookies] = useCookies();
 
   // Opens the modal
   const handleOpen = () => {
@@ -55,7 +57,11 @@ function SongListItemAdmin({ song, getSongs }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/song/${song.id}`);
+    await axios.delete(`/song/${song.id}`, {
+      headers: {
+        Authorization: cookies.token,
+      }
+     });
     getSongs();
   };
 
