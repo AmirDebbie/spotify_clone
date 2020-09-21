@@ -58,7 +58,7 @@ CREATE TABLE `artists` (
   `cover_img` varchar(400) DEFAULT NULL,
   `upload_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `songs` (
   KEY `artist_id` (`artist_id`),
   CONSTRAINT `songs_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`),
   CONSTRAINT `songs_ibfk_2` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,13 +195,13 @@ CREATE TABLE `users` (
   `name` varchar(40) NOT NULL,
   `email` varchar(100) NOT NULL,
   `created_at` date DEFAULT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `is_admin` tinyint(1) DEFAULT '0',
   `remember_token` tinyint(1) DEFAULT '0',
   `prefrences` json DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +209,7 @@ CREATE TABLE `users` (
 --
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'David','david@gmail.com','2020-09-22','$2b$10$DbWcorklpRpoQIIu7wuHt.K113CnP9ToD.7KzD9kRpn2jkOxS1rF2',0,0,NULL),(3,'alon','alon@gmail.com','2020-09-22','$2b$10$dLBNRna4m1qei/QbmyqG.uFPI.VovCyilAlkWIjSQ7kGX3rTIY6CG',0,0,NULL),(5,'Amir','amird812@gmail.com','2020-09-22','$2b$10$gvtkxr5XyiJiJr8oE3eOwOTWqIAkN9k5O5HPqxKXzk5cvejwtSt.e',0,0,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 --
@@ -228,4 +229,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-21 10:05:21
+-- Dump completed on 2020-09-22  0:00:22
