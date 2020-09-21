@@ -12,7 +12,6 @@ import AddSongModal from "./AddModals/AddSongModal";
 import AddPlaylistModal from "./AddModals/AddPlayListModal";
 import { useCookies } from "react-cookie";
 
-
 function Admin() {
   const [artists, setArtists] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -26,8 +25,8 @@ function Admin() {
       const { data } = await axios.get("top_artist", {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       setArtists(data);
     })();
 
@@ -36,8 +35,8 @@ function Admin() {
       const { data } = await axios.get("song", {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       setSongs(data);
     })();
 
@@ -46,8 +45,8 @@ function Admin() {
       const { data } = await axios.get("album", {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       setAlbums(data);
     })();
 
@@ -56,18 +55,18 @@ function Admin() {
       const { data } = await axios.get("playlist", {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       setPlaylists(data);
     })();
-  }, []);
+  }, [cookies]);
 
   const getAlbums = async () => {
     const { data } = await axios.get("album", {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     setAlbums(data);
   };
 
@@ -75,8 +74,8 @@ function Admin() {
     const { data } = await axios.get("artist", {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     setArtists(data);
   };
 
@@ -84,8 +83,8 @@ function Admin() {
     const { data } = await axios.get("song", {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     setSongs(data);
   };
 
@@ -93,8 +92,8 @@ function Admin() {
     const { data } = await axios.get("playlist", {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     setPlaylists(data);
   };
 

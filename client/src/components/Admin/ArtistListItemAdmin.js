@@ -11,7 +11,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { useCookies } from "react-cookie";
 
-
 function getModalStyle() {
   return {
     top: "50%",
@@ -54,8 +53,8 @@ function ArtistListItemAdmin({ artist, getArtists }) {
     await axios.delete(`/artist/${artist.id}`, {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     getArtists();
   };
 
@@ -72,8 +71,8 @@ function ArtistListItemAdmin({ artist, getArtists }) {
       await axios.put(`/artist/${artist.id}`, updatedArtist, {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       getArtists();
       handleClose();
     }

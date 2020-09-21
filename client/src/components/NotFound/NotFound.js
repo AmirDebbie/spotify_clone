@@ -16,7 +16,7 @@ function NotFound() {
         }}
       >
         <h1 style={{ margin: 0, padding: 30 }}>Oops, You Just Got 404</h1>
-        <img alt='404' src={image} />
+        <img alt="404" src={image} />
       </div>
     </>
   );

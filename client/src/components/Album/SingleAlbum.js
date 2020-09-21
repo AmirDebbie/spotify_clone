@@ -20,14 +20,14 @@ function SingleAlbum() {
         let { data } = await axios.get(`/albumsongs/${id}`, {
           headers: {
             Authorization: cookies.token,
-          }
-         });
+          },
+        });
         setAlbumSongs(data);
         data = await axios.get(`/album/${id}`, {
           headers: {
             Authorization: cookies.token,
-          }
-         });
+          },
+        });
         if (!data.data[0]) {
           setGoodRequest(false);
         }
@@ -37,7 +37,7 @@ function SingleAlbum() {
         setGoodRequest(false);
       }
     })();
-  }, [id]);
+  }, [id, cookies]);
 
   return (
     <div>

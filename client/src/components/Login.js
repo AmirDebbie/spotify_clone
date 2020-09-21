@@ -46,7 +46,7 @@ function LogIn() {
               pattern: /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
           />
-          <p style={{color: 'white'}}>{errors.email && "Invalid Email"}</p>
+          <p style={{ color: "white" }}>{errors.email && "Invalid Email"}</p>
           <input
             className="searchInput"
             name="password"
@@ -54,7 +54,9 @@ function LogIn() {
             placeholder="Password"
             ref={logIn({ required: true })}
           />
-          <p style={{color: 'white'}}>{errors.password && "Password is required"}</p>
+          <p style={{ color: "white" }}>
+            {errors.password && "Password is required"}
+          </p>
           <input className="registerButton" type="submit" value="Login" />
         </form>
         <Link

@@ -53,8 +53,8 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
     await axios.delete(`/playlist/${playlist.id}`, {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     getPlaylists();
   };
 
@@ -71,8 +71,8 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
       await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       getPlaylists();
       handleClose();
     }

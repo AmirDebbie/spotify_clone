@@ -4,7 +4,6 @@ import axios from "axios";
 import SquareArtistListItem from "./SquareArtistListItem";
 import { useCookies } from "react-cookie";
 
-
 function Artists() {
   const [artists, setArtists] = useState([]);
   const [cookies] = useCookies();
@@ -14,11 +13,11 @@ function Artists() {
       const { data } = await axios.get("artist", {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       setArtists(data);
     })();
-  }, []);
+  }, [cookies]);
   return (
     <>
       <NavAppBar />

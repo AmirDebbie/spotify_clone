@@ -7,7 +7,6 @@ import SongListItem from "../Song/SongListItem";
 import NotFound from "../NotFound/NotFound";
 import { useCookies } from "react-cookie";
 
-
 function SinglePlaylist() {
   const [playlistSongs, setPlaylistSongs] = useState([]);
   const [goodRequest, setGoodRequest] = useState(true);
@@ -21,14 +20,14 @@ function SinglePlaylist() {
         let { data } = await axios.get(`/playlistsongs/${id}`, {
           headers: {
             Authorization: cookies.token,
-          }
-         });
+          },
+        });
         setPlaylistSongs(data);
         data = await axios.get(`/playlist/${id}`, {
           headers: {
             Authorization: cookies.token,
-          }
-         });
+          },
+        });
         if (!data.data[0]) {
           setGoodRequest(false);
         }
@@ -38,7 +37,7 @@ function SinglePlaylist() {
         setGoodRequest(false);
       }
     })();
-  }, [id]);
+  }, [id, cookies]);
 
   return (
     <div>

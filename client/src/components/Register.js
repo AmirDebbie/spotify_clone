@@ -11,7 +11,7 @@ function Register() {
     try {
       const { data } = await axios.post("userRegister", formData);
       console.log(data);
-      history.push('/');
+      history.push("/");
     } catch (e) {
       console.error(e);
     }
@@ -42,7 +42,7 @@ function Register() {
             ref={register({ required: true })}
           />
           <br />
-          <p style={{color: 'white'}}>{errors.name && "Name is Required"}</p>
+          <p style={{ color: "white" }}>{errors.name && "Name is Required"}</p>
           <br />
           <input
             className="searchInput"
@@ -55,7 +55,7 @@ function Register() {
             })}
           />
           <br />
-          <p style={{color: 'white'}}>{errors.email && "Invalid Email"}</p>
+          <p style={{ color: "white" }}>{errors.email && "Invalid Email"}</p>
           <br />
           <input
             className="searchInput"
@@ -65,7 +65,9 @@ function Register() {
             ref={register({ required: true })}
           />
           <br />
-          <p style={{color: 'white'}}>{errors.password && "Password is required"}</p>
+          <p style={{ color: "white" }}>
+            {errors.password && "Password is required"}
+          </p>
           <br />
           <input className="registerButton" type="submit" value="Register" />
         </form>

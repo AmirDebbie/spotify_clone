@@ -4,7 +4,6 @@ import { Modal, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCookies } from "react-cookie";
 
-
 function getModalStyle() {
   return {
     top: "50%",
@@ -32,7 +31,6 @@ function AddArtistModal({ getArtists }) {
   const [coverImg, setCoverImg] = useState("");
   const [cookies] = useCookies();
 
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,8 +49,8 @@ function AddArtistModal({ getArtists }) {
     await axios.post(`/artist`, newArtist, {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     getArtists();
     handleClose();
   };

@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Tooltip,
-  Zoom,
-} from "@material-ui/core";
+import { Tooltip, Zoom } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
@@ -25,9 +22,9 @@ function SquareSongListItem({ query, song }) {
           <PlayCircleFilledIcon style={{ color: "white", fontSize: 150 }} />
         </div>
         <div>
-          <p style={{ fontSize: 15, color: "#999", fontWeight: 'bold' }}>{`${song.artist} | ${
-            song.album
-          } | ${song.length.slice(3, 8)}`}</p>
+          <p style={{ fontSize: 15, color: "#999", fontWeight: "bold" }}>{`${
+            song.artist
+          } | ${song.album} | ${song.length.slice(3, 8)}`}</p>
         </div>
       </div>
     </Link>

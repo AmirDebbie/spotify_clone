@@ -15,7 +15,7 @@ function SongListItem({ song, query }) {
       to={`/song/${song.id}?${query.path}=${query.id}`}
       style={{ textDecoration: "none", color: "white" }}
     >
-      <div className='songListItem'>
+      <div className="songListItem">
         <Tooltip
           TransitionComponent={Zoom}
           placement="top"

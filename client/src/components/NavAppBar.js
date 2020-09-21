@@ -13,25 +13,26 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import PlaylistPlayOutlinedIcon from "@material-ui/icons/PlaylistPlayOutlined";
 import MusicNoteOutlinedIcon from "@material-ui/icons/MusicNoteOutlined";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { LoggedIn } from "./LoggedInContext";
 
-
 function NavAppBar() {
   const [open, setOpen] = useState(false);
-  const [cookies, setCookie, removeCookie]  = useCookies()
+  const [cookies, setCookie, removeCookie] = useCookies();
   const context = useContext(LoggedIn);
+  const history = useHistory();
 
   const handleDrawer = () => {
     setOpen(true);
   };
 
   const handleLogOut = () => {
-    removeCookie('name')
-    removeCookie('token')
+    removeCookie("name");
+    removeCookie("token");
     context.setIsLogged(false);
-}
+    history.push("/");
+  };
 
   return (
     <div>
@@ -49,11 +50,21 @@ function NavAppBar() {
             <Typography style={{ fontWeight: "bold" }} variant="h4">
               Spotify-Clone
             </Typography>
-            <Typography style={{ fontWeight: "bold", position: 'absolute', left: 300, top: 20}} variant="h6">
+            <Typography
+              style={{
+                fontWeight: "bold",
+                position: "absolute",
+                left: 300,
+                top: 20,
+              }}
+              variant="h6"
+            >
               Hello {cookies.name}!
             </Typography>
           </Link>
-            <button className='logoutButton' onClick={handleLogOut}>Logout</button>
+          <button className="logoutButton" onClick={handleLogOut}>
+            Logout
+          </button>
         </Toolbar>
       </AppBar>
 

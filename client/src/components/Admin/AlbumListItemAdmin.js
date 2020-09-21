@@ -11,7 +11,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { useCookies } from "react-cookie";
 
-
 function getModalStyle() {
   return {
     top: "50%",
@@ -55,8 +54,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
     await axios.delete(`/album/${album.id}`, {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     getAlbums();
   };
 
@@ -77,8 +76,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
       await axios.put(`/album/${album.id}`, updatedAlbum, {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       getAlbums();
       handleClose();
     }

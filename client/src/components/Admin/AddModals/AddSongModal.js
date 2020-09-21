@@ -4,7 +4,6 @@ import { Modal, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCookies } from "react-cookie";
 
-
 function getModalStyle() {
   return {
     top: "50%",
@@ -69,8 +68,8 @@ function AddSongModal({ getSongs, artists, albums }) {
       await axios.post(`/song`, newSong, {
         headers: {
           Authorization: cookies.token,
-        }
-       });
+        },
+      });
       getSongs();
       handleClose();
     }
@@ -113,12 +112,13 @@ function AddSongModal({ getSongs, artists, albums }) {
           <option value="" selected>
             Select An Album
           </option>
-          {albums.filter((album) => album.artist_id === Number(artistId)).map((album) => (
-                <option key={album.id} value={album.id}>
-                  {album.name}
-                </option>
-              )
-          )}
+          {albums
+            .filter((album) => album.artist_id === Number(artistId))
+            .map((album) => (
+              <option key={album.id} value={album.id}>
+                {album.name}
+              </option>
+            ))}
         </select>
         <TextField
           required={true}

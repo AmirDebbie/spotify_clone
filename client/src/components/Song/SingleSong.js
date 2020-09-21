@@ -7,7 +7,6 @@ import SongListItem from "./SongListItem";
 import NavAppBar from "../NavAppBar";
 import { useCookies } from "react-cookie";
 
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -21,7 +20,6 @@ function SingleSong() {
   const [path, setPath] = useState();
   const [goodRequest, setGoodRequest] = useState(true);
   const [cookies] = useCookies();
-
 
   const video_id = useMemo(() => {
     let youtube_link = song.youtube_link;
@@ -43,8 +41,8 @@ function SingleSong() {
         let { data } = await axios.get(`/song/${id}`, {
           headers: {
             Authorization: cookies.token,
-          }
-         });
+          },
+        });
         if (!data[0]) {
           setGoodRequest(false);
         }
@@ -53,8 +51,8 @@ function SingleSong() {
           data = await axios.get(`/artistsongs/${query.get("artist")}`, {
             headers: {
               Authorization: cookies.token,
-            }
-           });
+            },
+          });
           setList(data.data);
           setPath("artist");
           setIdForObj(query.get("artist"));
@@ -62,8 +60,8 @@ function SingleSong() {
           data = await axios.get(`/albumsongs/${query.get("album")}`, {
             headers: {
               Authorization: cookies.token,
-            }
-           });
+            },
+          });
           setList(data.data);
           setPath("album");
           setIdForObj(query.get("album"));
@@ -71,8 +69,8 @@ function SingleSong() {
           data = await axios.get(`/playlistsongs/${query.get("playlist")}`, {
             headers: {
               Authorization: cookies.token,
-            }
-           });
+            },
+          });
           setList(data.data);
           setPath("playlist");
           setIdForObj(query.get("playlist"));
@@ -80,8 +78,8 @@ function SingleSong() {
           data = await axios.get(`/top_song`, {
             headers: {
               Authorization: cookies.token,
-            }
-           });
+            },
+          });
           setList(data.data);
         }
       } catch (e) {

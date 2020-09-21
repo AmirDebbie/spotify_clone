@@ -60,8 +60,8 @@ function SongListItemAdmin({ song, getSongs }) {
     await axios.delete(`/song/${song.id}`, {
       headers: {
         Authorization: cookies.token,
-      }
-     });
+      },
+    });
     getSongs();
   };
 
@@ -86,7 +86,11 @@ function SongListItemAdmin({ song, getSongs }) {
         created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/song/${song.id}`, updatedSong);
+      await axios.put(`/song/${song.id}`, updatedSong, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
       getSongs();
       handleClose();
     }
