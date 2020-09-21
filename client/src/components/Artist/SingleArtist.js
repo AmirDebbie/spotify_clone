@@ -22,7 +22,6 @@ function SingleArtist() {
         data = await axios.get(`/artistalbums/${id}`);
         setArtistAlbums(data.data);
         data = await axios.get(`/artist/${id}`);
-        console.log(data.data)
         if(!data.data[0]) {
           setGoodRequest(false)
         }
