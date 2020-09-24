@@ -20,15 +20,15 @@ function SongListItem({ song, query }) {
           TransitionComponent={Zoom}
           placement="top"
           arrow
-          title={new Date(song.created_at).toDateString()}
+          title={new Date(song.createdAt).toDateString()}
         >
           <ListItem style={{ textAlign: "center" }}>
             <ListItemText
               primary={song.title}
               secondary={
                 <Typography style={{ color: "#1db954", fontSize: 12 }}>{`${
-                  song.artist
-                } | ${song.album} | ${song.length.slice(3, 8)}`}</Typography>
+                  song.Artist.name
+                } | ${song.Album.name} | ${song.length.slice(3, 8)}`}</Typography>
               }
             />
             <PlayCircleFilledIcon

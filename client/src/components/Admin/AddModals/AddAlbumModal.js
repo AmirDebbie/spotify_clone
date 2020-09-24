@@ -31,7 +31,6 @@ function AddAlbumModal({ getAlbums, artists }) {
   const [artistId, setArtistId] = useState("");
   const [name, setName] = useState("");
   const [coverImg, setCoverImg] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,24 +42,20 @@ function AddAlbumModal({ getAlbums, artists }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === "Invalid Date") {
-      alert("Invalid Date Entered");
-    } else {
-      const newAlbum = {
-        artist_id: artistId,
-        name,
-        cover_img: coverImg,
-        created_at: new Date(createdAt).toISOString().slice(0, 10),
-        upload_at: new Date().toISOString().slice(0, 10),
-      };
-      await axios.post(`/album`, newAlbum, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      });
-      getAlbums();
-      handleClose();
-    }
+
+    const newAlbum = {
+      artist_id: artistId,
+      name,
+      cover_img: coverImg,
+      upload_at: new Date().toISOString().slice(0, 10),
+    };
+    await axios.post(`/album`, newAlbum, {
+      headers: {
+        Authorization: cookies.token,
+      },
+    });
+    getAlbums();
+    handleClose();
   };
 
   const body = (
@@ -96,15 +91,6 @@ function AddAlbumModal({ getAlbums, artists }) {
           label="Cover Img"
           onChange={(e) => {
             setCoverImg(e.target.value);
-          }}
-        />
-        <br />
-        <TextField
-          required={true}
-          style={{ width: 400 }}
-          label="Created At"
-          onChange={(e) => {
-            setCreatedAt(e.target.value);
           }}
         />
         <br />

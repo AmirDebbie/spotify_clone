@@ -14,7 +14,7 @@ function ArtistListItem({ artist }) {
             primary={artist.name}
             secondary={
               <Typography style={{ color: "#1db954", fontSize: 12 }}>
-                {new Date(artist.upload_at.slice(0, 10)).toDateString()}
+                {new Date(artist.createdAt.slice(0, 10)).toDateString()}
               </Typography>
             }
           />

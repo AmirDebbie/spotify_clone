@@ -36,7 +36,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(playlist.name);
   const [coverImg, setCoverImg] = useState(playlist.cover_img);
-  const [uploadAt, setUploadAt] = useState(playlist.upload_at.slice(0, 10));
+  const [createdAt, setCreatedAt] = useState(playlist.createdAt.slice(0, 10));
   const [cookies] = useCookies();
 
   // Opens the modal
@@ -60,13 +60,13 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(uploadAt)) === "Invalid Date") {
+    if (String(new Date(createdAt)) === "Invalid Date") {
       alert("Invalid Date Entered");
     } else {
       const updatedPlaylist = {
         name,
         cover_img: coverImg,
-        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
+        createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
         headers: {
@@ -103,10 +103,10 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
         <br />
         <TextField
           style={{ width: 400 }}
-          label="Uploaded At"
-          value={uploadAt}
+          label="Created At"
+          value={createdAt}
           onChange={(e) => {
-            setUploadAt(e.target.value);
+            setCreatedAt(e.target.value);
           }}
         />
         <br />
@@ -130,7 +130,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
           primary={playlist.name}
           secondary={
             <Typography style={{ color: "#1db954", fontSize: 12 }}>
-              {new Date(playlist.upload_at.slice(0, 10)).toDateString()}
+              {new Date(playlist.createdAt.slice(0, 10)).toDateString()}
             </Typography>
           }
         />

@@ -22,7 +22,7 @@ function NewPlaylistListItem({ playlist }) {
         </div>
         <p
           style={{ fontSize: 15, color: "#999", fontWeight: "bold" }}
-        >{`${new Date(playlist.upload_at.slice(0, 10)).toDateString()}`}</p>
+        >{`${new Date(playlist.createdAt.slice(0, 10)).toDateString()}`}</p>
       </div>
     </Link>
   );

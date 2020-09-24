@@ -18,7 +18,7 @@ function SquareArtistListItem({ artist }) {
         </div>
         <p
           style={{ fontSize: 15, color: "#999", fontWeight: "bold" }}
-        >{`${new Date(artist.upload_at.slice(0, 10)).toDateString()}`}</p>
+        >{`${new Date(artist.createdAt.slice(0, 10)).toDateString()}`}</p>
       </div>
     </Link>
   );

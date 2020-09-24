@@ -22,7 +22,7 @@ function HomePage() {
     // Get all artists
     (async () => {
       try {
-        const { data } = await axios.get("top_artist", {
+        const { data } = await axios.get("artist/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -36,7 +36,7 @@ function HomePage() {
     // Get all songs
     (async () => {
       try {
-        const { data } = await axios.get("top_song", {
+        const { data } = await axios.get("song/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -50,7 +50,7 @@ function HomePage() {
     // Get all albums
     (async () => {
       try {
-        const { data } = await axios.get("top_album", {
+        const { data } = await axios.get("album/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -64,7 +64,7 @@ function HomePage() {
     // Get all playlists
     (async () => {
       try {
-        const { data } = await axios.get("top_playlist", {
+        const { data } = await axios.get("playlist/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -91,25 +91,25 @@ function HomePage() {
   };
 
   const handleInputChange = async (search) => {
-    const songsData = await axios.get(`song?search=${search}`, {
+    const songsData = await axios.get(`song/?search=${search}`, {
       headers: {
         Authorization: cookies.token,
       },
     });
     setSongs(songsData.data);
-    const albumsData = await axios.get(`album?search=${search}`, {
+    const albumsData = await axios.get(`album/?search=${search}`, {
       headers: {
         Authorization: cookies.token,
       },
     });
     setAlbums(albumsData.data);
-    const artistsData = await axios.get(`artist?search=${search}`, {
+    const artistsData = await axios.get(`artist/?search=${search}`, {
       headers: {
         Authorization: cookies.token,
       },
     });
     setArtists(artistsData.data);
-    const playlistsData = await axios.get(`playlist?search=${search}`, {
+    const playlistsData = await axios.get(`playlist/?search=${search}`, {
       headers: {
         Authorization: cookies.token,
       },

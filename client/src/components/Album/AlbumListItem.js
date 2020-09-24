@@ -14,9 +14,9 @@ function AlbumListItem({ album }) {
             primary={album.name}
             secondary={
               <Typography style={{ color: "#1db954", fontSize: 12 }}>{`${
-                album.artist
+                album.Artist.name
               } | ${new Date(
-                album.created_at.slice(0, 10)
+                album.createdAt.slice(0, 10)
               ).toDateString()}`}</Typography>
             }
           />

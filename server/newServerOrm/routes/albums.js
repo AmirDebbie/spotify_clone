@@ -50,7 +50,7 @@ router.get("/top", async (req, res) => {
   }
 });
 
-// get artist with all songs and albums.
+// get album with all songs
 router.get("/:id", async (req, res) => {
   try {
     const result = await Album.findByPk(req.params.id, {
@@ -61,6 +61,16 @@ router.get("/:id", async (req, res) => {
         },
         {
           model: Song,
+          include: [
+            {
+              model: Artist,
+              attributes: ["name"],
+            },
+            {
+              model: Album,
+              attributes: ["name"],
+            },
+          ]
         },
       ],
     });

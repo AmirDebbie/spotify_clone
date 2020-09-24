@@ -11,7 +11,7 @@ function LogIn() {
   const context = useContext(LoggedIn);
   const onSubmit = async (formData) => {
     try {
-      const { data } = await axios.post("userLogin", formData);
+      const { data } = await axios.post("user/login", formData);
       setCookie("name", data.name);
       setCookie("token", data.token);
       context.setIsLogged(true);

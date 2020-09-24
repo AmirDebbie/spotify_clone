@@ -34,7 +34,6 @@ function AddSongModal({ getSongs, artists, albums }) {
   const [length, setLength] = useState("");
   const [trackNumber, setTrackNumber] = useState("");
   const [lyrics, setLyrics] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
   const [cookies] = useCookies();
 
   const handleOpen = () => {
@@ -47,9 +46,7 @@ function AddSongModal({ getSongs, artists, albums }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(createdAt)) === "Invalid Date") {
-      alert("Invalid Date Entered");
-    } else if (isNaN(trackNumber)) {
+    if (isNaN(trackNumber)) {
       alert("Invalid Track Number Entered");
     } else if (!/^([0-5][0-9]):([0-5][0-9])$/.test(length)) {
       alert('Invalid Length Entered (Length should look like: "xx:xx")');
@@ -62,8 +59,7 @@ function AddSongModal({ getSongs, artists, albums }) {
         length: "00:".concat(length),
         track_number: trackNumber,
         lyrics,
-        created_at: new Date(createdAt).toISOString().slice(0, 10),
-        upload_at: new Date().toISOString().slice(0, 10),
+        upload_at: new Date().toISOString().slice(0, 10)
       };
       await axios.post(`/song`, newSong, {
         headers: {
@@ -152,15 +148,6 @@ function AddSongModal({ getSongs, artists, albums }) {
           label="Lyrics"
           onChange={(e) => {
             setLyrics(e.target.value);
-          }}
-        />
-        <br />
-        <TextField
-          required={true}
-          style={{ width: 400 }}
-          label="Created At"
-          onChange={(e) => {
-            setCreatedAt(e.target.value);
           }}
         />
         <br />

@@ -8,7 +8,6 @@ import { useCookies } from "react-cookie";
 import NotFound from "../NotFound/NotFound";
 
 function SingleAlbum() {
-  const [albumSongs, setAlbumSongs] = useState([]);
   const [goodRequest, setGoodRequest] = useState(true);
   const [album, setAlbum] = useState();
   const { id } = useParams();
@@ -17,21 +16,21 @@ function SingleAlbum() {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/albumsongs/${id}`, {
+        let { data } = await axios.get(`/album/${id}`, {
           headers: {
             Authorization: cookies.token,
           },
         });
-        setAlbumSongs(data);
-        data = await axios.get(`/album/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
-        if (!data.data[0]) {
-          setGoodRequest(false);
-        }
-        setAlbum(data.data[0]);
+        setAlbum(data);
+        // data = await axios.get(`/album/${id}`, {
+        //   headers: {
+        //     Authorization: cookies.token,
+        //   },
+        // });
+        // if (!data.data[0]) {
+        //   setGoodRequest(false);
+        // }
+        // setAlbum(data.data[0]);
       } catch (e) {
         console.log(e.message);
         setGoodRequest(false);
@@ -48,8 +47,8 @@ function SingleAlbum() {
               <NavAppBar />
               <div className="subjectPage">
                 <h1>{album.name}</h1>
-                <p>{`${album.artist} | ${new Date(
-                  album.created_at.slice(0, 10)
+                <p>{`${album.Artist.name} | ${new Date(
+                  album.createdAt.slice(0, 10)
                 ).toDateString()}`}</p>
                 {album.cover_img && (
                   <img
@@ -59,7 +58,7 @@ function SingleAlbum() {
                   />
                 )}
                 <List>
-                  {albumSongs.map((song) => (
+                  {album.Songs.map((song) => (
                     <SongListItem
                       query={{ path: "album", id: album.id }}
                       key={song.id}

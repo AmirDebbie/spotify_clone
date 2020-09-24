@@ -10,37 +10,23 @@ import NotFound from "../NotFound/NotFound";
 import { useCookies } from "react-cookie";
 
 function SingleArtist() {
-  const [artistSongs, setArtistSongs] = useState([]);
   const [artist, setArtist] = useState();
   const [goodRequest, setGoodRequest] = useState(true);
-  const [artistAlbums, setArtistAlbums] = useState([]);
   const { id } = useParams();
   const [cookies] = useCookies();
 
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/artistsongs/${id}`, {
+        const { data } = await axios.get(`/artist/${id}`, {
           headers: {
             Authorization: cookies.token,
           },
         });
-        setArtistSongs(data);
-        data = await axios.get(`/artistalbums/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
-        setArtistAlbums(data.data);
-        data = await axios.get(`/artist/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
-        if (!data.data[0]) {
+        if (!data) {
           setGoodRequest(false);
         }
-        setArtist(data.data[0]);
+        setArtist(data);
       } catch (e) {
         console.log(e.message);
         setGoodRequest(false);
@@ -66,7 +52,7 @@ function SingleArtist() {
               <div style={styles.container}>
                 <h1>{artist.name}</h1>
                 <p>{`Uploaded At ${new Date(
-                  artist.upload_at.slice(0, 10)
+                  artist.createdAt.slice(0, 10)
                 ).toDateString()}`}</p>
                 {artist.cover_img && (
                   <img
@@ -78,7 +64,7 @@ function SingleArtist() {
                 <div className="subjectPage">
                   <h2>Top Songs</h2>
                   <List>
-                    {artistSongs.slice(0, 5).map((song) => (
+                    {artist.Songs.slice(0, 5).map((song) => (
                       <SongListItem
                         query={{ path: "artist", id: artist.id }}
                         key={song.id}
@@ -92,7 +78,7 @@ function SingleArtist() {
                   <br />
                   <h2>Albums</h2>
                   <Carousel Carousel color="white" breakPoints={breakPoints}>
-                    {artistAlbums.map((album) => (
+                    {artist.Albums.map((album) => (
                       <SquareAlbumListItem key={album.id} album={album} />
                     ))}
                   </Carousel>

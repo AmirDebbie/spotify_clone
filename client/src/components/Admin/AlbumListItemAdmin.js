@@ -36,7 +36,6 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(album.name);
   const [coverImg, setCoverImg] = useState(album.cover_img);
-  const [createdAt, setCreatedAt] = useState(album.created_at.slice(0, 10));
   const [uploadAt, setUploadAt] = useState(album.upload_at.slice(0, 10));
   const [cookies] = useCookies();
 
@@ -61,16 +60,12 @@ function AlbumListItemAdmin({ album, getAlbums }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (
-      String(new Date(createdAt)) === "Invalid Date" ||
-      String(new Date(uploadAt)) === "Invalid Date"
-    ) {
+    if (String(new Date(uploadAt)) === "Invalid Date") {
       alert("Invalid Date Entered");
     } else {
       const updatedAlbum = {
         name,
         cover_img: coverImg,
-        created_at: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/album/${album.id}`, updatedAlbum, {
@@ -109,16 +104,6 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         <TextField
           style={{ width: 400 }}
           required={true}
-          label="Created At"
-          value={createdAt}
-          onChange={(e) => {
-            setCreatedAt(e.target.value);
-          }}
-        />
-        <br />
-        <TextField
-          style={{ width: 400 }}
-          required={true}
           label="Uploaded At"
           value={uploadAt}
           onChange={(e) => {
@@ -146,9 +131,9 @@ function AlbumListItemAdmin({ album, getAlbums }) {
           primary={album.name}
           secondary={
             <Typography style={{ color: "#1db954", fontSize: 12 }}>{`${
-              album.artist
+              album.Artist.name
             } | ${new Date(
-              album.created_at.slice(0, 10)
+              album.createdAt.slice(0, 10)
             ).toDateString()}`}</Typography>
           }
         />

@@ -17,8 +17,8 @@ function SquareAlbumListItem({ album }) {
           <h3 style={{ margin: 0 }}>{album.name}</h3>
         </div>
         <p style={{ fontSize: 15, color: "#999", fontWeight: "bold" }}>{`${
-          album.artist
-        } | ${new Date(album.created_at.slice(0, 10)).toDateString()}`}</p>
+          album.Artist.name
+        } | ${new Date(album.createdAt.slice(0, 10)).toDateString()}`}</p>
       </div>
     </Link>
   );

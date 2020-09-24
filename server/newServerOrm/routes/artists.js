@@ -33,7 +33,30 @@ router.get("/top", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const result = await Artist.findByPk(req.params.id, {
-      include: [Album, Song],
+      include: [
+        {
+          model: Album,
+          include: [
+            {
+              model: Artist,
+              attributes: ["name"],
+            }
+          ]
+        },
+        {
+          model: Song,
+          include: [
+            {
+              model: Artist,
+              attributes: ["name"],
+            },
+            {
+              model: Album,
+              attributes: ["name"],
+            },
+          ],
+        },
+      ],
     });
     res.json(result);
   } catch (e) {

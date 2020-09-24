@@ -31,7 +31,9 @@ function NavAppBar() {
     removeCookie("name");
     removeCookie("token");
     context.setIsLogged(false);
-    history.push("/");
+    setTimeout(() => {
+      history.push("/");
+    }, 500)
   };
 
   return (

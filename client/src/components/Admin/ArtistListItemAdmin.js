@@ -36,7 +36,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(artist.name);
   const [coverImg, setCoverImg] = useState(artist.cover_img);
-  const [uploadAt, setUploadAt] = useState(artist.upload_at.slice(0, 10));
+  const [createdAt, setCreatedAt] = useState(artist.createdAt.slice(0, 10));
   const [cookies] = useCookies();
 
   // Opens the modal
@@ -60,13 +60,13 @@ function ArtistListItemAdmin({ artist, getArtists }) {
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    if (String(new Date(uploadAt)) === "Invalid Date") {
+    if (String(new Date(createdAt)) === "Invalid Date") {
       alert("Invalid Date Entered");
     } else {
       const updatedArtist = {
         name,
         cover_img: coverImg,
-        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
+        createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       await axios.put(`/artist/${artist.id}`, updatedArtist, {
         headers: {
@@ -103,11 +103,11 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         <br />
         <TextField
           style={{ width: 400 }}
-          label="Uploaded At"
+          label="Created At"
           required={true}
-          value={uploadAt}
+          value={createdAt}
           onChange={(e) => {
-            setUploadAt(e.target.value);
+            setCreatedAt(e.target.value);
           }}
         />
         <br />
@@ -131,7 +131,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
           primary={artist.name}
           secondary={
             <Typography style={{ color: "#1db954", fontSize: 12 }}>
-              {new Date(artist.upload_at.slice(0, 10)).toDateString()}
+              {new Date(artist.createdAt.slice(0, 10)).toDateString()}
             </Typography>
           }
         />

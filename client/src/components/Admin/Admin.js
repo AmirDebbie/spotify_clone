@@ -22,7 +22,7 @@ function Admin() {
   useEffect(() => {
     // Get all artists
     (async () => {
-      const { data } = await axios.get("top_artist", {
+      const { data } = await axios.get("artist", {
         headers: {
           Authorization: cookies.token,
         },

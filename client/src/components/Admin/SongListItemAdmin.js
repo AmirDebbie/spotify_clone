@@ -42,7 +42,7 @@ function SongListItemAdmin({ song, getSongs }) {
   const [length, setLength] = useState(song.length.slice(3, 8));
   const [trackNumber, setTrackNumber] = useState(song.track_number);
   const [lyrics, setLyrics] = useState(song.lyrics);
-  const [createdAt, setCreatedAt] = useState(song.created_at.slice(0, 10));
+  const [createdAt, setCreatedAt] = useState(song.createdAt.slice(0, 10));
   const [uploadAt, setUploadAt] = useState(song.upload_at.slice(0, 10));
   const [cookies] = useCookies();
 
@@ -83,7 +83,7 @@ function SongListItemAdmin({ song, getSongs }) {
         length: "00:".concat(length),
         track_number: trackNumber,
         lyrics,
-        created_at: new Date(createdAt).toISOString().slice(0, 10),
+        createdAt: new Date(createdAt).toISOString().slice(0, 10),
         upload_at: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/song/${song.id}`, updatedSong, {
@@ -188,18 +188,18 @@ function SongListItemAdmin({ song, getSongs }) {
         TransitionComponent={Zoom}
         placement="top"
         arrow
-        title={new Date(song.created_at).toDateString()}
+        title={new Date(song.createdAt).toDateString()}
       >
         <ListItem style={{ textAlign: "center" }}>
           <ListItemText
             primary={song.title}
             secondary={
               <Typography style={{ color: "#1db954", fontSize: 12 }}>{`${
-                song.artist
-              } | ${song.album} | ${song.length.slice(3, 8)}`}</Typography>
+                song.Artist.name
+              } | ${song.Album.name} | ${song.length.slice(3, 8)}`}</Typography>
             }
           />
-          <YoutubeModal title={song.name} youtube_link={song.youtube_link} />
+          <YoutubeModal title={song.title} youtube_link={song.youtube_link} />
           <button
             className="deleteButton"
             onClick={handleDelete}

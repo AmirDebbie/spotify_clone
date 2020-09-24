@@ -58,6 +58,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/validate", (req, res) => {
+  console.log('hello')
   jwt.verify(req.body.token, "my_secret_key", (error, data) => {
     if (error) {
       res.sendStatus(403);

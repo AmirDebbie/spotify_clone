@@ -38,49 +38,49 @@ function SingleSong() {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/song/${id}`, {
+        const { data: song } = await axios.get(`/song/${id}`, {
           headers: {
             Authorization: cookies.token,
           },
         });
-        if (!data[0]) {
+        if (!song) {
           setGoodRequest(false);
         }
-        setSong(data[0]);
+        setSong(song);
         if (query.get("artist")) {
-          data = await axios.get(`/artistsongs/${query.get("artist")}`, {
+          const { data: artist } = await axios.get(`/artist/${query.get("artist")}`, {
             headers: {
               Authorization: cookies.token,
             },
           });
-          setList(data.data);
+          setList(artist.Songs);
           setPath("artist");
           setIdForObj(query.get("artist"));
         } else if (query.get("album")) {
-          data = await axios.get(`/albumsongs/${query.get("album")}`, {
+          const { data: album } = await axios.get(`/album/${query.get("album")}`, {
             headers: {
               Authorization: cookies.token,
             },
           });
-          setList(data.data);
+          setList(album.Songs);
           setPath("album");
           setIdForObj(query.get("album"));
         } else if (query.get("playlist")) {
-          data = await axios.get(`/playlistsongs/${query.get("playlist")}`, {
+          const { data: playlist } = await axios.get(`/playlist/${query.get("playlist")}`, {
             headers: {
               Authorization: cookies.token,
             },
           });
-          setList(data.data);
+          setList(playlist.Playlists_songs);
           setPath("playlist");
           setIdForObj(query.get("playlist"));
         } else {
-          data = await axios.get(`/top_song`, {
+          const { data: topSongs } = await axios.get(`/song/top`, {
             headers: {
               Authorization: cookies.token,
             },
           });
-          setList(data.data);
+          setList(topSongs);
         }
       } catch (e) {
         console.log(e.message);
