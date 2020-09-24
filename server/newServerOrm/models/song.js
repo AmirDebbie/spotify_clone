@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     upload_at: DataTypes.DATE
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Song',
   });
   return Song;

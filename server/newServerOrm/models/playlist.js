@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     cover_img: DataTypes.STRING
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Playlist',
   });
   return Playlist;

@@ -27,42 +27,26 @@ app.use(
   })
 );
 
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "momo1momo2",
-//   database: "spotify_clone",
-// });
-// connection.connect((err) => {
-//   if (err) throw err;
-//   console.log("Connected to my sql!");
-// });
-// connection.query("SELECT * FROM artists", (err, result, fields) => {
-//   if (err) throw err;
-// });
+function ensureToken(req, res, next) {
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    jwt.verify(bearerHeader, "my_secret_key", (error, data) => {
+      if (error) {
+        res.status(403).send("incoreccet token");
+      } else {
+        res.token = bearerHeader;
+        next();
+      }
+    });
+  } else {
+    res.sendStatus(403);
+  }
+}
 
 app.use('/user', require("./routes/users"))
+// app.use(ensureToken);
 app.use('/artist', require("./routes/artists"))
 app.use('/playlist', require("./routes/playlists"))
-
-
-// app.use(ensureToken);
-
-// function ensureToken(req, res, next) {
-//   const bearerHeader = req.headers["authorization"];
-//   if (typeof bearerHeader !== "undefined") {
-//     jwt.verify(bearerHeader, "my_secret_key", (error, data) => {
-//       if (error) {
-//         res.status(403).send("incoreccet token");
-//       } else {
-//         res.token = bearerHeader;
-//         next();
-//       }
-//     });
-//   } else {
-//     res.sendStatus(403);
-//   }
-// }
 
 // // POST ENDPOINTS
 

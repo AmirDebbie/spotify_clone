@@ -257,6 +257,7 @@ app.get("/artist", (req, res) => {
 
 // Get by id
 
+
 app.get("/playlist/:id", (req, res) => {
   if (isNaN(Number(req.params.id))) {
     return res.status(400).send("Id must be a number");

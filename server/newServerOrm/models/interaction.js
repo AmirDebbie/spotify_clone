@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     liked: DataTypes.BOOLEAN
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Interaction',
   });
   return Interaction;

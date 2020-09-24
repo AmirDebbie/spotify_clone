@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     cover_img: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Artist',
+    paranoid: true,
+    modelName: 'Artist'
   });
   return Artist;
 };

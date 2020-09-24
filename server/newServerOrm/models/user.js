@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     prefrences: DataTypes.JSON
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'User',
   });
   return User;
