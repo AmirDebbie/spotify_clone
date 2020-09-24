@@ -21,7 +21,6 @@ function HomePage() {
   useEffect(() => {
     // Get all artists
     (async () => {
-      console.log("hello");
       try {
         const { data } = await axios.get("top_artist", {
           headers: {
