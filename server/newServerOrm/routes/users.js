@@ -35,17 +35,20 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, rememberToken } = req.body;
   try {
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
         const userId = user.user_id;
-        const token = jwt.sign({ userId }, "my_secret_key");
-        res.json({
-          name: user.name,
-          token,
-        });
+        const tokenProps = { userId };
+        if(!rememberToken) {
+          tokenProps.exp = Math.floor(Date.now() / 1000) + 3600;
+        }
+        const token = jwt.sign(tokenProps, "my_secret_key");
+        res.cookie('name', user.name)
+        res.cookie('token', token)
+        res.json({msg: 'Connected'});
       } else {
         res.status(403).json({ message: "incorrect password" });
       }

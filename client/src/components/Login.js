@@ -3,17 +3,14 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { LoggedIn } from "./LoggedInContext";
-import { useCookies } from "react-cookie";
 
 function LogIn() {
   const { register: logIn, handleSubmit, errors } = useForm();
-  const [cookies, setCookie] = useCookies();
   const context = useContext(LoggedIn);
   const onSubmit = async (formData) => {
     try {
-      const { data } = await axios.post("user/login", formData);
-      setCookie("name", data.name);
-      setCookie("token", data.token);
+      console.log(formData)
+      await axios.post("user/login", formData);
       context.setIsLogged(true);
     } catch (e) {
       console.error(e);
@@ -57,6 +54,13 @@ function LogIn() {
           <p style={{ color: "white" }}>
             {errors.password && "Password is required"}
           </p>
+          <label style={{color: 'white'}}>Remember Me</label>
+          <input
+            name="rememberToken"
+            type="checkbox"
+            ref={logIn()}
+          />
+          <br /><br />
           <input className="registerButton" type="submit" value="Login" />
         </form>
         <Link
