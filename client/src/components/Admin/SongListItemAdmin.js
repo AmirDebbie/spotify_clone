@@ -37,13 +37,13 @@ function SongListItemAdmin({ song, getSongs }) {
   const classes = useStyles();
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
-  const [youtubeLink, setYoutubeLink] = useState(song.youtube_link);
+  const [youtubeLink, setYoutubeLink] = useState(song.youtubeLink);
   const [title, setTitle] = useState(song.title);
   const [length, setLength] = useState(song.length.slice(3, 8));
-  const [trackNumber, setTrackNumber] = useState(song.track_number);
+  const [trackNumber, setTrackNumber] = useState(song.trackNumber);
   const [lyrics, setLyrics] = useState(song.lyrics);
   const [createdAt, setCreatedAt] = useState(song.createdAt.slice(0, 10));
-  const [uploadAt, setUploadAt] = useState(song.upload_at.slice(0, 10));
+  const [uploadAt, setUploadAt] = useState(song.uploadAt.slice(0, 10));
   const [cookies] = useCookies();
 
   // Opens the modal
@@ -78,13 +78,13 @@ function SongListItemAdmin({ song, getSongs }) {
       alert('Invalid Length Entered (Length should look like: "xx:xx")');
     } else {
       const updatedSong = {
-        youtube_link: youtubeLink,
+        youtubeLink: youtubeLink,
         title,
         length: "00:".concat(length),
-        track_number: trackNumber,
+        trackNumber: trackNumber,
         lyrics,
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
-        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
+        uploadAt: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/song/${song.id}`, updatedSong, {
         headers: {
@@ -199,7 +199,7 @@ function SongListItemAdmin({ song, getSongs }) {
               } | ${song.Album.name} | ${song.length.slice(3, 8)}`}</Typography>
             }
           />
-          <YoutubeModal title={song.title} youtube_link={song.youtube_link} />
+          <YoutubeModal title={song.title} youtubeLink={song.youtubeLink} />
           <button
             className="deleteButton"
             onClick={handleDelete}

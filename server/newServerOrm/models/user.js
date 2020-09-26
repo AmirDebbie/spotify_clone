@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Interaction, {
-        foreignKey: 'user_id'
+        foreignKey: 'userId'
       });
     }
   };
@@ -19,8 +19,14 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    is_admin: DataTypes.BOOLEAN,
-    remember_token: DataTypes.BOOLEAN,
+    isAdmin:{
+      field:"is_admin",
+      type: DataTypes.BOOLEAN
+    },
+    rememberToken:{
+      field:"remember_token",
+      type: DataTypes.BOOLEAN
+    },
     prefrences: DataTypes.JSON
   }, {
     sequelize,

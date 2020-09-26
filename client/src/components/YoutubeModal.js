@@ -18,22 +18,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function YoutubeModal({ youtube_link, title }) {
+export default function YoutubeModal({ youtubeLink, title }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
 
-  const video_id = useMemo(() => {
-    let video_id = youtube_link.split("v=")[1];
-    if (video_id) {
-      const ampersandPosition = video_id.indexOf("&");
+  const videoId = useMemo(() => {
+    let videoId = youtubeLink.split("v=")[1];
+    if (videoId) {
+      const ampersandPosition = videoId.indexOf("&");
       if (ampersandPosition !== -1) {
-        video_id = video_id.substring(0, ampersandPosition);
+        videoId = videoId.substring(0, ampersandPosition);
       }
     }
-    return video_id;
-  }, [youtube_link]);
+    return videoId;
+  }, [youtubeLink]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,7 +49,7 @@ export default function YoutubeModal({ youtube_link, title }) {
         title={title}
         width="560"
         height="315"
-        src={`https://www.youtube.com/embed/${video_id}`}
+        src={`https://www.youtube.com/embed/${videoId}`}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

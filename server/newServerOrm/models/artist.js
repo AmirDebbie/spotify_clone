@@ -11,16 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Song, {
-        foreignKey: 'artist_id'
+        foreignKey: 'artistId'
       });
       this.hasMany(models.Album, {
-        foreignKey: 'artist_id'
+        foreignKey: 'artistId'
       });
     }
   };
   Artist.init({
     name: DataTypes.STRING,
-    cover_img: DataTypes.TEXT
+    coverImg:{
+      field:'cover_img',
+      type:DataTypes.TEXT, 
+    },
   }, {
     sequelize,
     paranoid: true,

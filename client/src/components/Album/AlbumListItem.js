@@ -20,11 +20,11 @@ function AlbumListItem({ album }) {
               ).toDateString()}`}</Typography>
             }
           />
-          {album.cover_img && (
+          {album.coverImg && (
             <img
               alt="album cover"
               className="artistImg"
-              src={album.cover_img}
+              src={album.coverImg}
             />
           )}
         </ListItem>

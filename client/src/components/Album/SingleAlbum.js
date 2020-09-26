@@ -50,11 +50,11 @@ function SingleAlbum() {
                 <p>{`${album.Artist.name} | ${new Date(
                   album.createdAt.slice(0, 10)
                 ).toDateString()}`}</p>
-                {album.cover_img && (
+                {album.coverImg && (
                   <img
                     alt="album"
                     style={{ height: 200, width: 200 }}
-                    src={album.cover_img}
+                    src={album.coverImg}
                   />
                 )}
                 <List>

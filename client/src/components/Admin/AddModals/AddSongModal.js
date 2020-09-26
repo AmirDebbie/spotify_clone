@@ -52,14 +52,14 @@ function AddSongModal({ getSongs, artists, albums }) {
       alert('Invalid Length Entered (Length should look like: "xx:xx")');
     } else {
       const newSong = {
-        youtube_link: youtubeLink,
-        album_id: albumId,
-        artist_id: artistId,
+        youtubeLink: youtubeLink,
+        albumId: albumId,
+        artistId: artistId,
         title,
         length: "00:".concat(length),
-        track_number: trackNumber,
+        trackNumber: trackNumber,
         lyrics,
-        upload_at: new Date().toISOString().slice(0, 10)
+        uploadAt: new Date().toISOString().slice(0, 10)
       };
       await axios.post(`/song`, newSong, {
         headers: {
@@ -109,7 +109,7 @@ function AddSongModal({ getSongs, artists, albums }) {
             Select An Album
           </option>
           {albums
-            .filter((album) => album.artist_id === Number(artistId))
+            .filter((album) => album.artistId === Number(artistId))
             .map((album) => (
               <option key={album.id} value={album.id}>
                 {album.name}

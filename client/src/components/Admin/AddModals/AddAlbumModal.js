@@ -44,10 +44,10 @@ function AddAlbumModal({ getAlbums, artists }) {
     e.preventDefault();
 
     const newAlbum = {
-      artist_id: artistId,
+      artistId: artistId,
       name,
-      cover_img: coverImg,
-      upload_at: new Date().toISOString().slice(0, 10),
+      coverImg: coverImg,
+      uploadAt: new Date().toISOString().slice(0, 10),
     };
     await axios.post(`/album`, newAlbum, {
       headers: {

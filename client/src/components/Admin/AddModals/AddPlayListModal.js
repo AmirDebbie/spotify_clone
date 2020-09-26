@@ -43,7 +43,7 @@ function AddPlaylistModal({ getPlaylists }) {
     e.preventDefault();
     const newPlaylist = {
       name,
-      cover_img: coverImg
+      coverImg: coverImg
     };
     await axios.post(`/playlist`, newPlaylist, {
       headers: {

@@ -18,11 +18,11 @@ function ArtistListItem({ artist }) {
               </Typography>
             }
           />
-          {artist.cover_img && (
+          {artist.coverImg && (
             <img
               alt="artist cover"
               className="artistImg"
-              src={artist.cover_img}
+              src={artist.coverImg}
             />
           )}
         </ListItem>

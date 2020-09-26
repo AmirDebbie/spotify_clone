@@ -35,7 +35,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(playlist.name);
-  const [coverImg, setCoverImg] = useState(playlist.cover_img);
+  const [coverImg, setCoverImg] = useState(playlist.coverImg);
   const [createdAt, setCreatedAt] = useState(playlist.createdAt.slice(0, 10));
   const [cookies] = useCookies();
 
@@ -65,7 +65,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
     } else {
       const updatedPlaylist = {
         name,
-        cover_img: coverImg,
+        coverImg: coverImg,
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
@@ -148,11 +148,11 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
         >
           Update
         </button>
-        {playlist.cover_img && (
+        {playlist.coverImg && (
           <img
             alt="playlist cover"
             className="artistImg"
-            src={playlist.cover_img}
+            src={playlist.coverImg}
           />
         )}
       </ListItem>

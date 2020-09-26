@@ -4,25 +4,29 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Album extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       this.hasMany(models.Song, {
-        foreignKey: 'album_id'
+        foreignKey: 'albumId'
       });
       this.belongsTo(models.Artist, {
-        foreignKey: 'artist_id'
+        foreignKey: 'artistId'
       });
     }
   };
   Album.init({
-    artist_id: DataTypes.INTEGER,
+    artistId:{
+      field:'artist_id',
+      type: DataTypes.STRING
+      },
     name: DataTypes.STRING,
-    cover_img: DataTypes.TEXT,
-    upload_at: DataTypes.DATE
+    coverImg:{
+      field:'cover_img',
+      type:DataTypes.TEXT, 
+    },
+    uploadAt: {
+      field: 'upload_at',
+      type: DataTypes.DATE
+    }
   }, {
     sequelize,
     paranoid: true,

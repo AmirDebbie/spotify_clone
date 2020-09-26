@@ -9,8 +9,8 @@ function SquareAlbumListItem({ album }) {
     >
       <div className="newAlbumGrid">
         <div style={{ textAlign: "center" }}>
-          {album.cover_img && (
-            <img alt="Go To Album" className="bigImg" src={album.cover_img} />
+          {album.coverImg && (
+            <img alt="Go To Album" className="bigImg" src={album.coverImg} />
           )}
         </div>
         <div style={{ height: 20, marginBottom: 20, marginTop: 5 }}>

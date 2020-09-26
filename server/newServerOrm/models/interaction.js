@@ -11,17 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Song, {
-        foreignKey: 'song_id'
+        foreignKey: 'songId'
       });
       this.belongsTo(models.User, {
-        foreignKey: 'user_id'
+        foreignKey: 'userId'
       });
     }
   };
   Interaction.init({
-    user_id: DataTypes.INTEGER,
-    song_id: DataTypes.INTEGER,
-    play_count: DataTypes.INTEGER,
+    userId:{
+      field:"user_id",
+      type:DataTypes.INTEGER
+    },
+    songId:{
+      field:"song_id",
+      type:DataTypes.INTEGER
+    },
+    playCount:{
+      field:"play_count",
+      type:DataTypes.INTEGER
+    },
     liked: DataTypes.BOOLEAN
   }, {
     sequelize,

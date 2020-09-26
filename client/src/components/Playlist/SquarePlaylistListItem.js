@@ -9,11 +9,11 @@ function NewPlaylistListItem({ playlist }) {
     >
       <div className="newAlbumGrid">
         <div>
-          {playlist.cover_img && (
+          {playlist.coverImg && (
             <img
               alt="Go To Playlist"
               className="bigImg"
-              src={playlist.cover_img}
+              src={playlist.coverImg}
             />
           )}
         </div>

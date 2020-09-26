@@ -54,11 +54,11 @@ function SingleArtist() {
                 <p>{`Uploaded At ${new Date(
                   artist.createdAt.slice(0, 10)
                 ).toDateString()}`}</p>
-                {artist.cover_img && (
+                {artist.coverImg && (
                   <img
                     alt="artist"
                     style={{ height: 200 }}
-                    src={artist.cover_img}
+                    src={artist.coverImg}
                   />
                 )}
                 <div className="subjectPage">

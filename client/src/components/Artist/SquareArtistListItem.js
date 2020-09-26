@@ -9,8 +9,8 @@ function SquareArtistListItem({ artist }) {
     >
       <div className="newAlbumGrid">
         <div>
-          {artist.cover_img && (
-            <img alt="Go To Artist" className="bigImg" src={artist.cover_img} />
+          {artist.coverImg && (
+            <img alt="Go To Artist" className="bigImg" src={artist.coverImg} />
           )}
         </div>
         <div style={{ height: 20, marginBottom: 20, marginTop: 5 }}>

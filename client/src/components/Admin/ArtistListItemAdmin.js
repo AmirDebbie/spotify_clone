@@ -65,7 +65,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
     } else {
       const updatedArtist = {
         name,
-        cover_img: coverImg,
+        coverImg: coverImg,
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       await axios.put(`/artist/${artist.id}`, updatedArtist, {
@@ -149,11 +149,11 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         >
           Update
         </button>
-        {artist.cover_img && (
+        {artist.coverImg && (
           <img
             alt="artist cover"
             className="artistImg"
-            src={artist.cover_img}
+            src={artist.coverImg}
           />
         )}
       </ListItem>

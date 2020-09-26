@@ -43,7 +43,7 @@ function AddArtistModal({ getArtists }) {
     e.preventDefault();
     const newArtist = {
       name,
-      cover_img: coverImg,
+      coverImg: coverImg,
     };
     await axios.post(`/artist`, newArtist, {
       headers: {

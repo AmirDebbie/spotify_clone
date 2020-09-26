@@ -8,7 +8,6 @@ import NotFound from "../NotFound/NotFound";
 import { useCookies } from "react-cookie";
 
 function SinglePlaylist() {
-  const [playlistSongs, setPlaylistSongs] = useState([]);
   const [goodRequest, setGoodRequest] = useState(true);
   const [playlist, setPlaylist] = useState();
   const { id } = useParams();
@@ -17,21 +16,15 @@ function SinglePlaylist() {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/playlistsongs/${id}`, {
+        const { data } = await axios.get(`/playlist/${id}`, {
           headers: {
             Authorization: cookies.token,
           },
         });
-        setPlaylistSongs(data);
-        data = await axios.get(`/playlist/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
-        if (!data.data[0]) {
+        if (!data) {
           setGoodRequest(false);
         }
-        setPlaylist(data.data[0]);
+        setPlaylist(data);
       } catch (e) {
         console.log(e.message);
         setGoodRequest(false);
@@ -48,18 +41,18 @@ function SinglePlaylist() {
               <NavAppBar />
               <div className="subjectPage">
                 <h1>{playlist.name}</h1>
-                <p>{`Uploaded At ${new Date(
-                  playlist.upload_at.slice(0, 10)
+                <p>{`Created At ${new Date(
+                  playlist.createdAt.slice(0, 10)
                 ).toDateString()}`}</p>
-                {playlist.cover_img && (
+                {playlist.coverImg && (
                   <img
                     alt="playlist"
                     style={{ height: 200 }}
-                    src={playlist.cover_img}
+                    src={playlist.coverImg}
                   />
                 )}
                 <List>
-                  {playlistSongs.map((song) => (
+                  {playlist.Playlists_songs.map((song) => (
                     <SongListItem
                       query={{ path: "playlist", id: playlist.id }}
                       key={song.id}

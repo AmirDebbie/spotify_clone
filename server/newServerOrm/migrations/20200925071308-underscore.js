@@ -1,0 +1,51 @@
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.renameColumn("albums","createdAt","created_at")
+    await queryInterface.renameColumn("albums","updatedAt","updated_at")
+    await queryInterface.renameColumn("albums","deletedAt","deleted_at")
+    await queryInterface.renameColumn("artists","createdAt","created_at")
+    await queryInterface.renameColumn("artists","updatedAt","updated_at")
+    await queryInterface.renameColumn("artists","deletedAt","deleted_at")
+    await queryInterface.renameColumn("interactions","createdAt","created_at")
+    await queryInterface.renameColumn("interactions","updatedAt","updated_at")
+    await queryInterface.renameColumn("interactions","deletedAt","deleted_at")
+    await queryInterface.renameColumn("playlists","createdAt","created_at")
+    await queryInterface.renameColumn("playlists","updatedAt","updated_at")
+    await queryInterface.renameColumn("playlists","deletedAt","deleted_at")
+    await queryInterface.renameColumn("playlists_songs","createdAt","created_at")
+    await queryInterface.renameColumn("playlists_songs","updatedAt","updated_at")
+    await queryInterface.renameColumn("playlists_songs","deletedAt","deleted_at")
+    await queryInterface.renameColumn("songs","createdAt","created_at")
+    await queryInterface.renameColumn("songs","updatedAt","updated_at")
+    await queryInterface.renameColumn("songs","deletedAt","deleted_at")
+    await queryInterface.renameColumn("users","createdAt","created_at")
+    await queryInterface.renameColumn("users","updatedAt","updated_at")
+    await queryInterface.renameColumn("users","deletedAt","deleted_at")
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.renameColumn("albums","created_at","createdAt")
+    await queryInterface.renameColumn("albums","updated_at","updatedAt")
+    await queryInterface.renameColumn("albums","deleted_at","deletedAt")
+    await queryInterface.renameColumn("artists","created_at","createdAt")
+    await queryInterface.renameColumn("artists","updated_at","updatedAt")
+    await queryInterface.renameColumn("artists","deleted_at","deletedAt")
+    await queryInterface.renameColumn("interactions","created_at","createdAt")
+    await queryInterface.renameColumn("interactions","updated_at","updatedAt")
+    await queryInterface.renameColumn("interactions","deleted_at","deletedAt")
+    await queryInterface.renameColumn("playlists","created_at","createdAt")
+    await queryInterface.renameColumn("playlists","updated_at","updatedAt")
+    await queryInterface.renameColumn("playlists","deleted_at","deletedAt")
+    await queryInterface.renameColumn("playlists_songs","created_at","createdAt")
+    await queryInterface.renameColumn("playlists_songs","updated_at","updatedAt")
+    await queryInterface.renameColumn("playlists_songs","deleted_at","deletedAt")
+    await queryInterface.renameColumn("songs","created_at","createdAt")
+    await queryInterface.renameColumn("songs","updated_at","updatedAt")
+    await queryInterface.renameColumn("songs","deleted_at","deletedAt")
+    await queryInterface.renameColumn("users","created_at","createdAt")
+    await queryInterface.renameColumn("users","updated_at","updatedAt")
+    await queryInterface.renameColumn("users","deleted_at","deletedAt")
+  }
+};

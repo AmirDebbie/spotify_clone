@@ -14,15 +14,15 @@ function PlaylistListItem({ playlist }) {
             primary={playlist.name}
             secondary={
               <Typography style={{ color: "#1db954", fontSize: 12 }}>
-                {new Date(playlist.upload_at.slice(0, 10)).toDateString()}
+                {new Date(playlist.createdAt.slice(0, 10)).toDateString()}
               </Typography>
             }
           />
-          {playlist.cover_img && (
+          {playlist.coverImg && (
             <img
               alt="playlist cover"
               className="artistImg"
-              src={playlist.cover_img}
+              src={playlist.coverImg}
             />
           )}
         </ListItem>

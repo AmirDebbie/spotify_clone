@@ -35,8 +35,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
   const modalStyle = getModalStyle();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(album.name);
-  const [coverImg, setCoverImg] = useState(album.cover_img);
-  const [uploadAt, setUploadAt] = useState(album.upload_at.slice(0, 10));
+  const [coverImg, setCoverImg] = useState(album.coverImg);
+  const [uploadAt, setUploadAt] = useState(album.uploadAt.slice(0, 10));
   const [cookies] = useCookies();
 
   // Opens the modal
@@ -65,8 +65,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
     } else {
       const updatedAlbum = {
         name,
-        cover_img: coverImg,
-        upload_at: new Date(uploadAt).toISOString().slice(0, 10),
+        coverImg: coverImg,
+        uploadAt: new Date(uploadAt).toISOString().slice(0, 10),
       };
       await axios.put(`/album/${album.id}`, updatedAlbum, {
         headers: {
@@ -151,8 +151,8 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         >
           Update
         </button>
-        {album.cover_img && (
-          <img alt="album cover" className="artistImg" src={album.cover_img} />
+        {album.coverImg && (
+          <img alt="album cover" className="artistImg" src={album.coverImg} />
         )}
       </ListItem>
       <Modal open={open} onClose={handleClose}>

@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Playlist.init({
     name: DataTypes.STRING,
-    cover_img: DataTypes.STRING
+    coverImg:{
+      field:'cover_img',
+      type:DataTypes.STRING, 
+    },
   }, {
     sequelize,
     paranoid: true,

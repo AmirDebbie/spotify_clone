@@ -21,17 +21,17 @@ function SingleSong() {
   const [goodRequest, setGoodRequest] = useState(true);
   const [cookies] = useCookies();
 
-  const video_id = useMemo(() => {
-    let youtube_link = song.youtube_link;
-    if (youtube_link) {
-      let video_id = youtube_link.split("v=")[1];
-      if (video_id) {
-        const ampersandPosition = video_id.indexOf("&");
+  const videoId = useMemo(() => {
+    let youtubeLink = song.youtubeLink;
+    if (youtubeLink) {
+      let videoId = youtubeLink.split("v=")[1];
+      if (videoId) {
+        const ampersandPosition = videoId.indexOf("&");
         if (ampersandPosition !== -1) {
-          video_id = video_id.substring(0, ampersandPosition);
+          videoId = videoId.substring(0, ampersandPosition);
         }
       }
-      return video_id;
+      return videoId;
     }
   }, [song]);
 
@@ -99,7 +99,7 @@ function SingleSong() {
             title={song.title}
             width="100%"
             height="600"
-            src={`https://www.youtube.com/embed/${video_id}`}
+            src={`https://www.youtube.com/embed/${videoId}`}
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
