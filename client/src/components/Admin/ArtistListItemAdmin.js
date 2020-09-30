@@ -50,12 +50,18 @@ function ArtistListItemAdmin({ artist, getArtists }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/artist/${artist.id}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    getArtists();
+    try {
+      await axios.delete(`/artist/${artist.id}`, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
+      getArtists();
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert("You are not an admin!");
+      }
+    }
   };
 
   const handleUpdateSubmit = async (e) => {
@@ -68,13 +74,19 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         coverImg: coverImg,
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/artist/${artist.id}`, updatedArtist, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      });
-      getArtists();
-      handleClose();
+      try {
+        await axios.put(`/artist/${artist.id}`, updatedArtist, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        getArtists();
+        handleClose();
+      } catch (e) {
+        if (e.response.status === 401) {
+          alert("You are not an admin!");
+        }
+      }
     }
   };
 

@@ -40,8 +40,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
-        const userId = user.user_id;
-        const tokenProps = { userId };
+        const tokenProps = { userId: user.id, isAdmin: user.isAdmin };
         if(!rememberToken) {
           tokenProps.exp = Math.floor(Date.now() / 1000) + 3600;
         }

@@ -45,13 +45,20 @@ function AddPlaylistModal({ getPlaylists }) {
       name,
       coverImg: coverImg
     };
-    await axios.post(`/playlist`, newPlaylist, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    getPlaylists();
-    handleClose();
+    try {
+      await axios.post(`/playlist`, newPlaylist, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
+      getPlaylists();
+      handleClose();
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert('You are not an admin!')
+      }
+    }
+    
   };
 
   const body = (

@@ -50,12 +50,18 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/playlist/${playlist.id}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    getPlaylists();
+    try {
+      await axios.delete(`/playlist/${playlist.id}`, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
+      getPlaylists();
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert('You are not an admin!')
+      }
+    }
   };
 
   const handleUpdateSubmit = async (e) => {
@@ -68,13 +74,19 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
         coverImg: coverImg,
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
-      await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      });
-      getPlaylists();
-      handleClose();
+      try {
+        await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        getPlaylists();
+        handleClose();
+      } catch (e) {
+        if (e.response.status === 401) {
+          alert('You are not an admin!')
+        }
+      }
     }
   };
 

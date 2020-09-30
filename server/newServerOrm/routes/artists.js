@@ -3,6 +3,7 @@ const router = Router();
 const { Artist, Song, Album } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const adminAuth = require('../functions/adminAuth')
 
 router.get("/", async (req, res) => {
   try {
@@ -64,17 +65,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", adminAuth, async (req, res) => {
   const { body } = req;
-  try {
-    await Artist.create(body);
-    res.json({ msg: "1 artist added" });
-  } catch (e) {
-    res.json({ error: e.message });
-  }
+    try {
+      await Artist.create(body);
+      res.json({ msg: "1 artist added" });
+    } catch (e) {
+      res.json({ error: e.message });
+    }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminAuth, async (req, res) => {
   try {
     await Artist.destroy({
       where: { id: req.params.id },
@@ -85,7 +86,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", adminAuth, async (req, res) => {
   try {
     const updated = await Artist.update(req.body, {
       where: { id: req.params.id },

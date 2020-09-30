@@ -61,13 +61,19 @@ function AddSongModal({ getSongs, artists, albums }) {
         lyrics,
         uploadAt: new Date().toISOString().slice(0, 10)
       };
-      await axios.post(`/song`, newSong, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      });
-      getSongs();
-      handleClose();
+      try {
+        await axios.post(`/song`, newSong, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        getSongs();
+        handleClose();
+      } catch (e) {
+        if (e.response.status === 401) {
+          alert('You are not an admin!')
+        }
+      }
     }
   };
 

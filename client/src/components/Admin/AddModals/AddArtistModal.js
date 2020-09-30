@@ -45,13 +45,19 @@ function AddArtistModal({ getArtists }) {
       name,
       coverImg: coverImg,
     };
-    await axios.post(`/artist`, newArtist, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    getArtists();
-    handleClose();
+    try {
+      await axios.post(`/artist`, newArtist, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
+      getArtists();
+      handleClose();
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert('You are not an admin!')
+      }
+    } 
   };
 
   const body = (

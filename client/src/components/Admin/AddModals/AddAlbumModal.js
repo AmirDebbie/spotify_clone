@@ -49,13 +49,19 @@ function AddAlbumModal({ getAlbums, artists }) {
       coverImg: coverImg,
       uploadAt: new Date().toISOString().slice(0, 10),
     };
-    await axios.post(`/album`, newAlbum, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    getAlbums();
-    handleClose();
+    try {
+      await axios.post(`/album`, newAlbum, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      });
+      getAlbums();
+      handleClose();
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert("You are not an admin!");
+      }
+    }
   };
 
   const body = (
