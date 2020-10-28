@@ -10,7 +10,7 @@ import SquarePlaylistListItem from "./Playlist/SquarePlaylistListItem";
 import { useCookies } from "react-cookie";
 
 function HomePage() {
-  const [cookies, setCookie] = useCookies();
+  const [cookies] = useCookies();
   const [artists, setArtists] = useState([]);
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);

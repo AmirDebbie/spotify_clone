@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Albums from "./components/Album/Albums";
 import Songs from "./components/Song/Songs";
 import Artists from "./components/Artist/Artists";
@@ -17,12 +17,21 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import HomePage from "./components/HomePage";
 import "./App.css";
+// import ReactGA from "react-ga";
+import { routeChange } from "./AnalyticsManager";
 
 function App() {
   const [cookies] = useCookies();
-
   const [isLogged, setIsLogged] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      routeChange(location.pathname);
+    });
+  }, [history]);
 
   useEffect(() => {
     (async () => {
@@ -46,7 +55,7 @@ function App() {
   }, [cookies]);
 
   return (
-    <Router>
+    <>
       {!loading ? (
         !isLogged ? (
           <LoggedIn.Provider value={{ isLogged, setIsLogged }}>
@@ -101,7 +110,7 @@ function App() {
       ) : (
         <div></div>
       )}
-    </Router>
+    </>
   );
 }
 

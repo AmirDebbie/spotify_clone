@@ -9,7 +9,6 @@ function LogIn() {
   const context = useContext(LoggedIn);
   const onSubmit = async (formData) => {
     try {
-      console.log(formData)
       await axios.post("user/login", formData);
       context.setIsLogged(true);
     } catch (e) {
@@ -54,13 +53,10 @@ function LogIn() {
           <p style={{ color: "white" }}>
             {errors.password && "Password is required"}
           </p>
-          <label style={{color: 'white'}}>Remember Me</label>
-          <input
-            name="rememberToken"
-            type="checkbox"
-            ref={logIn()}
-          />
-          <br /><br />
+          <label style={{ color: "white" }}>Remember Me</label>
+          <input name="rememberToken" type="checkbox" ref={logIn()} />
+          <br />
+          <br />
           <input className="registerButton" type="submit" value="Login" />
         </form>
         <Link

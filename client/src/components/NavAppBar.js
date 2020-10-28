@@ -19,7 +19,7 @@ import { LoggedIn } from "./LoggedInContext";
 
 function NavAppBar() {
   const [open, setOpen] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const context = useContext(LoggedIn);
   const history = useHistory();
 
@@ -33,7 +33,7 @@ function NavAppBar() {
     context.setIsLogged(false);
     setTimeout(() => {
       history.push("/");
-    }, 500)
+    }, 500);
   };
 
   return (
