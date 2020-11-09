@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon newServerOrm/index.js",
+    "dev": "nodemon index.js",
     "test": "NODE_ENV=test jest --detectOpenHandles"
   },
   "repository": {
