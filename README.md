@@ -1,3 +1,5 @@
+# Spotify Clone
+
 This is my Spotify clone. 
 The app mimics a spotify application, using React (and React Router), Node.js, and mySQL, with user authentication.
 
