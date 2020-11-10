@@ -4,7 +4,7 @@ This is my Spotify clone.
 The app mimics a spotify application, using React (and React Router), Node.js, and mySQL, with user authentication.
 
 ## How To Run
-cd to client directory and run npm install, and then npm start to run the client:
+cd to client directory and run npm install, and then "npm start" to run the client:
 ```
 cd client
 npm install
