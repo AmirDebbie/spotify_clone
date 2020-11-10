@@ -128,7 +128,7 @@ button:focus {
 }
 
 .registerButton {
-  background-color: #70837777;
+  background-color: #1b8540;
   display: inline;
   padding: 8px;
   color: white;
@@ -140,9 +140,28 @@ button:focus {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.registerButtonWhite {
+  background-color: rgba(255, 255, 255, 0.281);
+  display: inline;
+  padding: 8px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 200ms;
+  border: none;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.registerButtonWhite:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.39) ;
+  transition: 200ms;
+}
+
 .registerButton:hover {
   cursor: pointer;
-  background-color: #436e45;
+  background-color: #1db954;
   transition: 200ms;
 }
 

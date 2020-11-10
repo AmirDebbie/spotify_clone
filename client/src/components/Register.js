@@ -19,7 +19,17 @@ function Register() {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", color: "white" }}>Register</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          color: "white",
+          backgroundColor: "#1db954",
+          margin: 0,
+          padding: 11,
+        }}
+      >
+        Register
+      </h1>
 
       <div
         style={{
@@ -30,7 +40,10 @@ function Register() {
           margin: "auto",
           marginTop: "5%",
           padding: 30,
-          border: "solid #1db954 2px",
+          borderRadius: "7px",
+          minWidth: "500px",
+          boxShadow:
+            "5px 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset",
         }}
       >
         <form style={{ marginBottom: 25 }} onSubmit={handleSubmit(onSubmit)}>
@@ -80,7 +93,7 @@ function Register() {
             top: 20,
           }}
         >
-          <p className="registerButton">Login Here</p>
+          <p className="registerButtonWhite">Login Here</p>
         </Link>
       </div>
     </>
