@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const { Client } = require("@elastic/elasticsearch");
 require("dotenv").config();
-const { Artist, Song, Album, Playlist } = require("../models");
-const Sequelize = require("sequelize");
+// const { Artist, Song, Album, Playlist } = require("../models");
+// const Sequelize = require("sequelize");
 
 const client = new Client({
   cloud: {
@@ -38,7 +38,7 @@ router.get("/songs", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits);
     }
   );
 });
@@ -92,7 +92,7 @@ router.get("/artists", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits);
     }
   );
 });
