@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const app = express();
 
@@ -32,7 +33,7 @@ function ensureToken(req, res, next) {
       if (error) {
         res.status(403).send("incorrect token");
       } else {
-        req.decoded = decoded
+        req.decoded = decoded;
         next();
       }
     });
@@ -41,11 +42,12 @@ function ensureToken(req, res, next) {
   }
 }
 
-app.use('/user', require("./routes/users"))
-app.use(ensureToken);
-app.use('/artist', require("./routes/artists"))
-app.use('/playlist', require("./routes/playlists"))
-app.use('/song', require("./routes/songs"))
-app.use('/album', require("./routes/albums"))
+app.use("/user", require("./routes/users"));
+// app.use(ensureToken);
+app.use("/artist", require("./routes/artists"));
+app.use("/playlist", require("./routes/playlists"));
+app.use("/song", require("./routes/songs"));
+app.use("/album", require("./routes/albums"));
+app.use("/search", require("./routes/search"));
 
 module.exports = app;
