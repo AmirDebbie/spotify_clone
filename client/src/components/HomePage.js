@@ -91,31 +91,75 @@ function HomePage() {
   };
 
   const handleInputChange = async (search) => {
-    const songsData = await axios.get(`song/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    setSongs(songsData.data);
-    const albumsData = await axios.get(`album/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    setAlbums(albumsData.data);
-    const artistsData = await axios.get(`artist/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    setArtists(artistsData.data);
-    const playlistsData = await axios.get(`playlist/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
-    setPlaylists(playlistsData.data);
-    setLoading(false);
+    try {
+      if (search.length > 0) {
+        const songsData = await axios.get(
+          `search/songs/?search=${search}&all=all`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
+        setSongs(songsData.data);
+        const albumsData = await axios.get(
+          `search/albums/?search=${search}&all=all`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
+        setAlbums(albumsData.data);
+        const artistsData = await axios.get(
+          `search/artists/?search=${search}&all=all`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
+        setArtists(artistsData.data);
+        const playlistsData = await axios.get(
+          `search/playlists/?search=${search}&all=all`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
+        setPlaylists(playlistsData.data);
+        setLoading(false);
+      } else {
+        const songsData = await axios.get(`song/top`, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        setSongs(songsData.data);
+        const albumsData = await axios.get(`album/top`, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        setAlbums(albumsData.data);
+        const artistsData = await axios.get(`artist/top`, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        setArtists(artistsData.data);
+        const playlistsData = await axios.get(`playlist/top`, {
+          headers: {
+            Authorization: cookies.token,
+          },
+        });
+        setPlaylists(playlistsData.data);
+        setLoading(false);
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const breakPoints = [

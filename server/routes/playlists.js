@@ -3,6 +3,8 @@ const router = Router();
 const { Artist, Song, Album, Playlist, Playlists_song } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const updateByIndexAndId = require("../elastic/elasticUpdate");
+const postByIndex = require("../elastic/elasticAdd");
 
 router.get("/", async (req, res) => {
   try {
@@ -32,7 +34,32 @@ router.get("/top", async (req, res) => {
 router.post("/", async (req, res) => {
   const { body } = req;
   try {
-    await Playlist.create(body);
+    const created = await Playlist.create(body);
+    let result = await Playlist.findByPk(created.dataValues.id, {
+      include: [
+        {
+          model: Playlists_song,
+          where: { playlist_id: req.params.id },
+          include: [
+            {
+              model: Song,
+              include: [
+                {
+                  model: Artist,
+                  attributes: ["name"],
+                },
+                {
+                  model: Album,
+                  attributes: ["name"],
+                },
+              ],
+            },
+          ],
+          attributes: ["id"],
+        },
+      ],
+    });
+    await postByIndex("playlists", result);
     res.json({ msg: "1 playlist added" });
   } catch (e) {
     res.json({ error: e.message });
@@ -55,6 +82,9 @@ router.put("/:id", async (req, res) => {
     const updated = await Playlist.update(req.body, {
       where: { id: req.params.id },
     });
+
+    await updateByIndexAndId("playlists", req.params.id, req.body);
+
     res.json(
       updated[0] === 1
         ? { msg: "Playlist updated" }

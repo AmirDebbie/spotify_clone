@@ -38,7 +38,7 @@ router.get("/songs", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits.map((item) => item._source));
     }
   );
 });
@@ -65,7 +65,7 @@ router.get("/albums", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits.map((item) => item._source));
     }
   );
 });
@@ -92,7 +92,7 @@ router.get("/artists", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits.map((item) => item._source));
     }
   );
 });
@@ -119,7 +119,7 @@ router.get("/playlists", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result);
+      if (result) res.json(result.body.hits.hits.map((item) => item._source));
     }
   );
 });

@@ -43,7 +43,7 @@ function ensureToken(req, res, next) {
 }
 
 app.use("/user", require("./routes/users"));
-// app.use(ensureToken);
+app.use(ensureToken);
 app.use("/artist", require("./routes/artists"));
 app.use("/playlist", require("./routes/playlists"));
 app.use("/song", require("./routes/songs"));

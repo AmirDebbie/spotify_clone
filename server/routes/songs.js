@@ -3,7 +3,9 @@ const router = Router();
 const { Artist, Song, Album } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const adminAuth = require('../functions/adminAuth')
+const adminAuth = require("../functions/adminAuth");
+const updateByIndexAndId = require("../elastic/elasticUpdate");
+const postByIndex = require("../elastic/elasticAdd");
 
 router.get("/", async (req, res) => {
   try {
@@ -87,7 +89,20 @@ router.get("/:id", async (req, res) => {
 router.post("/", adminAuth, async (req, res) => {
   const { body } = req;
   try {
-    await Song.create(body);
+    const created = await Song.create(body);
+    const result = await Song.findByPk(created.dataValues.id, {
+      include: [
+        {
+          model: Album,
+          attributes: ["name"],
+        },
+        {
+          model: Artist,
+          attributes: ["name"],
+        },
+      ],
+    });
+    await postByIndex("songs", result);
     res.json({ msg: "1 song added" });
   } catch (e) {
     res.json({ error: e.message });
@@ -110,6 +125,9 @@ router.put("/:id", adminAuth, async (req, res) => {
     const updated = await Song.update(req.body, {
       where: { id: req.params.id },
     });
+
+    await updateByIndexAndId("songs", req.params.id, req.body);
+
     res.json(
       updated[0] === 1 ? { msg: "Song updated" } : { msg: "Nothing changed" }
     );

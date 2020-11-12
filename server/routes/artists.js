@@ -3,7 +3,9 @@ const router = Router();
 const { Artist, Song, Album } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const adminAuth = require('../functions/adminAuth')
+const adminAuth = require("../functions/adminAuth");
+const updateByIndexAndId = require("../elastic/elasticUpdate");
+const postByIndex = require("../elastic/elasticAdd");
 
 router.get("/", async (req, res) => {
   try {
@@ -41,8 +43,8 @@ router.get("/:id", async (req, res) => {
             {
               model: Artist,
               attributes: ["name"],
-            }
-          ]
+            },
+          ],
         },
         {
           model: Song,
@@ -67,12 +69,39 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", adminAuth, async (req, res) => {
   const { body } = req;
-    try {
-      await Artist.create(body);
-      res.json({ msg: "1 artist added" });
-    } catch (e) {
-      res.json({ error: e.message });
-    }
+  try {
+    const created = await Artist.create(body);
+    const result = await Artist.findByPk(created.dataValues.id, {
+      include: [
+        {
+          model: Album,
+          include: [
+            {
+              model: Artist,
+              attributes: ["name"],
+            },
+          ],
+        },
+        {
+          model: Song,
+          include: [
+            {
+              model: Artist,
+              attributes: ["name"],
+            },
+            {
+              model: Album,
+              attributes: ["name"],
+            },
+          ],
+        },
+      ],
+    });
+    await postByIndex("artists", result);
+    res.json({ msg: "1 artist added" });
+  } catch (e) {
+    res.json({ error: e.message });
+  }
 });
 
 router.delete("/:id", adminAuth, async (req, res) => {
@@ -91,6 +120,9 @@ router.put("/:id", adminAuth, async (req, res) => {
     const updated = await Artist.update(req.body, {
       where: { id: req.params.id },
     });
+
+    await updateByIndexAndId("artists", req.params.id, req.body);
+
     res.json(
       updated[0] === 1 ? { msg: "Artist updated" } : { msg: "Nothing changed" }
     );
