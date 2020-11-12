@@ -38,7 +38,7 @@ router.get("/songs", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result.body.hits.hits);
+      if (result) res.json(result);
     }
   );
 });
@@ -92,7 +92,7 @@ router.get("/artists", (req, res) => {
     },
     (err, result) => {
       if (err) console.log(err);
-      if (result) res.json(result.body.hits.hits);
+      if (result) res.json(result);
     }
   );
 });
