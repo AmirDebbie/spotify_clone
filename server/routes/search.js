@@ -20,7 +20,7 @@ router.get("/songs", (req, res) => {
   const { all, search } = req.query;
   let size = 3;
   if (all === "all") {
-    size = undefined;
+    size = 1000;
   }
   client.search(
     {
@@ -47,7 +47,7 @@ router.get("/albums", (req, res) => {
   const { all, search } = req.query;
   let size = 3;
   if (all === "all") {
-    size = undefined;
+    size = 1000;
   }
   client.search(
     {
@@ -74,7 +74,7 @@ router.get("/artists", (req, res) => {
   const { all, search } = req.query;
   let size = 3;
   if (all === "all") {
-    size = undefined;
+    size = 1000;
   }
   client.search(
     {
@@ -101,7 +101,7 @@ router.get("/playlists", (req, res) => {
   const { all, search } = req.query;
   let size = 3;
   if (all === "all") {
-    size = undefined;
+    size = 1000;
   }
   client.search(
     {
