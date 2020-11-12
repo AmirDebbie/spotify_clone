@@ -3,6 +3,8 @@
 This is my Spotify clone. 
 The app mimics a spotify application, using React (and React Router), Node.js, and mySQL, with user authentication.
 
+This is my first project using SQL, sequalize ORM, react router and implementing user authintication with JWT.
+
 ## How To Run
 cd to client directory and run npm install, and then "npm start" to run the client:
 ```
