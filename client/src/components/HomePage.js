@@ -22,7 +22,7 @@ function HomePage() {
     // Get all artists
     (async () => {
       try {
-        const { data } = await axios.get("artist/top", {
+        const { data } = await axios.get("http://localhost:8080/artist/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -36,7 +36,7 @@ function HomePage() {
     // Get all songs
     (async () => {
       try {
-        const { data } = await axios.get("song/top", {
+        const { data } = await axios.get("http://localhost:8080/song/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -50,7 +50,7 @@ function HomePage() {
     // Get all albums
     (async () => {
       try {
-        const { data } = await axios.get("album/top", {
+        const { data } = await axios.get("http://localhost:8080/album/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -64,7 +64,7 @@ function HomePage() {
     // Get all playlists
     (async () => {
       try {
-        const { data } = await axios.get("playlist/top", {
+        const { data } = await axios.get("http://localhost:8080/playlist/top", {
           headers: {
             Authorization: cookies.token,
           },
@@ -91,29 +91,41 @@ function HomePage() {
   };
 
   const handleInputChange = async (search) => {
-    const songsData = await axios.get(`song/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
+    const songsData = await axios.get(
+      `http://localhost:8080/song/?search=${search}`,
+      {
+        headers: {
+          Authorization: cookies.token,
+        },
+      }
+    );
     setSongs(songsData.data);
-    const albumsData = await axios.get(`album/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
+    const albumsData = await axios.get(
+      `http://localhost:8080/album/?search=${search}`,
+      {
+        headers: {
+          Authorization: cookies.token,
+        },
+      }
+    );
     setAlbums(albumsData.data);
-    const artistsData = await axios.get(`artist/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
+    const artistsData = await axios.get(
+      `http://localhost:8080/artist/?search=${search}`,
+      {
+        headers: {
+          Authorization: cookies.token,
+        },
+      }
+    );
     setArtists(artistsData.data);
-    const playlistsData = await axios.get(`playlist/?search=${search}`, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
+    const playlistsData = await axios.get(
+      `http://localhost:8080/playlist/?search=${search}`,
+      {
+        headers: {
+          Authorization: cookies.token,
+        },
+      }
+    );
     setPlaylists(playlistsData.data);
     setLoading(false);
   };

@@ -51,7 +51,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/album/${album.id}`, {
+      await axios.delete(`http://localhost:8080/album/${album.id}`, {
         headers: {
           Authorization: cookies.token,
         },
@@ -59,7 +59,7 @@ function AlbumListItemAdmin({ album, getAlbums }) {
       getAlbums();
     } catch (e) {
       if (e.response.status === 401) {
-        alert('You are not an admin!')
+        alert("You are not an admin!");
       }
     }
   };
@@ -73,18 +73,22 @@ function AlbumListItemAdmin({ album, getAlbums }) {
         name,
         coverImg: coverImg,
         uploadAt: new Date(uploadAt).toISOString().slice(0, 10),
-      }; 
+      };
       try {
-        await axios.put(`/album/${album.id}`, updatedAlbum, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
+        await axios.put(
+          `http://localhost:8080/album/${album.id}`,
+          updatedAlbum,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
         getAlbums();
         handleClose();
       } catch (e) {
         if (e.response.status === 401) {
-          alert('You are not an admin!')
+          alert("You are not an admin!");
         }
       }
     }

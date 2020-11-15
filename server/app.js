@@ -1,11 +1,13 @@
 const express = require("express");
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(
   morgan(function (tokens, req, res) {
@@ -25,6 +27,20 @@ app.use(
     }
   })
 );
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+  );
+  next();
+});
 
 function ensureToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];

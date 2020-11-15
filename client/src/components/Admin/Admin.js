@@ -22,7 +22,7 @@ function Admin() {
   useEffect(() => {
     // Get all artists
     (async () => {
-      const { data } = await axios.get("artist", {
+      const { data } = await axios.get("http://localhost:8080/artist", {
         headers: {
           Authorization: cookies.token,
         },
@@ -32,7 +32,7 @@ function Admin() {
 
     // Get all songs
     (async () => {
-      const { data } = await axios.get("song", {
+      const { data } = await axios.get("http://localhost:8080/song", {
         headers: {
           Authorization: cookies.token,
         },
@@ -42,7 +42,7 @@ function Admin() {
 
     // Get all albums
     (async () => {
-      const { data } = await axios.get("album", {
+      const { data } = await axios.get("http://localhost:8080/album", {
         headers: {
           Authorization: cookies.token,
         },
@@ -52,7 +52,7 @@ function Admin() {
 
     // Get all playlists
     (async () => {
-      const { data } = await axios.get("playlist", {
+      const { data } = await axios.get("http://localhost:8080/playlist", {
         headers: {
           Authorization: cookies.token,
         },
@@ -62,7 +62,7 @@ function Admin() {
   }, [cookies]);
 
   const getAlbums = async () => {
-    const { data } = await axios.get("album", {
+    const { data } = await axios.get("http://localhost:8080/album", {
       headers: {
         Authorization: cookies.token,
       },
@@ -71,7 +71,7 @@ function Admin() {
   };
 
   const getArtists = async () => {
-    const { data } = await axios.get("artist", {
+    const { data } = await axios.get("http://localhost:8080/artist", {
       headers: {
         Authorization: cookies.token,
       },
@@ -80,7 +80,7 @@ function Admin() {
   };
 
   const getSongs = async () => {
-    const { data } = await axios.get("song", {
+    const { data } = await axios.get("http://localhost:8080/song", {
       headers: {
         Authorization: cookies.token,
       },
@@ -89,7 +89,7 @@ function Admin() {
   };
 
   const getPlaylists = async () => {
-    const { data } = await axios.get("playlist", {
+    const { data } = await axios.get("http://localhost:8080/playlist", {
       headers: {
         Authorization: cookies.token,
       },

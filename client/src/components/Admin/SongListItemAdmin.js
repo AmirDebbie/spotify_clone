@@ -58,7 +58,7 @@ function SongListItemAdmin({ song, getSongs }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/song/${song.id}`, {
+      await axios.delete(`http://localhost:8080/song/${song.id}`, {
         headers: {
           Authorization: cookies.token,
         },
@@ -66,7 +66,7 @@ function SongListItemAdmin({ song, getSongs }) {
       getSongs();
     } catch (e) {
       if (e.response.status === 401) {
-        alert('You are not an admin!')
+        alert("You are not an admin!");
       }
     }
   };
@@ -93,7 +93,7 @@ function SongListItemAdmin({ song, getSongs }) {
         uploadAt: new Date(uploadAt).toISOString().slice(0, 10),
       };
       try {
-        await axios.put(`/song/${song.id}`, updatedSong, {
+        await axios.put(`http://localhost:8080/song/${song.id}`, updatedSong, {
           headers: {
             Authorization: cookies.token,
           },
@@ -102,7 +102,7 @@ function SongListItemAdmin({ song, getSongs }) {
         handleClose();
       } catch (e) {
         if (e.response.status === 401) {
-          alert('You are not an admin!')
+          alert("You are not an admin!");
         }
       }
     }

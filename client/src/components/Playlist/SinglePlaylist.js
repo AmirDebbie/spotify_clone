@@ -16,11 +16,14 @@ function SinglePlaylist() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`/playlist/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
+        const { data } = await axios.get(
+          `http://localhost:8080/playlist/${id}`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
         if (!data) {
           setGoodRequest(false);
         }

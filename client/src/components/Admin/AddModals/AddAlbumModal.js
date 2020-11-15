@@ -50,7 +50,7 @@ function AddAlbumModal({ getAlbums, artists }) {
       uploadAt: new Date().toISOString().slice(0, 10),
     };
     try {
-      await axios.post(`/album`, newAlbum, {
+      await axios.post(`http://localhost:8080/album`, newAlbum, {
         headers: {
           Authorization: cookies.token,
         },

@@ -51,7 +51,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/playlist/${playlist.id}`, {
+      await axios.delete(`http://localhost:8080/playlist/${playlist.id}`, {
         headers: {
           Authorization: cookies.token,
         },
@@ -59,7 +59,7 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
       getPlaylists();
     } catch (e) {
       if (e.response.status === 401) {
-        alert('You are not an admin!')
+        alert("You are not an admin!");
       }
     }
   };
@@ -75,16 +75,20 @@ function PlaylistListItemAdmin({ playlist, getPlaylists }) {
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       try {
-        await axios.put(`/playlist/${playlist.id}`, updatedPlaylist, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
+        await axios.put(
+          `http://localhost:8080/playlist/${playlist.id}`,
+          updatedPlaylist,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
         getPlaylists();
         handleClose();
       } catch (e) {
         if (e.response.status === 401) {
-          alert('You are not an admin!')
+          alert("You are not an admin!");
         }
       }
     }

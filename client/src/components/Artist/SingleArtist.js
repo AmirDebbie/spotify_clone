@@ -18,7 +18,7 @@ function SingleArtist() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`/artist/${id}`, {
+        const { data } = await axios.get(`http://localhost:8080/artist/${id}`, {
           headers: {
             Authorization: cookies.token,
           },

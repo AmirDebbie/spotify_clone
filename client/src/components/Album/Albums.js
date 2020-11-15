@@ -10,7 +10,7 @@ function Albums() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("album", {
+      const { data } = await axios.get("http://localhost:8080/album", {
         headers: {
           Authorization: cookies.token,
         },

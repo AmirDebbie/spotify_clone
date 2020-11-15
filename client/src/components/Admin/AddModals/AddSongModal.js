@@ -59,10 +59,10 @@ function AddSongModal({ getSongs, artists, albums }) {
         length: "00:".concat(length),
         trackNumber: trackNumber,
         lyrics,
-        uploadAt: new Date().toISOString().slice(0, 10)
+        uploadAt: new Date().toISOString().slice(0, 10),
       };
       try {
-        await axios.post(`/song`, newSong, {
+        await axios.post(`http://localhost:8080/song`, newSong, {
           headers: {
             Authorization: cookies.token,
           },
@@ -71,7 +71,7 @@ function AddSongModal({ getSongs, artists, albums }) {
         handleClose();
       } catch (e) {
         if (e.response.status === 401) {
-          alert('You are not an admin!')
+          alert("You are not an admin!");
         }
       }
     }

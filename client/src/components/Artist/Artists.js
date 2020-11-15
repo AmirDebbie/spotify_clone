@@ -10,7 +10,7 @@ function Artists() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("artist", {
+      const { data } = await axios.get("http://localhost:8080/artist", {
         headers: {
           Authorization: cookies.token,
         },

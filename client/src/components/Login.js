@@ -9,7 +9,7 @@ function LogIn() {
   const context = useContext(LoggedIn);
   const onSubmit = async (formData) => {
     try {
-      await axios.post("user/login", formData);
+      await axios.post("http://localhost:8080/user/login", formData);
       context.setIsLogged(true);
     } catch (e) {
       console.error(e);

@@ -46,7 +46,7 @@ function AddArtistModal({ getArtists }) {
       coverImg: coverImg,
     };
     try {
-      await axios.post(`/artist`, newArtist, {
+      await axios.post(`http://localhost:8080/artist`, newArtist, {
         headers: {
           Authorization: cookies.token,
         },
@@ -55,9 +55,9 @@ function AddArtistModal({ getArtists }) {
       handleClose();
     } catch (e) {
       if (e.response.status === 401) {
-        alert('You are not an admin!')
+        alert("You are not an admin!");
       }
-    } 
+    }
   };
 
   const body = (

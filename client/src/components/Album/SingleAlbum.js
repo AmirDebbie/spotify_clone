@@ -16,7 +16,7 @@ function SingleAlbum() {
   useEffect(() => {
     (async () => {
       try {
-        let { data } = await axios.get(`/album/${id}`, {
+        let { data } = await axios.get(`http://localhost:8080/album/${id}`, {
           headers: {
             Authorization: cookies.token,
           },

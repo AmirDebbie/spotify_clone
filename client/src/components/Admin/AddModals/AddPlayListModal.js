@@ -43,10 +43,10 @@ function AddPlaylistModal({ getPlaylists }) {
     e.preventDefault();
     const newPlaylist = {
       name,
-      coverImg: coverImg
+      coverImg: coverImg,
     };
     try {
-      await axios.post(`/playlist`, newPlaylist, {
+      await axios.post(`http://localhost:8080/playlist`, newPlaylist, {
         headers: {
           Authorization: cookies.token,
         },
@@ -55,10 +55,9 @@ function AddPlaylistModal({ getPlaylists }) {
       handleClose();
     } catch (e) {
       if (e.response.status === 401) {
-        alert('You are not an admin!')
+        alert("You are not an admin!");
       }
     }
-    
   };
 
   const body = (

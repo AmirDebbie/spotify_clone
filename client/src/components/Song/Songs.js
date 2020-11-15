@@ -11,7 +11,7 @@ function Songs() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("song", {
+      const { data } = await axios.get("http://localhost:8080/song", {
         headers: {
           Authorization: cookies.token,
         },

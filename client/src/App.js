@@ -37,11 +37,15 @@ function App() {
     (async () => {
       if (cookies.name && cookies.token) {
         try {
-          const { data } = await axios.post("/user/validate", cookies, {
-            headers: {
-              Authorization: cookies.token,
-            },
-          });
+          const { data } = await axios.post(
+            "http://localhost:8080/user/validate",
+            cookies,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          );
           setIsLogged(data);
           setLoading(false);
         } catch (e) {

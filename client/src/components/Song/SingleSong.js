@@ -38,48 +38,63 @@ function SingleSong() {
   useEffect(() => {
     (async () => {
       try {
-        const { data: song } = await axios.get(`/song/${id}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
+        const { data: song } = await axios.get(
+          `http://localhost:8080/song/${id}`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
         if (!song) {
           setGoodRequest(false);
         }
         setSong(song);
         if (query.get("artist")) {
-          const { data: artist } = await axios.get(`/artist/${query.get("artist")}`, {
-            headers: {
-              Authorization: cookies.token,
-            },
-          });
+          const { data: artist } = await axios.get(
+            `http://localhost:8080/artist/${query.get("artist")}`,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          );
           setList(artist.Songs);
           setPath("artist");
           setIdForObj(query.get("artist"));
         } else if (query.get("album")) {
-          const { data: album } = await axios.get(`/album/${query.get("album")}`, {
-            headers: {
-              Authorization: cookies.token,
-            },
-          });
+          const { data: album } = await axios.get(
+            `http://localhost:8080/album/${query.get("album")}`,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          );
           setList(album.Songs);
           setPath("album");
           setIdForObj(query.get("album"));
         } else if (query.get("playlist")) {
-          const { data: playlist } = await axios.get(`/playlist/${query.get("playlist")}`, {
-            headers: {
-              Authorization: cookies.token,
-            },
-          });
+          const { data: playlist } = await axios.get(
+            `http://localhost:8080/playlist/${query.get("playlist")}`,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          );
           setList(playlist.Playlists_songs);
           setPath("playlist");
           setIdForObj(query.get("playlist"));
         } else {
-          const { data: topSongs } = await axios.get(`/song/top`, {
-            headers: {
-              Authorization: cookies.token,
-            },
-          });
+          const { data: topSongs } = await axios.get(
+            `http://localhost:8080/song/top`,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          );
           setList(topSongs);
         }
       } catch (e) {

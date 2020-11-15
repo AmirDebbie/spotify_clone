@@ -51,7 +51,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/artist/${artist.id}`, {
+      await axios.delete(`http://localhost:8080/artist/${artist.id}`, {
         headers: {
           Authorization: cookies.token,
         },
@@ -75,11 +75,15 @@ function ArtistListItemAdmin({ artist, getArtists }) {
         createdAt: new Date(createdAt).toISOString().slice(0, 10),
       };
       try {
-        await axios.put(`/artist/${artist.id}`, updatedArtist, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        });
+        await axios.put(
+          `http://localhost:8080/artist/${artist.id}`,
+          updatedArtist,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
         getArtists();
         handleClose();
       } catch (e) {
@@ -162,11 +166,7 @@ function ArtistListItemAdmin({ artist, getArtists }) {
           Update
         </button>
         {artist.coverImg && (
-          <img
-            alt="artist cover"
-            className="artistImg"
-            src={artist.coverImg}
-          />
+          <img alt="artist cover" className="artistImg" src={artist.coverImg} />
         )}
       </ListItem>
       <Modal open={open} onClose={handleClose}>

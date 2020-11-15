@@ -9,7 +9,10 @@ function Register() {
 
   const onSubmit = async (formData) => {
     try {
-      const { data } = await axios.post("user/register", formData);
+      const { data } = await axios.post(
+        "http://localhost:8080/user/register",
+        formData
+      );
       console.log(data);
       history.push("/");
     } catch (e) {
