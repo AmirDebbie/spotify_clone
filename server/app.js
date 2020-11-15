@@ -29,7 +29,7 @@ app.use(
 function ensureToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {
-    jwt.verify(bearerHeader, "my_secret_key", (error, decoded) => {
+    jwt.verify(bearerHeader, process.env.SECRET, (error, decoded) => {
       if (error) {
         res.status(403).send("incorrect token");
       } else {
