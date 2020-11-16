@@ -45,9 +45,9 @@ router.post("/login", async (req, res) => {
           tokenProps.exp = Math.floor(Date.now() / 1000) + 3600;
         }
         const token = jwt.sign(tokenProps, process.env.SECRET);
-        res.cookie("name", user.name);
-        res.cookie("token", token);
-        res.json({ msg: "Connected" });
+        // res.cookie("name", user.name);
+        // res.cookie("token", token);
+        res.json({ msg: "Connected", name: user.name, token });
       } else {
         res.status(403).json({ message: "incorrect password" });
       }

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Interaction extends Model {
     /**
@@ -11,31 +9,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Song, {
-        foreignKey: 'songId'
+        foreignKey: "songId",
       });
       this.belongsTo(models.User, {
-        foreignKey: 'userId'
+        foreignKey: "userId",
       });
     }
-  };
-  Interaction.init({
-    userId:{
-      field:"user_id",
-      type:DataTypes.INTEGER
+  }
+  Interaction.init(
+    {
+      userId: {
+        field: "user_id",
+        type: DataTypes.INTEGER,
+      },
+      songId: {
+        field: "song_id",
+        type: DataTypes.INTEGER,
+      },
+      playCount: {
+        field: "play_count",
+        type: DataTypes.INTEGER,
+      },
+      liked: DataTypes.BOOLEAN,
     },
-    songId:{
-      field:"song_id",
-      type:DataTypes.INTEGER
-    },
-    playCount:{
-      field:"play_count",
-      type:DataTypes.INTEGER
-    },
-    liked: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    paranoid: true,
-    modelName: 'Interaction',
-  });
+    {
+      sequelize,
+      paranoid: true,
+      modelName: "Interaction",
+      tableName: "Interactions",
+    }
+  );
   return Interaction;
 };

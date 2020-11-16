@@ -3,14 +3,23 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { LoggedIn } from "./LoggedInContext";
+import { useCookies } from "react-cookie";
 
 function LogIn() {
   const { register: logIn, handleSubmit, errors } = useForm();
+  const [, setCookie] = useCookies();
   const context = useContext(LoggedIn);
   const onSubmit = async (formData) => {
     try {
-      await axios.post("http://localhost:8080/user/login", formData);
-      context.setIsLogged(true);
+      const { data } = await axios.post(
+        "http://localhost:8080/user/login",
+        formData
+      );
+      if (data.msg === "Connected") {
+        setCookie("token", data.token);
+        setCookie("name", data.name);
+        context.setIsLogged(true);
+      }
     } catch (e) {
       console.error(e);
     }

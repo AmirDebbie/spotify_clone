@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Song extends Model {
     /**
@@ -11,47 +9,51 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Playlists_song, {
-        foreignKey: 'songId'
+        foreignKey: "songId",
       });
       this.hasMany(models.Interaction, {
-        foreignKey: 'songId'
+        foreignKey: "songId",
       });
       this.belongsTo(models.Artist, {
-        foreignKey: 'artistId'
+        foreignKey: "artistId",
       });
       this.belongsTo(models.Album, {
-        foreignKey: 'albumId'
+        foreignKey: "albumId",
       });
     }
-  };
-  Song.init({
-    youtubeLink:{
-      field:"youtube_link",
-      type:DataTypes.STRING
+  }
+  Song.init(
+    {
+      youtubeLink: {
+        field: "youtube_link",
+        type: DataTypes.STRING,
+      },
+      albumId: {
+        field: "album_id",
+        type: DataTypes.INTEGER,
+      },
+      artistId: {
+        field: "artist_id",
+        type: DataTypes.INTEGER,
+      },
+      title: DataTypes.STRING,
+      length: DataTypes.TIME,
+      trackNumber: {
+        field: "track_number",
+        type: DataTypes.INTEGER,
+      },
+      lyrics: DataTypes.TEXT,
+      uploadAt: {
+        field: "upload_at",
+        type: DataTypes.DATE,
+      },
     },
-    albumId:{
-      field:"album_id",
-      type: DataTypes.INTEGER
-    },
-    artistId:{
-      field:"artist_id",
-      type:DataTypes.INTEGER
-    },
-    title: DataTypes.STRING,
-    length: DataTypes.TIME,
-    trackNumber:{
-      field:"track_number",
-      type:DataTypes.INTEGER
-    },
-    lyrics: DataTypes.TEXT,
-    uploadAt:{
-      field:"upload_at",
-      type:DataTypes.DATE
+    {
+      sequelize,
+      paranoid: true,
+      modelName: "Song",
+      tableName: "Songs",
     }
-  }, {
-    sequelize,
-    paranoid: true,
-    modelName: 'Song',
-  });
+  );
   return Song;
 };

@@ -2,37 +2,37 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("songs", "deletedAt", {
+    await queryInterface.addColumn("Songs", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("albums", "deletedAt", {
+    await queryInterface.addColumn("Albums", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("artists", "deletedAt", {
+    await queryInterface.addColumn("Artists", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("interactions", "deletedAt", {
+    await queryInterface.addColumn("Interactions", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("playlists", "deletedAt", {
+    await queryInterface.addColumn("Playlists", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("playlists_songs", "deletedAt", {
+    await queryInterface.addColumn("Playlists_songs", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
     });
-    await queryInterface.addColumn("users", "deletedAt", {
+    await queryInterface.addColumn("Users", "deletedAt", {
       type: Sequelize.DATE,
       allowNull: true,
       validate: {},
@@ -46,13 +46,12 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await  queryInterface.removeColumn('songs', 'deletedAt');
-    await  queryInterface.removeColumn('artists', 'deletedAt');
-    await  queryInterface.removeColumn('albums', 'deletedAt');
-    await  queryInterface.removeColumn('users', 'deletedAt');
-    await  queryInterface.removeColumn('playlists', 'deletedAt');
-    await  queryInterface.removeColumn('interactions', 'deletedAt');
-    await  queryInterface.removeColumn('playlists_songs', 'deletedAt');
-
+    await queryInterface.removeColumn("Aongs", "deletedAt");
+    await queryInterface.removeColumn("Artists", "deletedAt");
+    await queryInterface.removeColumn("Albums", "deletedAt");
+    await queryInterface.removeColumn("Users", "deletedAt");
+    await queryInterface.removeColumn("Playlists", "deletedAt");
+    await queryInterface.removeColumn("Interactions", "deletedAt");
+    await queryInterface.removeColumn("Playlists_songs", "deletedAt");
   },
 };

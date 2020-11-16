@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,31 +10,29 @@ module.exports = {
      */
     await queryInterface.changeColumn("Users", "name", {
       type: Sequelize.STRING,
-      allowNull: false
-    })
+      allowNull: false,
+    });
     await queryInterface.changeColumn("Users", "email", {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true
-    })
+      unique: true,
+    });
     await queryInterface.changeColumn("Users", "password", {
       type: Sequelize.STRING,
       allowNull: false,
       min: {
         args: 8,
-        msg:"Minimum 8 characters required in password"
-    }
-    })
+        msg: "Minimum 8 characters required in password",
+      },
+    });
     await queryInterface.changeColumn("Users", "is_admin", {
       type: Sequelize.BOOLEAN,
-      defaultValue: false
-    })
-    await queryInterface.changeColumn("users", "remember_token", {
-      type:Sequelize.BOOLEAN,
-      defaultValue: false
-    })
-
-    
+      defaultValue: false,
+    });
+    await queryInterface.changeColumn("Users", "remember_token", {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -46,21 +44,21 @@ module.exports = {
      */
     await queryInterface.changeColumn("Users", "name", {
       type: Sequelize.STRING,
-      allowNull: true
-    })
+      allowNull: true,
+    });
     await queryInterface.changeColumn("Users", "email", {
       type: Sequelize.STRING,
       allowNull: true,
-    })
+    });
     await queryInterface.changeColumn("Users", "password", {
       type: Sequelize.STRING,
-      allowNull: true
-    })
+      allowNull: true,
+    });
     await queryInterface.changeColumn("Users", "is_admin", {
       type: Sequelize.BOOLEAN,
-    })
-    await queryInterface.changeColumn("users", "remember_token", {
-      type:Sequelize.BOOLEAN,
-    })
-  }
+    });
+    await queryInterface.changeColumn("Users", "remember_token", {
+      type: Sequelize.BOOLEAN,
+    });
+  },
 };

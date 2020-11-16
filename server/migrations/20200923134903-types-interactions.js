@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -9,22 +9,22 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
 
-    await queryInterface.changeColumn("interactions","user_id",{
-      type:Sequelize.INTEGER,
-      allowNull:false
-    })
-    await queryInterface.changeColumn("interactions","song_id",{
-      type:Sequelize.INTEGER,
-      allowNull:false
-    })
-    await queryInterface.changeColumn("interactions","liked",{
-      type:Sequelize.BOOLEAN,
-      defaultValue:false
-    })
-    await queryInterface.changeColumn("interactions","play_count",{
-      type:Sequelize.INTEGER,
-      defaultValue:0
-    })
+    await queryInterface.changeColumn("Interactions", "user_id", {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    });
+    await queryInterface.changeColumn("Interactions", "song_id", {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    });
+    await queryInterface.changeColumn("Interactions", "liked", {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    });
+    await queryInterface.changeColumn("Interactions", "play_count", {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -34,19 +34,19 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.changeColumn("interactions","user_id",{
-      type:Sequelize.INTEGER,
-      allowNull:true
-    })
-    await queryInterface.changeColumn("interactions","song_id",{
-      type:Sequelize.INTEGER,
-      allowNull:true
-    })
-    await queryInterface.changeColumn("interactions","liked",{
-      type:Sequelize.BOOLEAN,
-    })
-    await queryInterface.changeColumn("interactions","play_count",{
-      type:Sequelize.INTEGER,
-    })
-  }
+    await queryInterface.changeColumn("Interactions", "user_id", {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    });
+    await queryInterface.changeColumn("Interactions", "song_id", {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    });
+    await queryInterface.changeColumn("Interactions", "liked", {
+      type: Sequelize.BOOLEAN,
+    });
+    await queryInterface.changeColumn("Interactions", "play_count", {
+      type: Sequelize.INTEGER,
+    });
+  },
 };
